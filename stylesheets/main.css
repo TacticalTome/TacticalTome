@@ -1,0 +1,29 @@
+.topNavigation {
+    background-color: #141414 !important;
+}
+
+.landingContainer {
+    background-image: url('../images/background1.png');
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.gameLandingContainer {
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+.landingContainer > .content {
+    color: white;
+    padding: 2em; 
+    border-radius: 5%; 
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.gameLandingContainer > .content {
+    color: white;
+    padding: 2em; 
+    border-radius: 5%; 
+    background-color: rgba(0, 0, 0, 0.75);
+}
