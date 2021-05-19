@@ -1,7 +1,6 @@
 <div class="fullscreen">
     <div class="centerHorizontalVertical centerText" style="width: 50%;">
         <?php if (\ALLOW_REGISTRATION) { ?>
-            <img class="hideOnMobile" src="<?php echo URL; ?>images/logo.jpg" style="height: 128px; width: 128px; border-radius: 50%;" draggable="false">
             <h1 class="fontTrebuchet textShadowLight colorOrange">Register</h1><br>
 
             <br>
