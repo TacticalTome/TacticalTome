@@ -33,6 +33,14 @@
                 $this->followedGames = explode(",", $this->mysqli['followedgames']);
                 $this->favoriteStrategyGuides = explode(",", $this->mysqli['favoritestrategyguides']);
                 $this->timeCreated = $this->mysqli['timecreated'];
+
+                for ($i = 0; $i < count($this->followedGames); $i++) {
+                    $this->followedGames[$i] = intval($this->followedGames[$i]);
+                }
+
+                for ($i = 0; $i < count($this->favoriteStrategyGuides); $i++) {
+                    $this->favoriteStrategyGuides[$i] = intval($this->favoriteStrategyGuides[$i]);
+                }
             }
         }
 

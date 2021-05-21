@@ -123,6 +123,17 @@ body[data-theme="light"] a:hover {
     transition: color 0.2s ease-in-out;
 }
 
+a[data-color="yellow"] {
+    text-decoration: none;
+    color: #ffff00 !important;
+    transition: color 0.2s ease-in-out;
+}
+
+a[data-color="yellow"]:hover {
+    color: #e9e900 !important;
+    transition: color 0.2s ease-in-out;
+}
+
 ul {
     list-style-type: disc;
     font-size: 18px;
@@ -390,8 +401,8 @@ body[data-theme="dark"] .blurEntireBackground { background-color: rgba(255, 255,
 
 .topNavigation .dropdown > .content > .link {
     display: none;
+    text-align: left !important;
     display: block;
-    text-align: left;
     padding: 10px;
     transition: all .2s ease-in-out;
 }
@@ -740,6 +751,9 @@ button[data-size="large"] {
     border-radius: 10px; 
 }
 
+button[data-length="medium"] { padding-right: 20px; padding-left: 20px; }
+button[data-length="long"] { padding-right: 40px; padding-left: 40px;  }
+
 button[data-shape="circle"] { border-radius: 50%; }
 
 button[data-outline="false"] { outline: none; }
@@ -879,7 +893,7 @@ button[data-border="blue"] {
     Mobile Rules
 ***/
 @media screen and (max-width: 768px) {
-    .row > .column {
+    .row {
         flex-basis: 100%;
     }
 }

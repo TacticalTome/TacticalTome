@@ -57,17 +57,23 @@
                     <div class="link fontVerdana" id="<?php if ($this->pageIdentifier == "Home") echo "active"; ?>"><a href="<?php echo \URL; ?>"><i class="fas fa-home"></i> Home</a></div>
                     <div class="link fontVerdana" id="<?php if ($this->pageIdentifier == "Explore") echo "active"; ?>"><a href="<?php echo \URL; ?>"><i class="fab fa-wpexplorer"></i> Explore</a></div>
                     <?php if ($this->userIsLoggedIn) { ?>
-                        <div class="dropdown">
+                        <div class="dropdown hideOnMobile">
                             <span class="title fontVerdana"><i class="fas fa-shoe-prints"></i> Followed Games <i class="fas fa-chevron-down"></i></span>
                             <div class="content">
                                 <?php
                                     foreach ($this->user->getFollowedGames() as $followedGameID) {
-                                        $followedGame = new \model\Game($this->database, $followedGameID);
-                                        echo '<div class="link fontVerdana" id=""><a href="' . \URL . 'game/view/' . $followedGameID . '/">' . $followedGame->getName() . '</a></div>';
+                                        if (!empty($followedGameID)) {
+                                            $followedGame = new \model\Game($this->database, $followedGameID);
+                                            echo '<div class="link fontVerdana" id=""><a href="' . \URL . 'game/view/' . $followedGameID . '/">' . $followedGame->getName() . '</a></div>';
+                                        }
                                     }
                                 ?>
+                                <br>
+                                <hr data-align="left" data-length="short" data-color="white" style="margin-left: 10px;">
+                                <div class="link fontVerdana" id=""><a href="<?php echo \URL; ?>game/submit/">Submit a Game</a></div>
                             </div>
                         </div>
+                        <div class="link fontVerdana hideOnDesktop" id=""><a href=""><i class="fas fa-shoe-prints"></i> Followed Games</a></div>
                     <?php } ?>
                 </div>
                 <div class="linkSection">

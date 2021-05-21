@@ -66,42 +66,42 @@
         <div class="spacer" data-size="large"></div>
 
         <h1 class="fontTrebuchet colorOrange lineWithWords">Most Popular Games</h1>
-        <div class="row" data-colcount="3">
-            <div class="column positionRelative hoverOverlayContainer cursorPointer" onclick="gotoLink('<?php echo \URL . "game/view/1/"; ?>');" title="American Conquest: Fight Back">
-                <img src="<?php echo \URL; ?>images/banners/americanconquestfightback.png" style="width: 16em; height: 8em;"></a>
-                <div class="hoverOverlay" style="width: 16em; height: 8em;"></div>
-            </div>
-            <div class="column positionRelative hoverOverlayContainer cursorPointer" onclick="gotoLink('<?php echo \URL . "game/view/2/"; ?>');" title="Factorio">
-                <img src="<?php echo \URL; ?>images/banners/factorio.jpg" style="width: 16em; height: 8em;">
-                <div class="hoverOverlay" style="width: 16em; height: 8em;"></div>
-            </div>
-            <div class="column positionRelative hoverOverlayContainer cursorPointer" title="Stronghold Crusader HD">
-                <img src="<?php echo \URL; ?>images/banners/strongholdcrusader.jpg" style="width: 16em; height: 8em;">
-                <div class="hoverOverlay" style="width: 16em; height: 8em;"></div>
+        <center>
+            <div class="row hideOnMobile" data-colcount="3">
+            <?php
+                $topGames = $this->database->query("SELECT * FROM games ORDER BY followers DESC LIMIT 6");
+                while ($game = $topGames->fetch_assoc()) {
+                    ?>
+                        <div class="column positionRelative hoverOverlayContainer cursorPointer" onclick="gotoLink('<?php echo \URL . "game/view/" . $game['id'] . "/"; ?>');" title="<?php echo $game['name']; ?>">
+                            <img src="<?php echo \URL; ?>images/banners/<?php echo $game['banner']; ?>" style="width: 16em; height: 8em;"></a>
+                            <div class="hoverOverlay" style="width: 16em; height: 8em;"></div>
+                        </div>
+                    <?php
+                }
+            ?>
             </div>
 
-            <div class="column positionRelative hoverOverlayContainer cursorPointer" title="Zoo Tycoon">
-                <img src="<?php echo \URL; ?>images/banners/zootycoon.jpg" style="width: 16em; height: 8em;">
-                <div class="hoverOverlay" style="width: 16em; height: 8em;"></div>
-            </div>
-            <div class="column positionRelative hoverOverlayContainer cursorPointer" title="Star Wars: Galactice Battlegrounds">
-                <img src="<?php echo \URL; ?>images/banners/starwarsgalacticbattlegrounds.jpg" style="width: 16em; height: 8em;">
-                <div class="hoverOverlay" style="width: 16em; height: 8em;"></div>
-            </div>
-            <div class="column positionRelative hoverOverlayContainer cursorPointer" title="Disciples II: Gallean's Return">
-                <img src="<?php echo \URL; ?>images/banners/diciplesgalleansreturn.jpg" style="width: 16em; height: 8em;">
-                <div class="hoverOverlay" style="width: 16em; height: 8em;"></div>
-            </div>
-        </div>
+            <ol class="hideOnDesktop" style="text-align: left;">
+            <?php
+                $topGames = $this->database->query("SELECT * FROM games ORDER BY followers DESC LIMIT 6");
+                while ($game = $topGames->fetch_assoc()) {
+                    ?>
+                        <li class="fontVerdana"><a href="<?php echo \URL . "game/view/" . $game['id'] . "/"; ?>"><?php echo $game['name']; ?></a></li>
+                    <?php
+                }
+            ?>
+            </ol>
+        </center>
 
         <hr data-color="black">
         <div class="spacer" data-size="large"></div>
 
         <div class="row" data-colcount="2">
             <div class="column">
-                <h1 class="fontTrebuchet colorOrange centerHorizontalVertical">Expository of Strategies</h1>
+                <h1 class="fontTrebuchet colorOrange centerHorizontalVertical hideOnMobile">Expository of Strategies</h1>
             </div>
             <div class="column">
+                <h1 class="fontTrebuchet colorOrange hideOnDesktop">Expository of Strategies</h1>
                 <p class="fontVerdana">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
                     nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
                     pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -114,12 +114,13 @@
 
         <div class="row" data-colcount="2">
             <div class="column">
+                <h1 class="fontTrebuchet colorOrange hideOnDesktop">Colleciton of Guides & Tutorials</h1>
                 <p class="fontVerdana">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore 
                     veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni 
                     dolores eos qui ratione voluptatem sequi nesciunt.</p>
             </div>
             <div class="column">
-                <h1 class="fontTrebuchet colorOrange centerHorizontalVertical">Colleciton of Guides & Tutorials</h1>
+                <h1 class="fontTrebuchet colorOrange centerHorizontalVertical hideOnMobile">Colleciton of Guides & Tutorials</h1>
             </div>
         </div>
 
@@ -129,9 +130,10 @@
 
         <div class="row" data-colcount="2">
             <div class="column">
-                <h1 class="fontTrebuchet colorOrange centerHorizontalVertical">News Station for Games</h1>
+                <h1 class="fontTrebuchet colorOrange centerHorizontalVertical hideOnMobile">News Station for Games</h1>
             </div>
             <div class="column">
+                <h1 class="fontTrebuchet colorOrange hideOnDesktop">News Station for Games</h1>
                 <p class="fontVerdana">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et 
                     dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
             </div>

@@ -9,6 +9,7 @@
         private string $title;
         private string $content;
         private int $timeCreated;
+        private int $favorites;
         private bool $exists = false;
 
         private Database $database;
@@ -29,6 +30,7 @@
                 $this->title = $this->mysqli['title'];
                 $this->content = $this->mysqli['content'];
                 $this->timeCreated = $this->mysqli['timecreated'];
+                $this->favorites = $this->mysqli['favorites'];
             }
         }
 
@@ -56,12 +58,21 @@
             return $this->timeCreated;
         }
 
+        public function getFavorites(): int {
+            return $this->favorites;
+        }
+
         public function exists(): bool {
             return $this->exists;
         }
 
         public function getPreview(): string {
             return substr(strip_tags(str_replace("<br>", "\n", $this->content)), 0, 100) . "--";
+        }
+
+        public function setFavorites(int $favorites): void {
+            $this->favorites = $favorites;
+            $this->database->query("UPDATE strategyguides SET favorites='".$this->favorites."' WHERE id='".$this->id."'");
         }
 
         static public function new(Database $database, int $uid, int $gid, string $title, string $content) {

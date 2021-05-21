@@ -4,7 +4,8 @@
 <div class="gameLandingContainer fullscreen positionRelative" style="background-image: url('<?php echo $this->game->getCoverURL(); ?>');">
     <div class="content centerHorizontalVertical">
         <h1 class="fontAlfaSlabOne colorOrange" data-size="large"><?php echo $this->game->getName(); ?></h1>
-        <p class="fontVerdana hideOnMobile"><?php echo $this->game->getDescription(); ?></p>
+        <p class="fontVerdana">Followers: <?php echo number_format($this->game->getFollowers()); ?></p>
+        <p class="fontVerdana hideOnMobile"><?php echo $this->game->getShortDescription(); ?></p>
 
         <?php if ($this->userIsLoggedIn) { ?>
             <?php if ($this->user->isFollowingGame($this->game->getId())) { ?>
@@ -30,6 +31,7 @@
             <h1 class="fontTrebuchet"><?php echo $this->game->getName(); ?></h1>
         </center>
         <p class="fontVerdana"><?php echo $this->game->getDescription(); ?></p>
+        <p class="fontVerdana"><b>Developer</b>: <?php echo $this->game->getDeveloper(); ?></p>
         <p class="fontVerdana"><b>Tags</b>: 
             <?php
                 for ($i = 0; $i < count($this->game->getTags()); $i++) {
@@ -38,15 +40,20 @@
                 }
             ?>
         </p>
+        <?php if ($this->game->getSteamAppId() != 0) { ?>
+            <p class="fontVerdana"><b>Steam link</b>: <a href="https://store.steampowered.com/app/<?php echo $this->game->getSteamAppId(); ?>/" target="_blank"><?php echo $this->game->getName(); ?></a></p>
+        <?php } ?>
         <hr>
 
         <div class="spacer" data-size="large"></div>
 
         <h3 class="fontVerdana">News</h3>
         <?php if ($this->game->hasNews()) { ?>
+            <ol id="gameNewsContainer">
+                <p class="fontVerdana">Loading News...</p>
+            </ol>
         <?php } else { ?>
-            <p class="fontVerdana">This game is older and therefore there is no news section supported for this game, due to an absence of news. However if you do have any news you would like posted here please 
-                contact us.</p>
+            <p class="fontVerdana">This game is not found on steam and therefore does not support a news section or the provided news section is not used for this specific game. However if you have any news you would like posted here, please contact us.</p>
         <?php } ?>
 
         <div class="spacer" data-size="large"></div>
@@ -54,6 +61,22 @@
         <div class="spacer" data-size="large"></div>
 
         <h3 class="fontVerdana">Most Popular Strategy Guides</h3>
+        <ol>
+        <?php
+            $popularPosts = $this->database->query("SELECT * FROM strategyguides WHERE gid='".$this->game->getId()."' ORDER BY favorites DESC LIMIT 10");
+            while ($post = $popularPosts->fetch_assoc()) {
+                $strategyGuide = new \model\StrategyGuide($this->database, $post['id']);
+                $user = new \model\User($this->database, $strategyGuide->getUserId());
+
+                echo "<li class='fontVerdana'><a href='" . \URL . "game/strategyguide/" . $strategyGuide->getid() . "/'>" . $strategyGuide->getTitle() . "</a></li>";
+                echo "<ul class='fontVerdana'>";
+                echo "<li>Posted by " . $user->getUsername() . " on " . date("D. F d, Y @ g:i A", $strategyGuide->getTimeCreated()) . "</li>";
+                echo "<li>" . $strategyGuide->getPreview() . "</li>";
+                echo "</ul>";
+                echo "<br>";
+            }
+        ?>
+        </ol>
 
         <div class="spacer" data-size="large"></div>
         <hr data-length="short">
@@ -80,3 +103,49 @@
         <div class="spacer" data-size="large"></div>
     </div>
 </div>
+
+<?php if ($this->game->hasNews()) { ?>
+    <script>
+        function formatMonth(index) {
+            let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            return months[index];
+        }
+
+        function formatDate(date) {
+            if (date <= 9) {
+                return "0" + date;
+            }
+            return date;
+        }
+
+        function formatTime(hours, minutes) {
+            if (minutes <= 9) minutes = "0" + minutes;
+            if (hours < 12) { // AM
+                if (hours == 0) return "12:" + minutes + " AM";
+                return hours + ":" + minutes + " AM";
+            } else { // PM
+                if (hours == 12) return "12:" + minutes + " PM";
+                return (hours - 12) + ":" + minutes + " PM";
+            }
+        }
+
+        $.get({
+            url: "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=<?php echo $this->game->getSteamAppId(); ?>",
+            dataType: "json",
+            success: function(data) {
+                $("#gameNewsContainer").empty();
+                let maxNews = 5;
+                for (let i = 0; i < maxNews; i++) {
+                    if (typeof data.appnews.newsitems[i] !== "undefined") {
+                        if (i > 0 && data.appnews.newsitems[i].date == data.appnews.newsitems[i-1].date) maxNews++;
+                        else {
+                            let datePosted = new Date(data.appnews.newsitems[i].date * 1000);
+                            let datePostedAsString = formatMonth(datePosted.getMonth()) + " " + formatDate(datePosted.getDate()) + ", " + datePosted.getFullYear() + " @ " + formatTime(datePosted.getHours(), datePosted.getMinutes()); 
+                            $("#gameNewsContainer").append("<li class='fontVerdana'><a href='" + data.appnews.newsitems[i].url + "' target='_blank'>" + data.appnews.newsitems[i].title + "</a></li><ul class='fontVerdana'><li>Posted by " + data.appnews.newsitems[i].author + " on " + datePostedAsString + "</li><li>" + data.appnews.newsitems[i].feedlabel + "</li></ul><br>");
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+<?php } ?>

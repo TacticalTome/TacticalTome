@@ -30,6 +30,7 @@
 			$this->mysqli = new \mysqli($this->host, $this->username, $this->password, $this->database);
 			if ($this->mysqli->connect_error) throw new \Exception("Database.php - " . $this->mysqli->connect_error);
 			$this->isConnected = true;
+            $this->mysqli->set_charset("utf8");
         }
 
         public function query(string $sql) {
