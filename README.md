@@ -1,1 +1,2 @@
-A fun thing to work on I guess?
+# The Gamer's Handbook
+An encyclopedia for game strategies, guides, tutorials, news, and more!
