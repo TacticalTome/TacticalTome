@@ -10,8 +10,8 @@
                 $this->loadModel("game");
                 $this->loadModel("strategyguide");
 
-                $search_games = $this->database->query("SELECT * FROM games WHERE name LIKE '%$search%' OR description LIKE '%$search%' ORDER BY followers");
-                $search_strategyguides = $this->database->query("SELECT * FROM strategyguides WHERE title LIKE '%$search%' OR content LIKE '%$search%' ORDER by favorites");
+                $search_games = $this->database->query("SELECT * FROM games WHERE name LIKE '%$search%' OR description LIKE '%$search%' ORDER BY followers DESC");
+                $search_strategyguides = $this->database->query("SELECT * FROM strategyguides WHERE title LIKE '%$search%' OR content LIKE '%$search%' ORDER by favorites DESC");
 
                 $this->relatedGames = Array();
                 while ($game = $search_games->fetch_assoc()) {
