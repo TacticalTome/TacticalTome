@@ -67,7 +67,7 @@
 
         <h1 class="fontTrebuchet colorOrange lineWithWords">Most Popular Games</h1>
         <center>
-            <div class="row hideOnMobile" data-colcount="3">
+            <div class="row hideOnMobile" data-colcount="2">
             <?php
                 $topGames = $this->database->query("SELECT * FROM games ORDER BY followers DESC LIMIT 6");
                 while ($game = $topGames->fetch_assoc()) {
