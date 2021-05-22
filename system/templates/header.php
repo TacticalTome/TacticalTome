@@ -87,7 +87,7 @@
                         <div class="link" id="smallMargin"><button class="simple fontVerdana" data-theme="dark" data-color="transparent" data-border="blue" onclick="gotoLink('<?php echo \URL; ?>user/login/');"><i class="fas fa-sign-in-alt"></i> Login</button></div>
                         <div class="link" id="smallMargin"><button class="simple fontVerdana" data-theme="dark" data-color="transparent" data-border="blue" onclick="gotoLink('<?php echo \URL; ?>user/register/');"><i class="fas fa-user-plus"></i> Sign Up</button></div>
                     <?php } else { ?>
-                        <div class="link" id="smallMargin"><button class="simple fontVerdana" data-theme="dark" data-color="transparent" data-border="blue" onclick="gotoLink('<?php echo \URL; ?>user/logout/');"><i class="fas fa-sign-out-alt"></i> Logout</button></div>
+                        <div class="link" id="smallMargin"><button class="simple fontVerdana" data-theme="dark" data-color="transparent" data-border="blue" onclick="gotoLink('<?php echo \URL; ?>user/account/');"><i class="fas fa-user"></i> Account</button></div>
                     <?php } ?>
                 </div>  
             </div>

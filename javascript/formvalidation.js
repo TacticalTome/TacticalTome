@@ -56,3 +56,67 @@ function validateRegister() {
         }
     }
 }
+
+// user/account
+function validateChangePassword() {
+    // Reset Output Container
+    $("#outputContainer").empty();
+
+    // Grab all inputted variables
+    var password = $("#password").val();
+    var newpassword = $("#newpassword").val();
+    var confirmnewpassword = $("#confirmnewpassword").val();
+
+    if (!password || !newpassword || !confirmnewpassword) {
+        addFormError("submitChangePassword", "Please fill out all the fields");
+        return false;
+    } else {
+        if (newpassword != confirmnewpassword) {
+            addFormError("submitChangePassword", "The new passwords do not match");
+            return false;
+        }
+    }
+}
+
+// user/account
+function validateChangeEmail() {
+    // Reset Output Container
+    $("#outputContainer").empty();
+
+    // Grab all inputted variables
+    var email = $("#newemail").val();
+
+    // Confirmation
+    if (!confirm("Are you sure you want to change your email?\nChange To: " + email)) return false;
+
+    // Validate inputted variables
+    if (!email) {
+        addFormError("submitChangeEmail", "Please fill out all the fields");
+        return false;
+    } else {
+        if (email.length > 100) {
+            addFormError("submitChangeEmail", "The email you provided is too long");
+            return false;
+        }
+    }
+}
+
+// game/submit
+function validateSubmitGame() {
+    // Reset Output Container
+    $("#outputContainer").empty();
+
+    // Grab all inputted variables
+    var link = $("#steamLink").val();
+
+    // Validate inputted variables
+    if (!link) {
+        addFormError("submitGame", "Please fill out all the fields");
+        return false;
+    } else {
+        if (!link.includes("https://store.steampowered.com")) {
+            addFormError("submitGame", "Please make sure the link you have provided is a steam link");
+            return false;
+        }
+    }
+}

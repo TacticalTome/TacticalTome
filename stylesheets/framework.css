@@ -1359,6 +1359,10 @@ input[type="submit"] {
     font-family: Verdana;
 }
 
+input[type="text"][data-border="true"], input[type="password"][data-border="true"], input[type="email"][data-border="true"] {
+    border: 1px solid rgb(37, 37, 37);
+}
+
 textarea {
     width: 35%;
     padding: 10px;

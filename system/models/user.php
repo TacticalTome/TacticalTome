@@ -94,8 +94,16 @@
             return $this->id;
         }
 
+        public function getEmail(): string {
+            return $this->email;
+        }
+
         public function getUsername(): string {
             return $this->username;
+        }
+
+        public function getPassword(): string {
+            return $this->password;
         }
 
         public function getTimeCreated(): int {
@@ -118,6 +126,16 @@
             return $this->favoriteStrategyGuides;
         }
 
+        public function setPassword(string $password): void {
+            $this->password = $password;
+            $this->database->query("UPDATE user SET password='$password' WHERE id='".$this->id."'");
+        }
+
+        public function setEmail(string $email): void {
+            $this->email = $this->database->protect($email);
+            $this->database->query("UPDATE user SET email='".$this->email."' WHERE id='".$this->id."'");
+        }
+
         static public function login(Database $database, string $identifier, string $password) {
             $identifier = $database->protect($identifier);
 
@@ -125,7 +143,11 @@
             if ($checkCredentials->num_rows == 1) {
                 $credentials = $checkCredentials->fetch_assoc();
                 if (password_verify($password, $credentials['password'])) {
-                    $_SESSION['uid'] = $credentials['id'];
+                    if ($credentials['activated']) {
+                        $_SESSION['uid'] = $credentials['id'];
+                    } else {
+                        throw new \Exception("Your account is not activated. Please check your email for your activation code.");
+                    }
                 } else {
                     throw new \Exception("Password is incorrect");
                 }
@@ -151,7 +173,14 @@
             }
         }
 
-        static private function isEmailValid(string $email) {
+        static public function isEmailTaken(Database $database, string $email): bool {
+            $email = $database->protect($email);
+            $query = $database->query("SELECT * FROM user WHERE email='$email'");
+            if ($query->num_rows > 0) return true;
+            return false;
+        }
+
+        static public function isEmailValid(string $email): bool {
             if (strlen($email) <= self::$emailMaxLength) {
                 if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     return true;
@@ -161,7 +190,7 @@
             return false;
         }
 
-        static private function isUsernameValid(string $username) {
+        static private function isUsernameValid(string $username): bool {
             if (strlen($username) <= self::$usernameMaxLength) {
                 if (!preg_match('/[^A-Za-z0-9]/', $username)) {
                     return true;
