@@ -1,6 +1,7 @@
 <div class="fullscreen">
     <div class="centerHorizontalVertical centerText" style="width: 50%;">
         <h1 class="fontTrebuchet textShadowLight colorOrange">Submit a Steam game</h1><br>
+        <p class="fontVerdana">Want to write a strategy guide for a game, but don't see it? Here you are able to add the game to the <?php echo \WEBSITE_NAME; ?> using it's steam store page link.</p>
         
         <br>
         <div id="outputContainer">

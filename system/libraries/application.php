@@ -35,7 +35,7 @@
 		}
 		
 		public static function unknownPage() {
-			echo "404 Error. Page not found.";
+			require_once(VIEW_DIRECTORY . "error/unknownpage.php");
 		}
 	}
 

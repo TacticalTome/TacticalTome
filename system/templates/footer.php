@@ -23,6 +23,14 @@
 
         <script>
             $(document).tooltip();
+
+            $("#searchWebsite").on("click", function(){
+                window.location.href = "<?php echo \URL; ?>tools/search/" + $("#searchWebsiteText").val() + "/";
+            });
+
+            $("#searchWebsiteText").on("keypress", function(e){
+                if (e.which === 13) window.location.href = "<?php echo \URL; ?>tools/search/" + $("#searchWebsiteText").val() + "/";
+            });
         </script>
     </body>
 </HTML>

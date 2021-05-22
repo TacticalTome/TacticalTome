@@ -78,8 +78,8 @@
                 </div>
                 <div class="linkSection">
                     <div class="link">
-                        <input type="text" class="fontVerdana" placeholder="Search" style="width: 75%;"/>
-                        <button class="simple fontVerdana" data-theme="dark" data-color="blue"><i class="fas fa-search"></i></button>
+                        <input type="text" class="fontVerdana" placeholder="Search" style="width: 75%;" id="searchWebsiteText"/>
+                        <button class="simple fontVerdana" data-theme="dark" data-color="blue" id="searchWebsite"><i class="fas fa-search"></i></button>
                     </div>
                 </div>
                 <div class="linkSection">
