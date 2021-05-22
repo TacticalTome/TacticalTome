@@ -72,9 +72,9 @@
                 $topGames = $this->database->query("SELECT * FROM games ORDER BY followers DESC LIMIT 6");
                 while ($game = $topGames->fetch_assoc()) {
                     ?>
-                        <div class="column positionRelative hoverOverlayContainer cursorPointer" onclick="gotoLink('<?php echo \URL . "game/view/" . $game['id'] . "/"; ?>');" title="<?php echo $game['name']; ?>">
-                            <img src="<?php echo \URL; ?>images/banners/<?php echo $game['banner']; ?>" style="width: 16em; height: 8em;"></a>
-                            <div class="hoverOverlay" style="width: 16em; height: 8em;"></div>
+                        <div class="column positionRelative hoverOverlayContainer cursorPointer" onclick="gotoLink('<?php echo \URL . "game/view/" . $game['id'] . "/"; ?>');" title="<?php echo $game['name']; ?>" style="width: 16em; height: 8em;">
+                            <img src="<?php echo \URL; ?>images/banners/<?php echo $game['banner']; ?>" style="width: 100%; height: 100%;"></a>
+                            <div class="hoverOverlay" style="width: 100%; height: 100%;"></div>
                         </div>
                     <?php
                 }
