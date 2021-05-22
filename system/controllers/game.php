@@ -185,8 +185,10 @@
 
                                     $covers = Array();
                                     for ($i = 0; $i < count($steam[$appId]["data"]["screenshots"]); $i++) {
-                                        file_put_contents(COVER_DIRECTORY . $gameFileName . $i . ".jpg", file_get_contents($steam[$appId]["data"]["screenshots"][$i]["path_full"]));
-                                        array_push($covers, $gameFileName . $i . ".jpg");
+                                        if ($i < 5) {
+                                            file_put_contents(COVER_DIRECTORY . $gameFileName . $i . ".jpg", file_get_contents($steam[$appId]["data"]["screenshots"][$i]["path_full"]));
+                                            array_push($covers, $gameFileName . $i . ".jpg");
+                                        }
                                     }
                                     $covers = implode(",", $covers);
 
