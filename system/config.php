@@ -5,7 +5,7 @@
 	ini_set("allow_url_fopen", true);
 
 	define("URL", "http://" . $_SERVER['HTTP_HOST'] . "/gamershandbook/");
-	define("WEBSITE_NAME", "Website Name");
+	define("WEBSITE_NAME", "Gamer's Handbook");
 	define("ALLOW_REGISTRATION", true);
 
 	define("ROOT_DIRECTORY", $_SERVER['DOCUMENT_ROOT'] . "/gamershandbook/");

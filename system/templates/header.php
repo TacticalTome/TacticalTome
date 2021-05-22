@@ -55,7 +55,7 @@
             <div class="linkContainerRight">
                 <div class="linkSection">
                     <div class="link fontVerdana" id="<?php if ($this->pageIdentifier == "Home") echo "active"; ?>"><a href="<?php echo \URL; ?>"><i class="fas fa-home"></i> Home</a></div>
-                    <div class="link fontVerdana" id="<?php if ($this->pageIdentifier == "Explore") echo "active"; ?>"><a href="<?php echo \URL; ?>"><i class="fab fa-wpexplorer"></i> Explore</a></div>
+                    <div class="link fontVerdana" id="<?php if ($this->pageIdentifier == "Explore") echo "active"; ?>"><a href="<?php echo \URL; ?>user/explore/"><i class="fab fa-wpexplorer"></i> Explore</a></div>
                     <?php if ($this->userIsLoggedIn) { ?>
                         <div class="dropdown hideOnMobile">
                             <span class="title fontVerdana"><i class="fas fa-shoe-prints"></i> Followed Games <i class="fas fa-chevron-down"></i></span>

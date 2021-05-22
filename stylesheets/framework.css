@@ -71,6 +71,10 @@ p {
     padding-bottom: 1em;
 }
 
+*[data-fontsize="fineprint"] {
+    font-size: 8px;
+}
+
 *[data-fontsize="small"] {
     font-size: 12px;
 }
@@ -895,6 +899,7 @@ button[data-border="blue"] {
 @media screen and (max-width: 768px) {
     .row {
         flex-basis: 100%;
+        padding: 0px;
     }
 }
 

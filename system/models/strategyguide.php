@@ -70,6 +70,14 @@
             return substr(strip_tags(str_replace("<br>", "\n", $this->content)), 0, 100) . "--";
         }
 
+        public function getDescriptionSnippet(int $length): string {
+            $output = strip_tags(str_replace("<br>", "\n", $this->content));
+            if ($length < strlen($output)) {
+                return substr(strip_tags(str_replace("<br>", "\n", $this->content)), 0, $length) . "--";
+            }
+            return $output;
+        }
+
         public function setFavorites(int $favorites): void {
             $this->favorites = $favorites;
             $this->database->query("UPDATE strategyguides SET favorites='".$this->favorites."' WHERE id='".$this->id."'");

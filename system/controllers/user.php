@@ -46,6 +46,61 @@
             session_destroy();
             header("location: " . URL);
         }
+
+        public function explore(string $action = null, int $page = null) {
+            $this->pageTitle = "Explore - " . \WEBSITE_NAME; 
+            $this->pageIdentifier = "Explore";
+            $this->loadModel("user");
+            $this->loadModel("game");
+            $this->loadModel("strategyguide");
+
+            $offset = 0;
+            if (!is_null($page)) $offset = intval($page) * 20;
+            
+            $randomGameGet = $this->database->query("SELECT * FROM games ORDER BY RAND() LIMIT 1");
+            $randomGame = $randomGameGet->fetch_assoc();
+
+            $this->randomGame = new \model\Game($this->database, $randomGame['id']);
+
+            $this->featuredStrategyGuides = Array();
+            $this->featuredStrategyGuideAuthors = Array();
+            if (!is_null($action) && $action == "recommended" && $this->userIsLoggedIn) {
+                $requiredId = "";
+                for ($i = 0; $i < count($this->user->getFollowedGames()); $i++) {
+                    if ($i == 0) $requiredId = " AND (";
+
+                    if ($i != count($this->user->getFollowedGames()) - 1) {
+                        $requiredId .= "gid='" . $this->user->getFollowedGames()[$i] . "' OR ";
+                    } else {
+                        $requiredId .= "gid='" . $this->user->getFollowedGames()[$i] . "'";
+                    }
+
+                    if ($i == count($this->user->getFollowedGames()) - 1) $requiredId .= ")";
+                }
+                $randomStrategyGuidesGet = $this->database->query("SELECT * FROM strategyguides WHERE timecreated > '".(time()-604800)."' ".$requiredId." ORDER BY favorites LIMIT 20 OFFSET " . $offset);
+            } else {
+                $randomStrategyGuidesGet = $this->database->query("SELECT * FROM strategyguides WHERE timecreated > '".(time()-604800)."' ORDER BY favorites LIMIT 20 OFFSET " . $offset);
+            }
+            while ($randomStrategyGuide = $randomStrategyGuidesGet->fetch_assoc()) {
+                $strategyGuide = new \model\StrategyGuide($this->database, $randomStrategyGuide['id']);
+                $author = new \model\User($this->database, $randomStrategyGuide['uid']);
+                array_push($this->featuredStrategyGuides, $strategyGuide);
+                array_push($this->featuredStrategyGuideAuthors, $author);
+            }
+
+            $this->featuredGames = Array();
+            if ($this->userIsLoggedIn) {
+                $randomGamesGet = $this->database->query("SELECT * FROM games ORDER BY RAND() LIMIT 20 OFFSET " . $offset);
+            } else {
+                $randomGamesGet = $this->database->query("SELECT * FROM games ORDER BY RAND() LIMIT 20 OFFSET " . $offset);
+            }
+            while ($randomGame = $randomGamesGet->fetch_assoc()) {
+                $game = new \model\Game($this->database, $randomGame['id']);
+                array_push($this->featuredGames, $game);
+            }
+
+            $this->loadViewWithHeaderFooter("user", "explore");
+        }
     }
 
 ?>

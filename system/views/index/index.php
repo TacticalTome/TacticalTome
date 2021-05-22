@@ -93,7 +93,7 @@
             </ol>
         </center>
 
-        <hr data-color="black">
+        <hr class="hideOnMobile" data-color="black">
         <div class="spacer" data-size="large"></div>
 
         <div class="row" data-colcount="2">
