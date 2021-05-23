@@ -8,15 +8,20 @@
                 if (substr($_SERVER['HTTP_REFERER'], 0, strlen(\URL)) === \URL) {
                     if ($this->userIsLoggedIn) {
                         if (strlen($_POST['title']) <= 100 && strlen($_POST['gameID']) <= 65535) {
-                            $this->loadModel("game");
-                            $this->loadModel("strategyguide");
+                            if (time() - $this->user->getTimeSinceLastPosted() >= 3600) {
+                                $this->loadModel("game");
+                                $this->loadModel("strategyguide");
 
-                            $game = new \model\Game($this->database, $_POST['gameID']);
-                            if ($game->exists()) {
-                                \model\StrategyGuide::new($this->database, $this->user->getId(), $_POST['gameID'], $_POST['title'], $_POST['content']);
-                                echo "Successfully posted";
+                                $game = new \model\Game($this->database, $_POST['gameID']);
+                                if ($game->exists()) {
+                                    $this->user->setTimeSinceLastPosted(time());
+                                    \model\StrategyGuide::new($this->database, $this->user->getId(), $_POST['gameID'], $_POST['title'], $_POST['content']);
+                                    echo "Successfully posted";
+                                } else {
+                                    echo "No such game exists";
+                                }
                             } else {
-                                echo "No such game exists";
+                                echo "You can only post a strategy guide once every hour";
                             }
                         } else {
                             echo "Your title (max 100 characters) or your content (max 65,535 characters) is too long";

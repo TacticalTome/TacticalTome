@@ -114,6 +114,9 @@
 
         public function account() {
             if ($this->userIsLoggedIn) {
+                $this->loadModel("strategyguide");
+                $this->loadModel("game");
+
                 if (!empty($_POST['changepassword'])) {
                     if (!empty($_POST['password']) && !empty($_POST['newpassword']) && !empty($_POST['confirmnewpassword'])) {
                         if (password_verify($_POST['password'], $this->user->getPassword())) {
@@ -145,6 +148,16 @@
                     } else {
                         array_push($this->formErrors, "Please supply all the fields");
                     }
+                }
+
+                $this->userStrategyGuides = Array();
+                $this->userStrategyGuidesGames = Array();
+                $query = $this->database->query("SELECT * FROM strategyguides WHERE uid='".$this->user->getId()."'");
+                while ($get = $query->fetch_assoc()) {
+                    $guide = new \model\StrategyGuide($this->database, $get['id']);
+                    $game = new \model\Game($this->database, $get['gid']);
+                    array_push($this->userStrategyGuides, $guide);
+                    array_push($this->userStrategyGuidesGames, $game);
                 }
 
                 $this->loadViewWithHeaderFooter("user", "account");

@@ -80,6 +80,7 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL,
   `timecreated` int(11) NOT NULL,
   `activated` tinyint(1) NOT NULL,
+  `lastposted` int(11) NOT NULL,
   `followedgames` varchar(100) NOT NULL,
   `favoritestrategyguides` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

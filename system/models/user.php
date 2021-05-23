@@ -11,6 +11,8 @@
         private string $username;
         private string $password;
         private int $timeCreated;
+        private bool $activated;
+        private int $timeLastPosted;
         private array $followedGames;
         private array $favoriteStrategyGuides;
         private bool $isValid = false;
@@ -33,6 +35,8 @@
                 $this->followedGames = explode(",", $this->mysqli['followedgames']);
                 $this->favoriteStrategyGuides = explode(",", $this->mysqli['favoritestrategyguides']);
                 $this->timeCreated = $this->mysqli['timecreated'];
+                $this->activated = $this->mysqli['activated'];
+                $this->timeLastPosted = $this->mysqli['lastposted'];
 
                 for ($i = 0; $i < count($this->followedGames); $i++) {
                     $this->followedGames[$i] = intval($this->followedGames[$i]);
@@ -124,6 +128,15 @@
 
         public function getFavoriteStrategyGuides(): Array {
             return $this->favoriteStrategyGuides;
+        }
+
+        public function getTimeSinceLastPosted(): int {
+            return $this->timeLastPosted;
+        }
+
+        public function setTimeSinceLastPosted(int $time): void {
+            $this->timeLastPosted = $time;
+            $this->database->query("UPDATE user SET lastposted='$time' WHERE id='".$this->id."'");
         }
 
         public function setPassword(string $password): void {
