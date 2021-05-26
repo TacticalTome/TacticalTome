@@ -1,8 +1,8 @@
 # Gamer's Handbook
 An encyclopedia for game strategies, guides, tutorials, news, and more!
 
-<img alt="Gamer's Handbook Screenshot 1" href="images/webscreenshot2.png"><br>
-<img alt="Gamer's Handbook Screenshot 2" href="images/webscreenshot2.png">
+<img alt="Gamer's Handbook Screenshot 1" href="https://github.com/Paughton/GamersHandbook/blob/main/images/webscreenshot1.png"><br>
+<img alt="Gamer's Handbook Screenshot 2" href="https://github.com/Paughton/GamersHandbook/blob/main/images/webscreenshot2.PNG">
 
 ## Branches
 `main` -> everything goes into here
@@ -12,9 +12,9 @@ In order to report a bug please open up an issue and apply the bug label. Also w
 
 #### Please Include:
 - Type
-- What did happened?
+- What happened?
 - What did you do to produce the bug?
-- Did it hinder your performance?
+- How much did it hinder your usage of the site?
 
 ## Contributing
 Gamer's Handbook is open up to contributions and it is recommended to first open up an issue first before beginning, so we know what you are working on and don't overwrite each other and to approve features.
