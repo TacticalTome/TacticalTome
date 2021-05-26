@@ -1,8 +1,8 @@
 # Gamer's Handbook
 An encyclopedia for game strategies, guides, tutorials, news, and more!
 
-<img alt="Gamer's Handbook Screenshot 1" href="https://github.com/Paughton/GamersHandbook/blob/main/images/webscreenshot1.png"><br>
-<img alt="Gamer's Handbook Screenshot 2" href="https://github.com/Paughton/GamersHandbook/blob/main/images/webscreenshot2.PNG">
+<img alt="Gamer's Handbook Screenshot 1" src="https://github.com/Paughton/GamersHandbook/blob/main/images/webscreenshot1.png"><br>
+<img alt="Gamer's Handbook Screenshot 2" src="https://github.com/Paughton/GamersHandbook/blob/main/images/webscreenshot2.PNG">
 
 ## Branches
 `main` -> everything goes into here
