@@ -1,7 +1,5 @@
 /*****************************************************
-(c) 2018 Silas Carlson. All rights reserved
-Silas's Text Editor
-Made by, Silas Carlson
+(c) 2018 Paughton. All rights reserved
 *****************************************************/
 
 // Font size
