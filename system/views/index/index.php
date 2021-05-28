@@ -65,46 +65,13 @@
     <div class="content">
         <div class="spacer" data-size="large"></div>
 
-        <h1 class="fontTrebuchet colorOrange lineWithWords">Most Popular Games</h1>
-        <center>
-            <div class="row hideOnMobile" data-colcount="2">
-            <?php
-                $topGames = $this->database->query("SELECT * FROM games ORDER BY followers DESC LIMIT 6");
-                while ($game = $topGames->fetch_assoc()) {
-                    ?>
-                        <div class="column positionRelative hoverOverlayContainer cursorPointer" onclick="gotoLink('<?php echo \URL . "game/view/" . $game['id'] . "/"; ?>');" title="<?php echo $game['name']; ?>" style="width: 16em; height: 8em;">
-                            <img src="<?php echo \URL; ?>images/banners/<?php echo $game['banner']; ?>" style="width: 100%; height: 100%;"></a>
-                            <div class="hoverOverlay" style="width: 100%; height: 100%;"></div>
-                        </div>
-                    <?php
-                }
-            ?>
-            </div>
-
-            <ol class="hideOnDesktop" style="text-align: left;">
-            <?php
-                $topGames = $this->database->query("SELECT * FROM games ORDER BY followers DESC LIMIT 6");
-                while ($game = $topGames->fetch_assoc()) {
-                    ?>
-                        <li class="fontVerdana"><a href="<?php echo \URL . "game/view/" . $game['id'] . "/"; ?>"><?php echo $game['name']; ?></a></li>
-                    <?php
-                }
-            ?>
-            </ol>
-        </center>
-
-        <hr class="hideOnMobile" data-color="black">
-        <div class="spacer" data-size="large"></div>
-
         <div class="row" data-colcount="2">
             <div class="column">
                 <h1 class="fontTrebuchet colorOrange centerHorizontalVertical hideOnMobile">Expository of Strategies</h1>
             </div>
             <div class="column">
                 <h1 class="fontTrebuchet colorOrange hideOnDesktop">Expository of Strategies</h1>
-                <p class="fontVerdana">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p class="fontVerdana">Find strategy guides that gamers like you have created. All strategy guides that users have written and submitted can be found here.</p>
             </div>
         </div>
 
@@ -138,6 +105,36 @@
                     dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
             </div>
         </div>
+
+        <div class="spacer" data-size="large"></div>
+
+        <h1 class="fontTrebuchet colorOrange lineWithWords">Most Popular Games</h1>
+        <center>
+            <div class="row hideOnMobile" data-colcount="2">
+            <?php
+                $topGames = $this->database->query("SELECT * FROM games ORDER BY followers DESC LIMIT 6");
+                while ($game = $topGames->fetch_assoc()) {
+                    ?>
+                        <div class="column positionRelative hoverOverlayContainer cursorPointer" onclick="gotoLink('<?php echo \URL . "game/view/" . $game['id'] . "/"; ?>');" title="<?php echo $game['name']; ?>" style="width: 16em; height: 8em;">
+                            <img src="<?php echo \URL; ?>images/banners/<?php echo $game['banner']; ?>" style="width: 100%; height: 100%;"></a>
+                            <div class="hoverOverlay" style="width: 100%; height: 100%;"></div>
+                        </div>
+                    <?php
+                }
+            ?>
+            </div>
+
+            <ol class="hideOnDesktop" style="text-align: left;">
+            <?php
+                $topGames = $this->database->query("SELECT * FROM games ORDER BY followers DESC LIMIT 6");
+                while ($game = $topGames->fetch_assoc()) {
+                    ?>
+                        <li class="fontVerdana"><a href="<?php echo \URL . "game/view/" . $game['id'] . "/"; ?>"><?php echo $game['name']; ?></a></li>
+                    <?php
+                }
+            ?>
+            </ol>
+        </center>
 
         <div class="spacer" data-size="large"></div>
     </div>

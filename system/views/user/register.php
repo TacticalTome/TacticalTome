@@ -18,6 +18,7 @@
                 <input type="text" name="username" placeholder="Username" id="username"><br><br>
                 <input type="password" name="password" placeholder="Password" id="password"><br><br>
                 <input type="password" name="confirmpassword" placeholder="Confirm Password" id="confirmpassword"><br><br>
+                <p>By clicking register you acknowledge that you are 13 years of age or older.</p>
                 <input type="submit" name="register" value="Register" data-color="blue" id="submitRegister">
             </form>
         <?php } else { ?>
