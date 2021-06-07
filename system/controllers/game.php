@@ -10,6 +10,18 @@
 
                 $this->game = new \model\Game($this->database, $gameID);
                 if ($this->game->exists()) {
+                    $this->recentStrategyGuides = Array();
+                    $recentStrategyGuidesGet = $this->database->query("SELECT * FROM strategyguides WHERE gid='".$this->game->getId()."' ORDER BY timecreated DESC LIMIT 10");
+                    while ($strategyGuide = $recentStrategyGuidesGet->fetch_assoc()) {
+                        array_push($this->recentStrategyGuides, new \model\StrategyGuide($this->database, $strategyGuide['id']));
+                    }
+
+                    $this->popularStrategyGuides = Array();
+                    $popularStrategyGuidesGet = $this->database->query("SELECT * FROM strategyguides WHERE gid='".$this->game->getId()."' ORDER BY favorites DESC LIMIT 10");
+                    while ($strategyGuide = $popularStrategyGuidesGet->fetch_assoc()) {
+                        array_push($this->popularStrategyGuides, new \model\StrategyGuide($this->database, $strategyGuide['id']));
+                    }
+
                     $this->loadViewWithHeaderFooter("game", "view");
                 } else {
                     $this->unknownPage();
@@ -51,104 +63,6 @@
                     }
 
                     $this->loadViewWithHeaderFooter("game", "unfollow");
-                } else {
-                    $this->unknownPage();
-                }
-            } else {
-                $this->unknownPage();
-            }
-        }
-
-        public function favorite(int $strategyGuideID = null) {
-            if (!is_null($strategyGuideID) && $this->userIsLoggedIn) {
-                $this->loadModel("game");
-                $this->loadModel("strategyguide");
-
-                $this->strategyGuide = new \model\StrategyGuide($this->database, $strategyGuideID);
-                $this->game = new \model\Game($this->database, $this->strategyGuide->getGameId());
-                if ($this->game->exists() && $this->user->getId() != $this->strategyGuide->getUserId()) {
-                    $this->author = new \model\User($this->database, $this->strategyGuide->getUserId());
-                    if (!$this->user->isStrategyGuideFavorite($strategyGuideID)) {
-                        $this->strategyGuide->setFavorites($this->strategyGuide->getFavorites() + 1);
-                        $this->user->addFavoriteStrategyGuide($strategyGuideID);
-                    }
-
-                    $this->loadViewWithHeaderFooter("game", "favorite");
-                } else {
-                    $this->unknownPage();
-                }
-            } else {
-                $this->unknownPage();
-            }
-        }
-
-        public function unfavorite(int $strategyGuideID = null) {
-            if (!is_null($strategyGuideID) && $this->userIsLoggedIn) {
-                $this->loadModel("game");
-                $this->loadModel("strategyguide");
-
-                $this->strategyGuide = new \model\StrategyGuide($this->database, $strategyGuideID);
-                $this->game = new \model\Game($this->database, $this->strategyGuide->getGameId());
-                if ($this->game->exists() && $this->user->getId() != $this->strategyGuide->getUserId()) {
-                    $this->author = new \model\User($this->database, $this->strategyGuide->getUserId());
-                    if ($this->user->isStrategyGuideFavorite($strategyGuideID)) {
-                        $this->strategyGuide->setFavorites($this->strategyGuide->getFavorites() - 1);
-                        $this->user->removeFavoriteStrategyGuide($strategyGuideID);
-                    }
-
-                    $this->loadViewWithHeaderFooter("game", "unfavorite");
-                } else {
-                    $this->unknownPage();
-                }
-            } else {
-                $this->unknownPage();
-            }
-        }
-
-        public function newstrategyguide(int $gameID = null) {
-            if (!is_null($gameID) && $this->userIsLoggedIn) {
-                $this->loadModel("game");
-
-                $this->game = new \model\Game($this->database, $gameID);
-                if ($this->game->exists() && $this->user->isFollowingGame($this->game->getId())) {
-                    $this->loadViewWithHeaderFooter("game", "newstrategyguide");
-                } else {
-                    $this->unknownPage();
-                }
-            } else {
-                $this->unknownPage();
-            }
-        }
-
-        public function editstrategyguide(int $strategyGuideID = null) {
-            if (!is_null($strategyGuideID) && $this->userIsLoggedIn) {
-                $this->loadModel("user");
-                $this->loadModel("game");
-                $this->loadModel("strategyguide");
-
-                $this->strategyGuide = new \model\StrategyGuide($this->database, $strategyGuideID);
-                if ($this->strategyGuide->exists() && $this->user->getId() == $this->strategyGuide->getUserId()) {
-                    $this->game = new \model\Game($this->database, $this->strategyGuide->getGameId());
-                    $this->loadViewWithHeaderFooter("game", "editstrategyguide");
-                } else {
-                    $this->unknownPage();
-                }
-            } else {
-                $this->unknownPage();
-            }
-        }
-
-        public function strategyguide(int $strategyGuideID = null) {
-            if (!is_null($strategyGuideID)) {
-                $this->loadModel("user");
-                $this->loadModel("game");
-                $this->loadModel("strategyguide");
-
-                $this->strategyGuide = new \model\StrategyGuide($this->database, $strategyGuideID);
-                if ($this->strategyGuide->exists()) {
-                    $this->game = new \model\Game($this->database, $this->strategyGuide->getGameId());
-                    $this->author = new \model\User($this->database, $this->strategyGuide->getUserId());
-                    $this->loadViewWithHeaderFooter("game", "strategyguide");
                 } else {
                     $this->unknownPage();
                 }

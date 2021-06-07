@@ -151,13 +151,10 @@
                 }
 
                 $this->userStrategyGuides = Array();
-                $this->userStrategyGuidesGames = Array();
                 $query = $this->database->query("SELECT * FROM strategyguides WHERE uid='".$this->user->getId()."'");
                 while ($get = $query->fetch_assoc()) {
                     $guide = new \model\StrategyGuide($this->database, $get['id']);
-                    $game = new \model\Game($this->database, $get['gid']);
                     array_push($this->userStrategyGuides, $guide);
-                    array_push($this->userStrategyGuidesGames, $game);
                 }
 
                 $this->loadViewWithHeaderFooter("user", "account");

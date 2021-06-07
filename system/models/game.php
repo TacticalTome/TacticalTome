@@ -101,6 +101,14 @@
             $this->database->query("UPDATE games SET followers='".$this->followers."' WHERE id='".$this->id."'");
         }
 
+        public function getURL() {
+            return \URL . "game/view/" . $this->id . "/";
+        }
+
+        public function getNewStrategyGuideURL() {
+            return \URL . "strategyguide/new/" . $this->id . "/";
+        }
+
         static public function existsWithSteamId(Database $database, int $steamId): bool {
             $steamId = $database->protect($steamId);
             $query = $database->query("SELECT * FROM games WHERE steamappid='$steamId'");

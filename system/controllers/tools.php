@@ -20,13 +20,9 @@
                 }
 
                 $this->relatedStrategyGuides = Array();
-                $this->relatedStrategyGuidesAuthors = Array();
                 while ($strategyGuide = $search_strategyguides->fetch_assoc()) {
                     $strategyGuideObject = new \model\StrategyGuide($this->database, $strategyGuide['id']);
-                    $strategyGuideAuthor = new \model\User($this->database, $strategyGuide['uid']);
-                    $strategyGuideGame = new \model\Game($this->database, $strategyGuide['gid']);
                     array_push($this->relatedStrategyGuides, $strategyGuideObject);
-                    array_push($this->relatedStrategyGuidesAuthors, $strategyGuideAuthor);
                 }
 
                 $this->search = $search;

@@ -1,7 +1,7 @@
 <!--
     Landing Container
 -->
-<script src="<?php echo URL; ?>javascript/editor.js"></script>
+<script src="<?php echo \URL; ?>javascript/editor.js"></script>
 <div class="gameLandingContainer fullscreen positionRelative" style="background-image: url('<?php echo $this->game->getCoverURL(); ?>');">
     <div class="content hideOnMobile centerHorizontalVertical" style="width: 75%;">
         <div class="editor-container" style="background: #454545; padding: 10px; border-radius: 10px;">
@@ -90,12 +90,12 @@
         var title = $("#title").html();
         
         if (confirm("Are you sure you want to post this? Make sure that everything is how you want it before posting.\n\n*MAKE SURE IT ADHERES TO OUR RULES.")) {
-            $.ajax({ url: "<?php echo URL; ?>ajax/updatestrategyguide/",
+            $.ajax({ url: "<?php echo \URL; ?>ajax/updatestrategyguide/",
                     data: {title: title, content: content, gameID: <?php echo $this->game->getId(); ?>, strategyGuideID: <?php echo $this->strategyGuide->getId(); ?>},
                     type: "POST",
                     success: function(data) {
                         alert(data);
-                        if (data == "Successfully posted") window.location.href = "<?php echo \URL . "game/view/" . $this->game->getId() . "/"; ?>";
+                        if (data == "Successfully posted") window.location.href = "<?php echo $this->game->getURL(); ?>";
                     }
             });
         }
@@ -103,7 +103,7 @@
 
     function backToGamePage() {
         if (confirm("Are you sure you want to leave?\n\nAll progress will be lost!")) {
-            window.location.href = "<?php echo \URL . "game/view/" . $this->game->getId() . "/"; ?>";
+            window.location.href = "<?php echo $this->game->getURL(); ?>";
         }
     }
 </script>

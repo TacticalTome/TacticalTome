@@ -6,6 +6,6 @@
         <h1 class="fontAlfaSlabOne colorOrange" data-size="large">You are no longer following:</h1>
         <h3 class="fontTrebuchet"><?php echo $this->game->getName(); ?></h3>
         <div class="spacer" data-size="medium"></div>
-        <button data-color="darkblue" data-size="medium" onclick="gotoLink('<?php echo \URL . "game/view/" . $this->game->getId() . "/"; ?>');">Return</button>
+        <button data-color="darkblue" data-size="medium" onclick="gotoLink('<?php echo $this->game->getURL(); ?>');">Return</button>
     </div>
 </div>

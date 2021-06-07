@@ -83,6 +83,22 @@
             $this->database->query("UPDATE strategyguides SET favorites='".$this->favorites."' WHERE id='".$this->id."'");
         }
 
+        public function getURL() {
+            return \URL . "strategyguide/view/" . $this->id . "/";
+        }
+
+        public function getEditURL() {
+            return \URL . "strategyguide/edit/" . $this->id . "/";
+        }
+
+        public function getFavoriteURL() {
+            return \URL . "strategyguide/favorite/" . $this->id . "/";
+        }
+
+        public function getUnfavoriteURL() {
+            return \URL . "strategyguide/unfavorite/" . $this->id . "/";
+        }
+
         static public function new(Database $database, int $uid, int $gid, string $title, string $content) {
             $uid = $database->protect($uid);
             $gid = $database->protect($gid);

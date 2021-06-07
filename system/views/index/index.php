@@ -109,11 +109,10 @@
         <center>
             <div class="row hideOnMobile" data-colcount="2">
             <?php
-                $topGames = $this->database->query("SELECT * FROM games ORDER BY followers DESC LIMIT 6");
-                while ($game = $topGames->fetch_assoc()) {
+                foreach($this->topGames as $game) {
                     ?>
-                        <div class="column positionRelative hoverOverlayContainer cursorPointer" onclick="gotoLink('<?php echo \URL . "game/view/" . $game['id'] . "/"; ?>');" title="<?php echo $game['name']; ?>" style="width: 16em; height: 8em;">
-                            <img src="<?php echo \URL; ?>images/banners/<?php echo $game['banner']; ?>" style="width: 100%; height: 100%;"></a>
+                        <div class="column positionRelative hoverOverlayContainer cursorPointer" onclick="gotoLink('<?php echo $game->getURL(); ?>')" title="<?php echo $game->getName(); ?>" style="width: 16em; height: 8em;">
+                            <img src="<?php echo $game->getBannerURL(); ?>" style="width: 100%; height: 100%;"></a>
                             <div class="hoverOverlay" style="width: 100%; height: 100%;"></div>
                         </div>
                     <?php
@@ -123,10 +122,9 @@
 
             <ol class="hideOnDesktop" style="text-align: left;">
             <?php
-                $topGames = $this->database->query("SELECT * FROM games ORDER BY followers DESC LIMIT 6");
-                while ($game = $topGames->fetch_assoc()) {
+                foreach($this->topGames as $game) {
                     ?>
-                        <li class="fontVerdana"><a href="<?php echo \URL . "game/view/" . $game['id'] . "/"; ?>"><?php echo $game['name']; ?></a></li>
+                        <li class="fontVerdana"><a href="<?php echo $game->getURL(); ?>"><?php echo $game->getName(); ?></a></li>
                     <?php
                 }
             ?>

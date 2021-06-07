@@ -49,21 +49,22 @@
     <div class="content">
         <h1>My Strategy Guides</h1>
         <?php
-            for ($i = 0; $i < count($this->userStrategyGuides); $i++) {
+            foreach ($this->userStrategyGuides as $strategyGuide) {
+                $game = new \model\Game($this->database, $strategyGuide->getGameId());
                 ?>
                     <div class="row" data-colcount="2">
                         <div class="column hideOnMobile">
                             <center>    
-                                <div class="positionRelative hoverOverlayContainer cursorPointer" style="width: 350px; height: 200px;" onclick="gotoLink('<?php echo \URL . "game/view/" . $this->userStrategyGuidesGames[$i]->getId() . "/"; ?>');" title="<?php echo $this->userStrategyGuidesGames[$i]->getName(); ?>">
-                                    <img src="<?php echo $this->userStrategyGuidesGames[$i]->getBannerUrl(); ?>" style="width: 100%; height: 100%;"></a>
+                                <div class="positionRelative hoverOverlayContainer cursorPointer" style="width: 350px; height: 200px;" onclick="gotoLink('<?php echo $game->getURL(); ?>');" title="<?php echo $game->getName(); ?>">
+                                    <img src="<?php echo $game->getBannerUrl(); ?>" style="width: 100%; height: 100%;"></a>
                                     <div class="hoverOverlay" style="width: 100%; height: 100%;"></div>
                                 </div>
                             </center>
                         </div>
                         <div class="column">
-                            <h1 class="fontTrebuchet"><a href="<?php echo \URL; ?>game/strategyguide/<?php echo $this->userStrategyGuides[$i]->getId(); ?>/"><?php echo $this->userStrategyGuides[$i]->getTitle(); ?></a></h1>
-                            <p class="fontTrebuchet hideOnDesktop"><a href="<?php echo \URL; ?>game/view/<?php echo $this->userStrategyGuidesGames[$i]->getId(); ?>"><?php echo $this->userStrategyGuidesGames[$i]->getName(); ?></a></p>
-                            <p class="fontVerdana" data-fontsize="medium" style="overflow-wrap: break-word;"><?php echo $this->userStrategyGuides[$i]->getDescriptionSnippet(250); ?></p>
+                            <h1 class="fontTrebuchet"><a href="<?php echo $strategyGuide->getURL(); ?>"><?php echo $this->userStrategyGuides[$i]->getTitle(); ?></a></h1>
+                            <p class="fontTrebuchet hideOnDesktop"><a href="<?php echo $game->getURL(); ?>"><?php echo $game->getName(); ?></a></p>
+                            <p class="fontVerdana" data-fontsize="medium" style="overflow-wrap: break-word;"><?php echo $strategyGuide->getDescriptionSnippet(250); ?></p>
                         </div>    
                     </div>
                     <div class="spacer" data-size="medium"></div>
