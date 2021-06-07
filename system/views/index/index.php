@@ -82,9 +82,7 @@
         <div class="row" data-colcount="2">
             <div class="column">
                 <h1 class="fontTrebuchet colorOrange hideOnDesktop">Colleciton of Guides & Tutorials</h1>
-                <p class="fontVerdana">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore 
-                    veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni 
-                    dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                <p class="fontVerdana">In <?php echo \WEBSITE_NAME; ?> you are able to view any guide or tutorial for any game. Users are able to create and view any guide for any game.</p>
             </div>
             <div class="column">
                 <h1 class="fontTrebuchet colorOrange centerHorizontalVertical hideOnMobile">Colleciton of Guides & Tutorials</h1>
@@ -101,8 +99,7 @@
             </div>
             <div class="column">
                 <h1 class="fontTrebuchet colorOrange hideOnDesktop">News Station for Games</h1>
-                <p class="fontVerdana">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et 
-                    dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
+                <p class="fontVerdana"><?php echo \WEBSITE_NAME; ?> contains news for every game on our website. All newer games will have a news section allowing you to easy access to upcoming or past information regarding the game you play.</p>
             </div>
         </div>
 
