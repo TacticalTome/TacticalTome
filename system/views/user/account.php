@@ -1,6 +1,7 @@
 <div class="jumbotron jumbotronWithBackground" data-theme="dark" data-stickynavabove="large">
     <div class="content">
         <h1 class="centerText fontAlfaSlabOne colorOrange">Account</h1>
+        <p class=" centerText fontVerdana"><a href="<?php echo $this->user->getProfileURL(); ?>" data-color="yellow">Your Profile</a></p>
         <center>
             <button data-color="red" data-length="long" id="logoutButton">Logout</button>
             <button data-color="blue" data-length="long" id="changePasswordButton">Change Password</button>
@@ -62,7 +63,7 @@
                             </center>
                         </div>
                         <div class="column">
-                            <h1 class="fontTrebuchet"><a href="<?php echo $strategyGuide->getURL(); ?>"><?php echo $this->userStrategyGuides[$i]->getTitle(); ?></a></h1>
+                            <h1 class="fontTrebuchet"><a href="<?php echo $strategyGuide->getURL(); ?>"><?php echo $strategyGuide->getTitle(); ?></a></h1>
                             <p class="fontTrebuchet hideOnDesktop"><a href="<?php echo $game->getURL(); ?>"><?php echo $game->getName(); ?></a></p>
                             <p class="fontVerdana" data-fontsize="medium" style="overflow-wrap: break-word;"><?php echo $strategyGuide->getDescriptionSnippet(250); ?></p>
                         </div>    

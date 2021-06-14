@@ -29,6 +29,7 @@
         <?php
             for ($i = 0; $i < 20; $i++) {
                 if (isset($this->featuredStrategyGuides[$i])) {
+                    $author = new \model\User($this->database, $this->featuredStrategyGuides[$i]->getUserId());
                     $game = new \model\Game($this->database, $this->featuredStrategyGuides[$i]->getGameId());
                     ?>
                         <div class="row" data-colcount="2">
@@ -42,7 +43,7 @@
                             </div>
                             <div class="column">
                                 <h1 class="fontTrebuchet"><a href="<?php echo $this->featuredStrategyGuides[$i]->getURL(); ?>"><?php echo $this->featuredStrategyGuides[$i]->getTitle(); ?></a></h1>
-                                <p class="fontTrebuchet" data-fontsize="small">Posted by <?php echo $this->featuredStrategyGuideAuthors[$i]->getUsername(); ?> on <?php echo date("D. F d, Y @ g:i A", $this->featuredStrategyGuides[$i]->getTimeCreated()) ?></p>
+                                <p class="fontTrebuchet" data-fontsize="small">Posted by <a href="<?php echo $author->getProfileURL(); ?>"><?php echo $author->getUsername(); ?></a> on <?php echo date("D. F d, Y @ g:i A", $this->featuredStrategyGuides[$i]->getTimeCreated()) ?></p>
                                 <p class="fontTrebuchet hideOnDesktop"><a href="<?php echo $game->getURL(); ?>"><?php echo $game->getName(); ?></a></p>
                                 <p class="fontVerdana" data-fontsize="medium" style="overflow-wrap: break-word;"><?php echo $this->featuredStrategyGuides[$i]->getDescriptionSnippet(250); ?></p>
                             </div>    

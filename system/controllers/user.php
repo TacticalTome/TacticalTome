@@ -66,14 +66,7 @@
 
             $offset = 0;
             if (!is_null($page)) $offset = intval($page) * 20;
-            
-            $randomGameGet = $this->database->query("SELECT * FROM games ORDER BY RAND() LIMIT 1");
-            $randomGame = $randomGameGet->fetch_assoc();
 
-            $this->randomGame = new \model\Game($this->database, $randomGame['id']);
-
-            $this->featuredStrategyGuides = Array();
-            $this->featuredStrategyGuideAuthors = Array();
             if (!is_null($action) && $action == "recommended" && $this->userIsLoggedIn) {
                 $requiredId = "";
                 for ($i = 0; $i < count($this->user->getFollowedGames()); $i++) {
@@ -91,11 +84,11 @@
             } else {
                 $randomStrategyGuidesGet = $this->database->query("SELECT * FROM strategyguides WHERE timecreated > '".(time()-604800)."' ORDER BY favorites LIMIT 20 OFFSET " . $offset);
             }
+
+            $this->featuredStrategyGuides = Array();
             while ($randomStrategyGuide = $randomStrategyGuidesGet->fetch_assoc()) {
                 $strategyGuide = new \model\StrategyGuide($this->database, $randomStrategyGuide['id']);
-                $author = new \model\User($this->database, $randomStrategyGuide['uid']);
                 array_push($this->featuredStrategyGuides, $strategyGuide);
-                array_push($this->featuredStrategyGuideAuthors, $author);
             }
 
             $this->featuredGames = Array();
@@ -193,6 +186,41 @@
                     $this->loadViewWithHeaderFooter("user", "confirm");
                 } else {
                     $this->unknownpage();
+                }
+            } else {
+                $this->unknownPage();
+            }
+        }
+
+        public function view(int $id = null) {
+            if (!is_null($id)) {
+                $this->loadModel("user");
+                $this->loadModel("game");
+                $this->loadModel("strategyguide");
+
+                $id = $this->database->protect($id);
+                $this->userProfile = new \model\User($this->database, $id);
+
+                $this->userStrategyGuides = Array();
+                $query = $this->database->query("SELECT * FROM strategyguides WHERE uid='".$this->userProfile->getId()."'");
+                while ($get = $query->fetch_assoc()) {
+                    array_push($this->userStrategyGuides, new \model\StrategyGuide($this->database, $get['id']));
+                }
+
+                $this->userFollowedGames = Array();
+                foreach ($this->userProfile->getFollowedGames() as $followedGame) {
+                    if (!empty($followedGame)) array_push($this->userFollowedGames, new \model\Game($this->database, $followedGame));
+                }
+
+                $this->userFavoriteStrategyGuides = Array();
+                foreach ($this->userProfile->getFavoriteStrategyGuides() as $strategyGuide) {
+                    if (!empty($strategyGuide)) array_push($this->userFavoriteStrategyGuides, new \model\StrategyGuide($this->database, $strategyGuide));
+                }
+
+                if ($this->userProfile->isValid()) {
+                    $this->loadViewWithHeaderFooter("user", "view");
+                } else {
+                    $this->unknownPage();
                 }
             } else {
                 $this->unknownPage();

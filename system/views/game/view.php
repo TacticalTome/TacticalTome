@@ -66,12 +66,13 @@
             foreach ($this->popularStrategyGuides as $strategyGuide) {
                 $author = new \model\User($this->database, $strategyGuide->getUserId());
 
-                echo "<li class='fontVerdana'><a href='" . $strategyGuide->getURL() . "'>" . $strategyGuide->getTitle() . "</a></li>";
-                echo "<ul class='fontVerdana'>";
-                echo "<li>Posted by " . $author->getUsername() . " on " . date("D. F d, Y @ g:i A", $strategyGuide->getTimeCreated()) . "</li>";
-                echo "<li>" . $strategyGuide->getPreview() . "</li>";
-                echo "</ul>";
-                echo "<br>";
+                ?>
+                    <li class="fontVerdana"><a href="<?php echo $strategyGuide->getURL(); ?>"><?php echo $strategyGuide->getTitle(); ?></a></li>
+                    <ul class='fontVerdana'>
+                        <li>Posted by <a href="<?php echo $author->getProfileURL(); ?>"><?php echo $author->getUsername(); ?></a> on <?php echo date("D. F d, Y @ g:i A", $strategyGuide->getTimeCreated()); ?></li>
+                        <li><?php echo $strategyGuide->getPreview(); ?></li>
+                    </ul><br>
+                <?php
             }
         ?>
         </ol>
@@ -86,12 +87,13 @@
             foreach ($this->recentStrategyGuides as $strategyGuide) {
                 $author = new \model\User($this->database, $strategyGuide->getUserId());
 
-                echo "<li class='fontVerdana'><a href='" . $strategyGuide->getURL() . "'>" . $strategyGuide->getTitle() . "</a></li>";
-                echo "<ul class='fontVerdana'>";
-                echo "<li>Posted by " . $author->getUsername() . " on " . date("D. F d, Y @ g:i A", $strategyGuide->getTimeCreated()) . "</li>";
-                echo "<li>" . $strategyGuide->getPreview() . "</li>";
-                echo "</ul>";
-                echo "<br>";
+                ?>
+                    <li class="fontVerdana"><a href="<?php echo $strategyGuide->getURL(); ?>"><?php echo $strategyGuide->getTitle(); ?></a></li>
+                    <ul class='fontVerdana'>
+                        <li>Posted by <a href="<?php echo $author->getProfileURL(); ?>"><?php echo $author->getUsername(); ?></a> on <?php echo date("D. F d, Y @ g:i A", $strategyGuide->getTimeCreated()); ?></li>
+                        <li><?php echo $strategyGuide->getPreview(); ?></li>
+                    </ul><br>
+                <?php
             }
         ?>
         </ol>

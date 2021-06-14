@@ -149,6 +149,10 @@
             $this->database->query("UPDATE user SET email='".$this->email."' WHERE id='".$this->id."'");
         }
 
+        public function getProfileURL(): string {
+            return \URL . "user/view/" . $this->id . "/";
+        }
+
         static public function login(Database $database, string $identifier, string $password) {
             $identifier = $database->protect($identifier);
 
