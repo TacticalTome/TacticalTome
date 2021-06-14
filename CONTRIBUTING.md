@@ -22,7 +22,6 @@ After installing the repository you must edit the `system/config.php` file to fi
 ```PHP
 define("URL", "http://" . $_SERVER['HTTP_HOST'] . "/gamershandbook/");
 define("ROOT_DIRECTORY", $_SERVER['DOCUMENT_ROOT'] . "/gamershandbook/");
-define("REMOVE_FROM_URL", "/gamershandbook/");
 date_default_timezone_set("America/Chicago");
 ```
 In the main `index.php` file you need to change the following line:
@@ -34,9 +33,8 @@ $application = new library\Application("localhost", "root", "", "gamershandbook"
 #### Recommended steps for configuartion:
 1. Change the `URL` constant to the URL of your local files (typically `localhost`)
 2. Change the `ROOT_DIRECTORY` to wherever your files are located (base file)
-3. The `REMOVE_FROMURL` variable is used to remove unnecessary information from the URL i.e. `/gamershandbook/` from `http://localhost:8080/gamershandbook/game/view/0` which helps parsing all the values after the `gamershandbook` in the URL (Change this if necessary)
-4. Change the timezone to whatever you timezone you are in (*Optional*)
-5. Change the database credentials in the `index.php` file
+3. Change the timezone to whatever you timezone you are in (*Optional*)
+4. Change the database credentials in the `index.php` file
 
 ## MVC Format
 
