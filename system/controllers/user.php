@@ -4,6 +4,8 @@
 
     class User extends \library\Controller {
         public function login() {
+            $this->loadModel("user");
+
             if (!empty($_POST['login'])) {
                 if (!empty($_POST['usernameOrEmail']) && !empty($_POST['password'])) {
                     try {
@@ -22,6 +24,9 @@
 
         public function signup() { $this->register(); }
         public function register() {
+            $this->loadModel("user");
+            $this->loadModel("confirmation");
+
             if (!empty($_POST['register'])) {
                 if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['confirmpassword'])) {
                     if ($_POST['password'] == $_POST['confirmpassword']) {
@@ -29,13 +34,14 @@
                             \model\User::register($this->database, $_POST['email'], $_POST['username'], $_POST['password']);
 
                             $email = $this->database->protect($_POST['email']);
-                            $password = md5(rand(time()/2, time()));
+                            $password = \model\Confirmation::generatePassword();
+                            $emailTitle = "Confirm Account";
+                            $emailContent = "Please confirm your account by clicking the link below.\n" . \URL . "user/confirm/activateaccount/" . $password . "/". $email . "/";
 
                             $userGet = $this->database->query("SELECT * FROM user WHERE email='$email'");
                             $user = $userGet->fetch_assoc();
 
-                            $this->database->query("INSERT INTO confirmations (uid, action, password, value, time) VALUES ('".$user['id']."', 'activateaccount', '$password', '$email', '".time()."')");
-                            mail($user['email'], "Confirm Account", "Please confirm your account by clicking the link below.\n" . \URL . "user/confirm/activateaccount/" . $password . "/". $email . "/");
+                            \model\Confirmation::new($this->database, $user['id'], "activateaccount", $password, $email, $email, $emailTitle, $emailContent);
 
                             header("location: " . URL . "user/login/");
                         } catch (\Exception $exception) {
@@ -109,6 +115,7 @@
             if ($this->userIsLoggedIn) {
                 $this->loadModel("strategyguide");
                 $this->loadModel("game");
+                $this->loadModel("confirmation");
 
                 if (!empty($_POST['changepassword'])) {
                     if (!empty($_POST['password']) && !empty($_POST['newpassword']) && !empty($_POST['confirmnewpassword'])) {
@@ -130,10 +137,11 @@
                     if (!empty($_POST['newemail'])) {
                         if (\model\User::isEmailValid($_POST['newemail']) && !\model\User::isEmailTaken($this->database, $_POST['newemail'])) {
                             $email = $this->database->protect($_POST['newemail']);
-                            $password = md5(rand(time()/2, time()));
+                            $password = \model\Confirmation::generatePassword();
+                            $emailTitle = "Change Email";
+                            $emailContent = "You have been requested to change your email to: " . $email . "\nClick the link below to confirm this action.\n" . \URL . "user/confirm/newemail/" . $password . "/". $email . "/";
 
-                            $this->database->query("INSERT INTO confirmations (uid, action, password, value, time) VALUES ('".$this->user->getId()."', 'newemail', '$password', '$email', '".time()."')");
-                            mail($this->user->getEmail(), "Change Email", "You have been requested to change your email to: " . $email . "\nClick the link below to confirm this action.\n" . \URL . "user/confirm/newemail/" . $password . "/". $email . "/");
+                            \model\Confirmation::new($this->database, $this->user->getId(), "newemail", $password, $email, $email, $emailTitle, $emailContent);
                             array_push($this->formErrors, "You have been sent an email to confirm your request");
                         } else {
                             array_push($this->formErrors, "The email you have provided is either invalid or already in use");
