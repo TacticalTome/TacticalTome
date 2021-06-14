@@ -95,13 +95,10 @@
                                     }
                                     $tags = implode(",", $tags);
 
-                                    file_put_contents(BANNER_DIRECTORY . $gameFileName . ".jpg", file_get_contents($steam[$appId]["data"]["header_image"]));
-
                                     $covers = Array();
                                     for ($i = 0; $i < count($steam[$appId]["data"]["screenshots"]); $i++) {
                                         if ($i < 5) {
-                                            file_put_contents(COVER_DIRECTORY . $gameFileName . $i . ".jpg", file_get_contents($steam[$appId]["data"]["screenshots"][$i]["path_full"]));
-                                            array_push($covers, $gameFileName . $i . ".jpg");
+                                            array_push($covers, $steam[$appId]["data"]["screenshots"][$i]["path_full"]);
                                         }
                                     }
                                     $covers = implode(",", $covers);
@@ -112,7 +109,7 @@
                                         $steam[$appId]["data"]["short_description"],
                                         $steam[$appId]["data"]["developers"][0],
                                         $tags,
-                                        $gameFileName . ".jpg",
+                                        $steam[$appId]["data"]["header_image"],
                                         $covers,
                                         $appId
                                     );

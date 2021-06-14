@@ -9,7 +9,7 @@
         private string $developer;
         private array $tags;
         private string $banner;
-        private string $cover;
+        private array $cover;
         private int $steamAppId;
         private bool $hasNews = false;
         private int $followers;
@@ -30,21 +30,19 @@
                 $this->exists = true;
                 $this->mysqli = $get->fetch_assoc();
 
-                $possibleCovers = explode(",", $this->mysqli['cover']);
-
                 $this->id = $this->mysqli['id'];
                 $this->name = $this->mysqli['name'];
                 $this->description = $this->mysqli['description'];
                 $this->developer = $this->mysqli['developer'];
                 $this->tags = explode(",", $this->mysqli['tags']);
                 $this->banner = $this->mysqli['banner'];
-                $this->cover = $possibleCovers[array_rand($possibleCovers)];
+                $this->cover = explode(",", $this->mysqli['cover']);
                 $this->steamAppId = $this->mysqli['steamappid'];
                 $this->hasNews = $this->mysqli['news'];
                 $this->followers = $this->mysqli['followers'];
 
-                $this->bannerURL = \URL . "images/banners/" . $this->banner;
-                $this->coverURL = \URL . "images/covers/" . $this->cover;
+                $this->bannerURL = $this->banner;
+                $this->coverURL = $this->cover[array_rand($this->cover)];
             }
         }
 
