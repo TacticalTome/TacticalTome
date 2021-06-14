@@ -5,6 +5,7 @@
 	ini_set("allow_url_fopen", true);
 
 	define("URL", "http://" . $_SERVER['HTTP_HOST'] . "/gamershandbook/");
+	define("HTTPS_ENABLED", false);
 	define("WEBSITE_NAME", "Gamer's Handbook");
 	define("ALLOW_REGISTRATION", true);
 
@@ -18,8 +19,6 @@
 	define("TEMPLATE_DIRECTORY", SYSTEM_DIRECTORY . "templates/");
 	define("BANNER_DIRECTORY", IMAGE_DIRECTORY . "banners/");
 	define("COVER_DIRECTORY", IMAGE_DIRECTORY . "covers/");
-
-	define("REMOVE_FROM_URL", "/gamershandbook/");
 
 	date_default_timezone_set("America/Chicago");
 	

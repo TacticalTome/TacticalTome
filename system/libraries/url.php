@@ -10,7 +10,7 @@
 		
 		public function __construct(string $URL) {
 			$this->content = $URL;
-			$this->content = str_replace(\REMOVE_FROM_URL, "", $this->content);
+			$this->content = str_replace(\URL, "", $this->content);
 
 			$this->parseContent();
 		}

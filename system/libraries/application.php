@@ -12,7 +12,8 @@
 		private URL $URL;
 		
 		public function __construct(string $db_host, string $db_username, string $db_password, string $db_name) {
-			$URL = new URL($_SERVER['REQUEST_URI']);
+			if (\HTTPS_ENABLED) $URL = new URL("https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
+			else $URL = new URL("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
 			
 			if (file_exists(\CONTROLLER_DIRECTORY . strtolower($URL->getController()) . ".php")) {
 				$controller = strtolower($URL->getController());
