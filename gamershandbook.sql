@@ -33,7 +33,9 @@ CREATE TABLE `confirmations` (
   `action` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL,
-  `time` int(11) NOT NULL
+  `time` int(11) NOT NULL,
+  'moderator' tinyint(1) NOT NULL,
+  'banned' tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -49,7 +51,7 @@ CREATE TABLE `games` (
   `developer` varchar(100) NOT NULL,
   `tags` varchar(100) NOT NULL,
   `banner` varchar(100) NOT NULL,
-  `cover` varchar(256) NOT NULL,
+  `cover` varchar(1024) NOT NULL,
   `steamappid` int(11) NOT NULL,
   `news` tinyint(1) NOT NULL,
   `followers` int(11) NOT NULL
