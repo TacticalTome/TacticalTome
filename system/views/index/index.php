@@ -132,6 +132,33 @@
         </center>
 
         <div class="spacer" data-size="large"></div>
+
+        <h1 class="fontTrebuchet colorOrange lineWithWords">Today's Popular Strategy Guides</h1>
+        <?php
+            foreach($this->topStrategyGuides as $strategyGuide) {
+                $game = new \model\Game($this->database, $strategyGuide->getGameId());
+                ?>
+                    <div class="row" data-colcount="2">
+                        <div class="column hideOnMobile">
+                            <center>    
+                                <div class="positionRelative hoverOverlayContainer cursorPointer" style="width: 350px; height: 200px;" onclick="gotoLink('<?php echo $game->getURL(); ?>');" title="<?php echo $game->getName(); ?>">
+                                    <img src="<?php echo $game->getBannerUrl(); ?>" style="width: 100%; height: 100%;"></a>
+                                    <div class="hoverOverlay" style="width: 100%; height: 100%;"></div>
+                                </div>
+                            </center>
+                        </div>
+                        <div class="column">
+                            <h1 class="fontTrebuchet"><a href="<?php echo $strategyGuide->getURL(); ?>"><?php echo $strategyGuide->getTitle(); ?></a></h1>
+                            <p class="fontTrebuchet hideOnDesktop"><a href="<?php echo $game->getURL(); ?>"><?php echo $game->getName(); ?></a></p>
+                            <p class="fontVerdana" data-fontsize="medium" style="overflow-wrap: break-word;"><?php echo $strategyGuide->getDescriptionSnippet(250); ?></p>
+                        </div>    
+                    </div>
+                    <div class="spacer" data-size="mdeium"></div>
+                <?php
+            }
+        ?>
+
+        <div class="spacer" data-size="large"></div>
     </div>
 </div>
 
