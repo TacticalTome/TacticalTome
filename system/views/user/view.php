@@ -126,6 +126,7 @@
                     function toggleBan() {
                         if (confirm("Are you sure you want to toggle this user's ban?")) {
                             const reason = prompt("What is the reason?");
+                            if (reason === "" || !reason) return;
                             $.ajax({
                                 url: "<?php echo \URL; ?>ajax/toggleBan/",
                                 data: {userID: <?php echo $this->userProfile->getId(); ?>, reason: reason},

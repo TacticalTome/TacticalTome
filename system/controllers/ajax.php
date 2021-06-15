@@ -80,7 +80,7 @@
 
                         if ($strategyGuide->exists()) {
                             if ($this->user->getId() == $strategyGuide->getUserId()) {
-                                \model\StrategyGuide::delete($this->database, $_POST['strategyGuideID']);
+                                \model\StrategyGuide::delete($this->database, $strategyGuide->getId());
                                 echo "Successfully deleted";
                             }
                         } else {
@@ -116,6 +116,32 @@
                             } 
                         } else { 
                             echo "That user does not seem to exist";
+                        }
+                    } else {
+                        echo "You must be a moderator to execute this command";
+                    }
+                } else {
+                    echo "You must be logged in";
+                }
+            } else {
+                echo "There was a problem when banning that user";
+            }
+        }
+
+        public function forceDeleteStrategyGuide() {
+            if (!empty($_POST['strategyGuideID']) && !empty($_POST['reason'])) {
+                if ($this->userIsLoggedIn) {
+                    if ($this->user->isModerator()) {
+                        $this->loadModel("strategyguide");
+
+                        $strategyGuide = new \model\StrategyGuide($this->database, $_POST['strategyGuideID']);
+                        if ($strategyGuide->exists()) {
+                            $user = new \model\User($this->database, $strategyGuide->getUserId());
+                            \model\StrategyGuide::delete($this->database, $strategyGuide->getId());
+                            if ($user->isValid()) mail($user->getEmail(), "Your strategy guide has been deleted", "Your strategy guide: " . $strategyGuide->getTitle() . " was deleted from " . \WEBSITE_NAME . " for the following reason(s): " . $_POST['reason'] . "\n\nYour strategy guide was deleted by: " . $this->user->getUsername() . "\nIf you feel your strategy guide have been improperly or wrongly deleted please contact us.");
+                            echo "Successfully deleted";
+                        } else {
+                            echo "That strategy guide does not exist";
                         }
                     } else {
                         echo "You must be a moderator to execute this command";
