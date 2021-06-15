@@ -8,7 +8,7 @@
         <h1 class="centerText fontAlfaSlabOne colorOrange"><?php echo $this->userProfile->getUsername(); ?></h1>
         <?php
             if ($this->userIsLoggedIn) {
-                if ($this->user->isModerator()) {
+                if ($this->user->isModerator() && $this->user->getId() != $this->userProfile->getId() && !$this->userProfile->isModerator()) {
                     if ($this->userProfile->isBanned()) {
                         ?>
                             <center><button data-color="green" onclick="toggleBan();">Unban</button></center>
@@ -120,7 +120,7 @@
 
 <?php
     if ($this->userIsLoggedIn) {
-        if ($this->user->isModerator()) {
+        if ($this->user->isModerator() && $this->user->getId() != $this->userProfile->getId() && !$this->userProfile->isModerator()) {
             ?>
                 <script>
                     function toggleBan() {
