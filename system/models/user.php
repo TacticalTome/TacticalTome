@@ -15,6 +15,8 @@
         private int $timeLastPosted;
         private array $followedGames;
         private array $favoriteStrategyGuides;
+        private bool $moderator;
+        private bool $banned;
         private bool $isValid = false;
 
         private Database $database;
@@ -45,6 +47,9 @@
                 for ($i = 0; $i < count($this->favoriteStrategyGuides); $i++) {
                     $this->favoriteStrategyGuides[$i] = intval($this->favoriteStrategyGuides[$i]);
                 }
+
+                $this->moderator = $this->mysqli['moderator'];
+                $this->banned = $this->mysqli['banned'];
             }
         }
 
@@ -134,6 +139,14 @@
             return $this->timeLastPosted;
         }
 
+        public function isModerator(): bool {
+            return $this->moderator;
+        }
+
+        public function isBanned(): bool {
+            return $this->banned;
+        }
+
         public function setTimeSinceLastPosted(int $time): void {
             $this->timeLastPosted = $time;
             $this->database->query("UPDATE user SET lastposted='$time' WHERE id='".$this->id."'");
@@ -161,7 +174,11 @@
                 $credentials = $checkCredentials->fetch_assoc();
                 if (password_verify($password, $credentials['password'])) {
                     if ($credentials['activated']) {
-                        $_SESSION['uid'] = $credentials['id'];
+                        if (!$credentials['banned']) {
+                            $_SESSION['uid'] = $credentials['id'];
+                        } else {
+                            throw new \Exception("Your account has been banned and can no longer be accessed");
+                        }
                     } else {
                         throw new \Exception("Your account is not activated. Please check your email for your activation code.");
                     }

@@ -16,6 +16,11 @@
 			if (isset($_SESSION['uid']) && !empty($_SESSION['uid'])) {
 				$this->userIsLoggedIn = true;
 				$this->user = new \model\User($this->database, $_SESSION['uid']);
+
+				if ($this->user->isBanned()) {
+					SESSION_DESTROY();
+					header("location: " . \URL . "user/login/");
+				}
 			}
 		}
 		
