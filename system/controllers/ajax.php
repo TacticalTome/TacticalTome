@@ -96,6 +96,37 @@
                 echo "Please supply all the fields";
             }
         }
+
+        public function toggleBan() {
+            if (!empty($_POST['userID']) && !empty($_POST['reason'])) {
+                if ($this->userIsLoggedIn) {
+                    if ($this->user->isModerator()) {
+                        $this->loadModel("user");
+
+                        $user = new \model\User($this->database, $_POST['userID']);
+                        if ($user->isValid()) {
+                            if ($user->isBanned()) {
+                                $user->removeBan();
+                                mail($user->getEmail(), "Your ban has been removed", "Your ban has been removed from " . \WEBSITE_NAME . " for the following reason(s): " . $_POST['reason'] . "\n\nYour ban was lifted by: " . $this->user->getUsername());
+                                echo "The user's ban has been removed";
+                            } else {
+                                $user->ban();
+                                mail($user->getEmail(), "You have been banned", "You have been banned from " . \WEBSITE_NAME . " for the following reason(s): " . $_POST['reason'] . "\n\nYou have been banned by: " . $this->user->getUsername() . "\nIf you feel you have been improperly or wrongly banned please contact us.");
+                                echo "The user has been banned";
+                            } 
+                        } else { 
+                            echo "That user does not seem to exist";
+                        }
+                    } else {
+                        echo "You must be a moderator to execute this command";
+                    }
+                } else {
+                    echo "You must be logged in";
+                }
+            } else {
+                echo "There was a problem when banning that user";
+            }
+        }
     }
 
 ?>

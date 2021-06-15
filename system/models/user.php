@@ -83,16 +83,20 @@
             }
         }
 
-        private function updateFollowedGame() {
+        private function updateFollowedGame(): void {
             $this->followedGames = array_filter($this->followedGames);
             $pushToDatabase = implode(",", $this->followedGames);
             $update = $this->database->query("UPDATE user SET followedgames='$pushToDatabase' WHERE id='".$this->id."'");
         }
 
-        private function updateFavoriteStrategyGuides() {
+        private function updateFavoriteStrategyGuides(): void {
             $this->favoriteStrategyGuides = array_filter($this->favoriteStrategyGuides);
             $pushToDatabase = implode(",", $this->favoriteStrategyGuides);
             $update = $this->database->query("UPDATE user SET favoritestrategyguides='$pushToDatabase' WHERE id='".$this->id."'");
+        }
+
+        private function updateBanStatus(): void {
+            $this->database->query("UPDATE user SET banned='".$this->banned."' WHERE id='".$this->id."'");
         }
 
         public function isValid(): bool {
@@ -145,6 +149,16 @@
 
         public function isBanned(): bool {
             return $this->banned;
+        }
+
+        public function ban(): void {
+            $this->banned = true;
+            $this->updateBanStatus();
+        }
+
+        public function removeBan(): void {
+            $this->banned = false;
+            $this->updateBanStatus();
         }
 
         public function setTimeSinceLastPosted(int $time): void {

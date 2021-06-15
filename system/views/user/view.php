@@ -6,6 +6,21 @@
 <div class="jumbotron jumbotronWithBackground" data-theme="dark" data-stickynavabove="large">
     <div class="content">
         <h1 class="centerText fontAlfaSlabOne colorOrange"><?php echo $this->userProfile->getUsername(); ?></h1>
+        <?php
+            if ($this->userIsLoggedIn) {
+                if ($this->user->isModerator()) {
+                    if ($this->userProfile->isBanned()) {
+                        ?>
+                            <center><button data-color="green" onclick="toggleBan();">Unban</button></center>
+                        <?php
+                    } else {
+                        ?>
+                            <center ><button data-color="red" onclick="toggleBan();">Ban</button></center>
+                        <?php
+                    }
+                }
+            }
+        ?>
     </div>
 </div>
 
@@ -102,3 +117,28 @@
         ?>
     </div>
 </div>
+
+<?php
+    if ($this->userIsLoggedIn) {
+        if ($this->user->isModerator()) {
+            ?>
+                <script>
+                    function toggleBan() {
+                        if (confirm("Are you sure you want to toggle this user's ban?")) {
+                            const reason = prompt("What is the reason?");
+                            $.ajax({
+                                url: "<?php echo \URL; ?>ajax/toggleBan/",
+                                data: {userID: <?php echo $this->userProfile->getId(); ?>, reason: reason},
+                                type: "POST",
+                                success: function(data) {
+                                    alert(data);
+                                    if (data == "The user has been banned" || data == "The user's ban has been removed") window.location.reload();
+                                }
+                            });
+                        }
+                    }
+                </script>
+            <?php
+        }
+    }
+?>
