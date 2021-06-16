@@ -138,6 +138,9 @@
                 }
             }
 
+            $this->pageIdentifier = "Submit Steam Game";
+            $this->pageTitle = "Submit a Steam Game - " . \WEBSITE_NAME;
+
             $this->loadViewWithHeaderFooter("game", "submit");
         }
     }

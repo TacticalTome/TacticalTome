@@ -58,6 +58,9 @@
                 }
             }
 
+            $this->pageIdentifier = "Register";
+            $this->pageTitle = "Register - " . \WEBSITE_NAME;
+
             $this->loadViewWithHeaderFooter("user", "register");
         }
 
@@ -67,8 +70,6 @@
         }
 
         public function explore(string $action = null, int $page = null) {
-            $this->pageTitle = "Explore - " . \WEBSITE_NAME; 
-            $this->pageIdentifier = "Explore";
             $this->loadModel("user");
             $this->loadModel("game");
             $this->loadModel("strategyguide");
@@ -114,6 +115,9 @@
                 $game = new \model\Game($this->database, $randomGame['id']);
                 array_push($this->featuredGames, $game);
             }
+
+            $this->pageTitle = "Explore - " . \WEBSITE_NAME; 
+            $this->pageIdentifier = "Explore";
 
             $this->loadViewWithHeaderFooter("user", "explore");
         }
@@ -164,6 +168,9 @@
                     $guide = new \model\StrategyGuide($this->database, $get['id']);
                     array_push($this->userStrategyGuides, $guide);
                 }
+
+                $this->pageIdentifier = "Account";
+                $this->pageTitle = "Your Account - " . \WEBSITE_NAME;
 
                 $this->loadViewWithHeaderFooter("user", "account");
             } else {
@@ -233,6 +240,9 @@
                 }
 
                 if ($this->userProfile->isValid()) {
+                    $this->pageIdentifier = "Profile";
+                    $this->pageTitle = $this->userProfile->getUsername() . " - " . \WEBSITE_NAME;
+
                     $this->loadViewWithHeaderFooter("user", "view");
                 } else {
                     $this->unknownPage();

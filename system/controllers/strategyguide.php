@@ -79,6 +79,9 @@
 
                 $this->game = new \model\Game($this->database, $gameID);
                 if ($this->game->exists() && $this->user->isFollowingGame($this->game->getId())) {
+                    $this->pageIdentifier = "New Strategy Guide";
+                    $this->pageTitle = "New Strategy Guide - " . \WEBSITE_NAME;
+
                     $this->loadViewWithHeaderFooter("strategyguide", "new");
                 } else {
                     $this->unknownPage();
@@ -97,6 +100,10 @@
                 $this->strategyGuide = new \model\StrategyGuide($this->database, $strategyGuideID);
                 if ($this->strategyGuide->exists() && $this->user->getId() == $this->strategyGuide->getUserId()) {
                     $this->game = new \model\Game($this->database, $this->strategyGuide->getGameId());
+
+                    $this->pageIdentifier = "Edit Strategy Guide";
+                    $this->pageTitle = "Edit Strategy Guide - " . \WEBSITE_NAME;
+
                     $this->loadViewWithHeaderFooter("strategyguide", "edit");
                 } else {
                     $this->unknownPage();

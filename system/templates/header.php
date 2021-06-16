@@ -68,7 +68,9 @@
                 case "Login":
                 case "Explore":
                 case "Account":
-                case "Submit":
+                case "Submit Steam Game":
+                case "New Strategy Guide":
+                case "Edit Strategy Guide":
                     echo '<meta name="robots" content="nofollow">';
                     \utility\echoDefaultMetadata();
                     break;

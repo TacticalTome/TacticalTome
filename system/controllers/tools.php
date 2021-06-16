@@ -27,6 +27,9 @@
 
                 $this->search = $search;
 
+                $this->pageIdentifier = "Search";
+                $this->pageTitle = "Search: " . $search . " - " . \WEBSITE_NAME;
+
                 $this->loadViewWithHeaderFooter("tools", "search");
 
             } else {
