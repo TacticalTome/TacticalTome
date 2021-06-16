@@ -27,7 +27,7 @@
         <div class="spacer" data-size="medium"></div>
 
         <center>
-            <img class="hideOnMobile" src="<?php echo $this->game->getBannerURL(); ?>">
+            <img class="hideOnMobile" alt="<?php echo $this->game->getName(); ?> Banner" src="<?php echo $this->game->getBannerURL(); ?>">
             <h1 class="fontTrebuchet"><?php echo $this->game->getName(); ?></h1>
         </center>
         <p class="fontVerdana"><?php echo $this->game->getDescription(); ?></p>

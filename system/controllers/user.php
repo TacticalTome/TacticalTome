@@ -19,6 +19,9 @@
                 }
             }
 
+            $this->pageIdentifier = "Login";
+            $this->pageTitle = "Login - " . \WEBSITE_NAME;
+
             $this->loadViewWithHeaderFooter("user", "login");
         }
 

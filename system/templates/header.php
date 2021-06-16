@@ -41,17 +41,43 @@
         <!--
             Metadata
         -->
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta property="og:url" content="<?php echo \utility\getCurrentURL(); ?>">
-        <meta property="og:type" content="website">
-        <meta property="og:title" content="<?php echo $this->pageTitle; ?>">
-        <meta property="og:description" content="<?php echo $this->pageDescription; ?>">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <meta name="description" content="<?php echo $this->pageDescription; ?>">
+        <meta name="keywords" content="strategy guides, collection, guides, gaming, games, encyclopedia, tutorials, news">
+        <meta name="language" content="English">
+        <meta name="og:url" property="og:url" content="<?php echo \utility\getCurrentURL(); ?>">
+        <meta name="og:type" property="og:type" content="website">
+        <meta name="og:title" property="og:title" content="<?php echo $this->pageTitle; ?>">
+        <meta name="og:description" property="og:description" content="<?php echo $this->pageDescription; ?>">
 
-        <?php if ($this->pageIdentifier != "View Strategy Guide" && $this->pageIdentifier != "View Game") { ?>
-            <meta property="og:image" content="<?php echo \URL; ?>images/icon.png">
-        <?php } else { ?>
-            <meta property="og:image" content="<?php echo $this->game->getCoverURL(); ?>">
-        <?php } ?>
+        <?php
+            switch( $this->pageIdentifier) {
+                case "View Strategy Guide":
+                    echo '<meta name="author" content="' . $this->author->getUsername() . '">';
+                    echo '<meta name="copyright" content="' . $this->author->getUsername() . '">';
+                    echo '<meta name="og:image" property="og:image" content="' . $this->game->getCoverURL() . '">';
+                    break;
+
+                case "View Game":
+                    echo '<meta name="copyright" content="' . $this->game->getDeveloper() . '">';
+                    echo '<meta name="og:image" property="og:image" content="' . $this->game->getCoverURL() . '">';
+                    break;
+                
+                case "Register":
+                case "Login":
+                case "Explore":
+                case "Account":
+                case "Submit":
+                    echo '<meta name="robots" content="nofollow">';
+                    \utility\echoDefaultMetadata();
+                    break;
+
+                default:
+                    \utility\echoDefaultMetadata();
+                    break;
+            }
+        ?>
     </head>
 
     <!--

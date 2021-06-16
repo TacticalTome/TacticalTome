@@ -36,7 +36,7 @@
                             <div class="column hideOnMobile">
                                 <center>    
                                     <div class="positionRelative hoverOverlayContainer cursorPointer" style="width: 350px; height: 200px;" onclick="gotoLink('<?php echo $game->getURL(); ?>');" title="<?php echo $game->getName(); ?>">
-                                        <img src="<?php echo $game->getBannerUrl(); ?>" style="width: 100%; height: 100%;"></a>
+                                        <img alt="<?php echo $game->getName(); ?> Banner" src="<?php echo $game->getBannerUrl(); ?>" style="width: 100%; height: 100%;"></a>
                                         <div class="hoverOverlay" style="width: 100%; height: 100%;"></div>
                                     </div>
                                 </center>
@@ -61,7 +61,7 @@
                             </div>
                             <div class="column">
                                 <div class="positionRelative hoverOverlayContainer cursorPointer" onclick="gotoLink('<?php echo $this->featuredGames[$i]->getURL(); ?>');" title="<?php echo $this->featuredGames[$i]->getName(); ?>">
-                                    <img src="<?php echo $this->featuredGames[$i]->getBannerUrl(); ?>" style="width: 16em; height: 8em;"></a>
+                                    <img alt="<?php echo $this->featuredGames[$i]->getName(); ?> Banner" src="<?php echo $this->featuredGames[$i]->getBannerUrl(); ?>" style="width: 16em; height: 8em;"></a>
                                     <div class="hoverOverlay" style="width: 16em; height: 8em;"></div>
                                 </div>
                             </div>

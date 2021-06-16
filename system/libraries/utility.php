@@ -22,4 +22,9 @@
         return '<button data-color="blue" onclick="gotoLinkInNewTab(\'https://www.reddit.com/submit?title=' . urlencode($title) . '&url=' . urlencode(getCurrentURL()) . '\');" title="Share on Reddit"><i class="fab fa-reddit-alien"></i> Share</button>';
     }
 
+    function echoDefaultMetadata(): void {
+        echo '<meta name="copyright" content="' . \WEBSITE_NAME . '">';
+        echo '<meta name="og:image" property="og:image" content="' . \URL . 'images/icon.png">';
+    }
+
 ?>

@@ -16,11 +16,11 @@
 -->
 <div class="carousel unselectable hideOnMobile" id="carousel1" data-theme="dark" data-cycle="true">
     <div class="imageContainer" data-size="cover">
-        <img src="<?php echo URL; ?>/images/screenshot1.jpg" id="slide1" data-caption="caption1" alt="Screenshot #1">
-        <img src="<?php echo URL; ?>/images/screenshot2.jpg" id="slide2" data-caption="caption2" alt="Screenshot #2">
-        <img src="<?php echo URL; ?>/images/screenshot3.jpg" id="slide3" data-caption="caption3" alt="Screenshot #3">
-        <img src="<?php echo URL; ?>/images/screenshot4.jpg" id="slide4" data-caption="caption4" alt="Screenshot #4">
-        <img src="<?php echo URL; ?>/images/screenshot5.jpg" id="slide5" data-caption="caption5" alt="Screenshot #5">
+        <img alt="Gameplay of Stronghold Crusader HD" src="<?php echo URL; ?>/images/screenshot1.jpg" id="slide1" data-caption="caption1" alt="Screenshot #1">
+        <img alt="Gameplay of Disciples II: Gallean's Return" src="<?php echo URL; ?>/images/screenshot2.jpg" id="slide2" data-caption="caption2" alt="Screenshot #2">
+        <img alt="Gameplay of American Conquest: Fight Back" src="<?php echo URL; ?>/images/screenshot3.jpg" id="slide3" data-caption="caption3" alt="Screenshot #3">
+        <img alt="Gameplay of Railroad Tycoon II" src="<?php echo URL; ?>/images/screenshot4.jpg" id="slide4" data-caption="caption4" alt="Screenshot #4">
+        <img alt="Gameplay of Stronghold HD" src="<?php echo URL; ?>/images/screenshot5.jpg" id="slide5" data-caption="caption5" alt="Screenshot #5">
     </div>
     <div class="caption centered" id="caption1" data-center="true">
         <div class="content">
