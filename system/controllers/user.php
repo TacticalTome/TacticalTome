@@ -91,6 +91,10 @@
                 $randomStrategyGuidesGet = $this->database->query("SELECT * FROM strategyguides WHERE timecreated > '".(time()-604800)."' ORDER BY favorites LIMIT 20 OFFSET " . $offset);
             }
 
+            $this->action = $action;
+            $this->page = $page;
+            if (is_null($this->page)) $this->page = 0;
+
             $this->featuredStrategyGuides = Array();
             while ($randomStrategyGuide = $randomStrategyGuidesGet->fetch_assoc()) {
                 $strategyGuide = new \model\StrategyGuide($this->database, $randomStrategyGuide['id']);

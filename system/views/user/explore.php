@@ -74,6 +74,45 @@
 
                 if (isset($this->featuredGames[$i])) echo "<div class='spacer' data-size='large'></div><hr><div class='spacer' data-size='large'></div>";
             }
+
+            if (empty($this->featuredStrategyGuides)) {
+                echo "<h5>There appears to be no more strategy guides</h5>";
+                echo "<div class='spacer' data-size='medium'></div>";
+            }
+
+            if (empty($this->featuredGames)) {
+                echo "<h5>There appears to be no more games</h5>";
+                echo "<div class='spacer' data-size='medium'></div>";
+            }
         ?>
+
+        <center>
+            <?php if ($this->page > 0) { ?>
+                <button data-color="red" onclick="previousPage();">Previous</button> &nbsp;&nbsp;
+            <?php } ?>
+            <button data-color="green" onclick="nextPage();">Next</button>
+        </center>
+
+        <div class="spacer" data-size="medium"></div>
     </div>
 </div>
+
+<script>
+    <?php if ($this->page > 0) { ?>
+        function previousPage() {
+            <?php if ($this->action == "recommended") { ?> 
+                window.location.href = "<?php echo \URL . "user/explore/recommended/" . ($this->page - 1) . "/"; ?>";
+            <?php } else { ?>
+                window.location.href = "<?php echo \URL . "user/explore/top/" . ($this->page - 1) . "/"; ?>";
+            <?php } ?>
+        }
+    <?php } ?>
+
+    function nextPage() {
+        <?php if ($this->action == "recommended") { ?> 
+            window.location.href = "<?php echo \URL . "user/explore/recommended/" . ($this->page + 1) . "/"; ?>";
+        <?php } else { ?>
+            window.location.href = "<?php echo \URL . "user/explore/top/" . ($this->page + 1) . "/"; ?>";
+        <?php } ?>
+    }
+</script>
