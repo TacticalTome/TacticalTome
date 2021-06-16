@@ -15,7 +15,6 @@
 		URL
 	*/
 	define("URL", "http://" . $_SERVER['HTTP_HOST'] . "/gamershandbook/");
-	define("HTTPS_ENABLED", false);
 
 	/*
 		Website Properties
