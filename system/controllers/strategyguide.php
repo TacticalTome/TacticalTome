@@ -14,7 +14,7 @@
                     $this->game = new \model\Game($this->database, $this->strategyGuide->getGameId());
                     $this->author = new \model\User($this->database, $this->strategyGuide->getUserId());
 
-                    $this->pageTitle = $this->strategyGuide->getTitle() . " - " . \WEBSITE_NAME;
+                    $this->pageTitle = $this->strategyGuide->getTitle() . " - " . $this->game->getName() . " - " . \WEBSITE_NAME;
                     $this->pageIdentifier = "View Strategy Guide";
                     $this->pageDescription = $this->strategyGuide->getPreview();
 
