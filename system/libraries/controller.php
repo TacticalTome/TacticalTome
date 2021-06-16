@@ -8,6 +8,7 @@
 		protected Array $formErrors = array();
 		protected string $pageTitle = \WEBSITE_NAME;
 		protected string $pageIdentifier = "";
+		protected string $pageDescription = \WEBSITE_NAME . " is an encyclopedia for game strategies, guides, tutorials, news, and more!";
 		protected bool $userIsLoggedIn = false;
 		
 		public function __construct(\model\Database $database) {

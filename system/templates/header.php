@@ -1,5 +1,5 @@
 <!--
-<?php echo \WEBSITE_NAME; ?>
+    <?php echo \WEBSITE_NAME; ?>
     (c) 2021 - <?php echo date("Y"); ?> Silas Carlson. All Rights Reserved.
 -->
 
@@ -10,7 +10,7 @@
             Site Data
         -->
         <title><?php echo $this->pageTitle; ?></title>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <link rel="icon" href="<?php echo \URL; ?>images/icon.png" type="image/png">
 
         <!--
             Framework
@@ -37,6 +37,21 @@
         -->
         <link rel="stylesheet" href="<?php echo \URL; ?>stylesheets/main.css" />
         <script src="<?php echo \URL; ?>javascript/formvalidation.js"></script>
+
+        <!--
+            Metadata
+        -->
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta property="og:url" content="<?php echo \utility\getCurrentURL(); ?>">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="<?php echo $this->pageTitle; ?>">
+        <meta property="og:description" content="<?php echo $this->pageDescription; ?>">
+
+        <?php if ($this->pageIdentifier != "View Strategy Guide" && $this->pageIdentifier != "View Game") { ?>
+            <meta property="og:image" content="<?php echo \URL; ?>images/icon.png">
+        <?php } else { ?>
+            <meta property="og:image" content="<?php echo $this->game->getCoverURL(); ?>">
+        <?php } ?>
     </head>
 
     <!--

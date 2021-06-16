@@ -29,6 +29,15 @@
 
         <h1><?php echo $this->strategyGuide->getTitle(); ?></h1>
         <p><?php echo $this->strategyGuide->getContent(); ?></h1>
+        
+        <div class="spacer" data-size="small"></div>
+        
+
+        <?php 
+            echo \utility\getFacebookShareButton() . "&emsp;"; 
+            echo \utility\getTwitterShareButton() . "&emsp;";
+            echo \utility\getRedditShareButton($this->pageTitle);
+        ?>
 
         <div class="spacer" data-size="medium"></div>
 

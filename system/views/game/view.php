@@ -99,6 +99,14 @@
         </ol>
 
         <div class="spacer" data-size="large"></div>
+
+        <?php 
+            echo \utility\getFacebookShareButton() . "&emsp;"; 
+            echo \utility\getTwitterShareButton() . "&emsp;";
+            echo \utility\getRedditShareButton($this->pageTitle);
+        ?>
+
+        <div class="spacer" data-size="large"></div>
     </div>
 </div>
 

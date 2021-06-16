@@ -22,6 +22,10 @@
                         array_push($this->popularStrategyGuides, new \model\StrategyGuide($this->database, $strategyGuide['id']));
                     }
 
+                    $this->pageTitle = $this->game->getName() . " - " . \WEBSITE_NAME;
+                    $this->pageIdentifier = "View Game";
+                    $this->pageDescription = $this->game->getShortDescription();
+
                     $this->loadViewWithHeaderFooter("game", "view");
                 } else {
                     $this->unknownPage();

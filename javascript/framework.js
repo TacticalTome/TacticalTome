@@ -41,6 +41,10 @@ function gotoLink(link) {
     window.location.href = link;
 }
 
+function gotoLinkInNewTab(link) {
+    window.open(link, "_blank");
+}
+
 window.onload = function() {
     var isMobile = false; //initiate as false
     // device detection
