@@ -17,5 +17,6 @@ If you are still not sure what to do after reading this document, look at the is
 - Suggest a new feature
 - Make the code base more consistent (if applicable)
 - Fix a bug
+- Work on the API
 
 Recommendations are in no particular order.
