@@ -42,6 +42,7 @@
         </p>
         <?php if ($this->game->getSteamAppId() != 0) { ?>
             <p class="fontVerdana"><b>Steam link</b>: <a href="https://store.steampowered.com/app/<?php echo $this->game->getSteamAppId(); ?>/" target="_blank"><?php echo $this->game->getName(); ?></a></p>
+            <p class="fontVerdana"><b>Who's Playing</b>: <span id="currentSteamPlayerCount">Loading</span> players</p>
         <?php } ?>
         <hr>
 
@@ -149,6 +150,22 @@
                             let datePostedAsString = formatMonth(datePosted.getMonth()) + " " + formatDate(datePosted.getDate()) + ", " + datePosted.getFullYear() + " @ " + formatTime(datePosted.getHours(), datePosted.getMinutes()); 
                             $("#gameNewsContainer").append("<li class='fontVerdana'><a href='" + data.appnews.newsitems[i].url + "' target='_blank'>" + data.appnews.newsitems[i].title + "</a></li><ul class='fontVerdana'><li>Posted by " + data.appnews.newsitems[i].author + " on " + datePostedAsString + "</li><li>" + data.appnews.newsitems[i].feedlabel + "</li></ul><br>");
                         }
+                    }
+                }
+            }
+        });
+    </script>
+<?php } ?>
+
+<?php if ($this->game->getSteamAppId() != 0) { ?>
+    <script>
+        $.get({
+            url: "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=<?php echo $this->game->getSteamAppId(); ?>",
+            dataType: "json",
+            success: function(data) {
+                if (typeof data.response !== undefined) {
+                    if (data.response.result) {
+                        $("#currentSteamPlayerCount").text(data.response.player_count);
                     }
                 }
             }
