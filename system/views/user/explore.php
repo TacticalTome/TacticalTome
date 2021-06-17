@@ -76,17 +76,18 @@
             }
 
             if (empty($this->featuredStrategyGuides)) {
-                echo "<h5>There appears to be no more strategy guides</h5>";
+                echo "<h5 class='fontTrebuchet'>There appears to be no more strategy guides</h5>";
                 echo "<div class='spacer' data-size='medium'></div>";
             }
 
             if (empty($this->featuredGames)) {
-                echo "<h5>There appears to be no more games</h5>";
+                echo "<h5 class='fontTrebuchet'>There appears to be no more games</h5>";
                 echo "<div class='spacer' data-size='medium'></div>";
             }
         ?>
 
         <center>
+        <p class="fontTrebuchet">Not seeing a game? Add it <a href="<?php echo \URL; ?>game/submit/">here</a> or <a href="<?php echo \URL; ?>about/contact/">contact us</a>.</p>
             <?php if ($this->page > 0) { ?>
                 <button data-color="red" onclick="previousPage();">Previous</button> &nbsp;&nbsp;
             <?php } ?>
