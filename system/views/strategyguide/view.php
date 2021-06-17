@@ -59,7 +59,7 @@
 
 <?php
     if ($this->userIsLoggedIn) {
-        if ($this->user->getId() == $this->strategyGuide->getId()) {
+        if ($this->user->getId() == $this->strategyGuide->getUserId()) {
             ?>
                 <script>
                     function deleteStrategyGuide() {
