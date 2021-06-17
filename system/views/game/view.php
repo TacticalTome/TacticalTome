@@ -142,15 +142,19 @@
             success: function(data) {
                 $("#gameNewsContainer").empty();
                 let maxNews = 5;
-                for (let i = 0; i < maxNews; i++) {
-                    if (typeof data.appnews.newsitems[i] !== "undefined") {
-                        if (i > 0 && data.appnews.newsitems[i].date == data.appnews.newsitems[i-1].date) maxNews++;
-                        else {
-                            let datePosted = new Date(data.appnews.newsitems[i].date * 1000);
-                            let datePostedAsString = formatMonth(datePosted.getMonth()) + " " + formatDate(datePosted.getDate()) + ", " + datePosted.getFullYear() + " @ " + formatTime(datePosted.getHours(), datePosted.getMinutes()); 
-                            $("#gameNewsContainer").append("<li class='fontVerdana'><a href='" + data.appnews.newsitems[i].url + "' target='_blank'>" + data.appnews.newsitems[i].title + "</a></li><ul class='fontVerdana'><li>Posted by " + data.appnews.newsitems[i].author + " on " + datePostedAsString + "</li><li>" + data.appnews.newsitems[i].feedlabel + "</li></ul><br>");
+                if (data.appnews.newsitems.length > 0) {
+                    for (let i = 0; i < maxNews; i++) {
+                        if (typeof data.appnews.newsitems[i] !== "undefined") {
+                            if (i > 0 && data.appnews.newsitems[i].date == data.appnews.newsitems[i-1].date) maxNews++;
+                            else {
+                                let datePosted = new Date(data.appnews.newsitems[i].date * 1000);
+                                let datePostedAsString = formatMonth(datePosted.getMonth()) + " " + formatDate(datePosted.getDate()) + ", " + datePosted.getFullYear() + " @ " + formatTime(datePosted.getHours(), datePosted.getMinutes()); 
+                                $("#gameNewsContainer").append("<li class='fontVerdana'><a href='" + data.appnews.newsitems[i].url + "' target='_blank'>" + data.appnews.newsitems[i].title + "</a></li><ul class='fontVerdana'><li>Posted by " + data.appnews.newsitems[i].author + " on " + datePostedAsString + "</li><li>" + data.appnews.newsitems[i].feedlabel + "</li></ul><br>");
+                            }
                         }
                     }
+                } else {
+                    $("#gameNewsContainer").append("<p class='fontVerdana'>There seems to be no news that we could find.</p>");
                 }
             }
         });
