@@ -2,7 +2,7 @@
 
     namespace controller;
 
-    class API {
+    class API extends \library\Controller {
         
     }
 

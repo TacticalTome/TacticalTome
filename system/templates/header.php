@@ -71,6 +71,7 @@
                 case "Submit Steam Game":
                 case "New Strategy Guide":
                 case "Edit Strategy Guide":
+                case "View Followed Games":
                     echo '<meta name="robots" content="nofollow">';
                     \utility\echoDefaultMetadata();
                     break;
@@ -107,16 +108,20 @@
                                     foreach ($this->user->getFollowedGames() as $followedGameID) {
                                         if (!empty($followedGameID)) {
                                             $followedGame = new \model\Game($this->database, $followedGameID);
-                                            echo '<div class="link fontVerdana" id=""><a href="' . \URL . 'game/view/' . $followedGameID . '/">' . $followedGame->getName() . '</a></div>';
+                                            if ($this->pageIdentifier == "View Game" && $this->game->getId() == $followedGame->getId()) {
+                                                echo '<div class="link fontVerdana" id="active"><a href="' . \URL . 'game/view/' . $followedGameID . '/">' . $followedGame->getName() . '</a></div>';
+                                            } else {
+                                                echo '<div class="link fontVerdana" id=""><a href="' . \URL . 'game/view/' . $followedGameID . '/">' . $followedGame->getName() . '</a></div>';
+                                            }
                                         }
                                     }
                                 ?>
                                 <br>
                                 <hr data-align="left" data-length="short" data-color="white" style="margin-left: 10px;">
-                                <div class="link fontVerdana" id=""><a href="<?php echo \URL; ?>game/submit/">Submit a Game</a></div>
+                                <div class="link fontVerdana" id="<?php if ($this->pageIdentifier == "Submit Steam Game") echo "active"; ?>"><a href="<?php echo \URL; ?>game/submit/">Submit a Game</a></div>
                             </div>
                         </div>
-                        <div class="link fontVerdana hideOnDesktop" id=""><a href=""><i class="fas fa-shoe-prints"></i> Followed Games</a></div>
+                        <div class="link fontVerdana hideOnDesktop" id="<?php if ($this->pageIdentifier == "View Followed Games") echo "active"; ?>"><a href="<?php echo \URL; ?>user/followedgames/"><i class="fas fa-shoe-prints"></i> Followed Games</a></div>
                     <?php } ?>
                 </div>
                 <div class="linkSection">

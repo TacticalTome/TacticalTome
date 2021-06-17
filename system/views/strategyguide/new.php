@@ -6,6 +6,7 @@
     <div class="content hideOnMobile centerHorizontalVertical" style="width: 75%;">
         <div class="editor-container" style="background: #454545; padding: 10px; border-radius: 10px;">
             <h1 class="fontAlfaSlabOne colorOrange"><?php echo $this->game->getName(); ?></h1>
+            <p class="fontVerdana"><b>Please view our <a href="<?php echo \URL; ?>legal/postingguidelines/" target="_blank" data-color="yellow">Posting Guidelines</a> before continuing</b></p>
             <table>
                 <tbody>
                     <tr>

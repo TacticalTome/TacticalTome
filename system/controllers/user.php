@@ -251,6 +251,26 @@
                 $this->unknownPage();
             }
         }
+
+        public function followedGames() {
+            if ($this->userIsLoggedIn) {
+                $this->loadModel("game");
+
+                $this->followedGames = Array();
+                foreach ($this->user->getFollowedGames() as $gameId) {
+                    if (!empty($gameId)) {
+                        array_push($this->followedGames, new \model\Game($this->database, $gameId));
+                    }
+                }
+
+                $this->pageIdentifier = "View Followed Games";
+                $this->pageTitle = "Your Followed Games - " . \WEBSITE_NAME;
+
+                $this->loadViewWithHeaderFooter("user", "followedgames");
+            } else { 
+                $this->unknownPage();
+            }
+        }
     }
 
 ?>

@@ -9,6 +9,7 @@ This file does not override the issues section of this repository nor is it upda
 If you are still not sure what to do after reading this document, look at the issues section for more ideas. If that does not help please contact [@Paughton](https://github.com/Paughton/) with any questions at: [tanktotgames@gmail.com](mailto:tanktotgames@gmail.com).
 
 ## Ideas to work on
+##### Main things to work on
 - Improve the explore page (both recommended and top)
 - Improve the search functionality of the site
 - Improve the CSS for mobile applications
@@ -18,5 +19,12 @@ If you are still not sure what to do after reading this document, look at the is
 - Make the code base more consistent (if applicable)
 - Fix a bug
 - Work on the API
+##### If there is nothing else to work on
+- Work on the Terms of Service
+- Work on the Posting Guidelines
+- Work on the Privacy Policy
+- Work on the About Us page
+- Work on the FAQ page
+- Work on the Contact Us page
 
 Recommendations are in no particular order.
