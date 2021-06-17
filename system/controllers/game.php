@@ -79,59 +79,63 @@
             $this->loadModel("game");
 
             if (!empty($_POST['submitGame'])) {
-                if (!empty($_POST['steamLink'])) {
-                    $url = $_POST['steamLink'];
-                    if (filter_var($url, FILTER_VALIDATE_URL) !== false) {
-                        $url = parse_url($url);
-                        if ($url['host'] == "store.steampowered.com") {
-                            $urlParameters = explode("/", $url['path']);
-                            $appId = intval($urlParameters[2]);
+                if (!empty($_POST['steamLink']) && !empty($_POST['g-recaptcha-response'])) {
+                    if (\utility\isReCaptchaValid($_POST['g-recaptcha-response'])) {
+                        $url = $_POST['steamLink'];
+                        if (filter_var($url, FILTER_VALIDATE_URL) !== false) {
+                            $url = parse_url($url);
+                            if ($url['host'] == "store.steampowered.com") {
+                                $urlParameters = explode("/", $url['path']);
+                                $appId = intval($urlParameters[2]);
 
-                            if (!\model\Game::existsWithSteamId($this->database, $appId)) {
-                                $steam = json_decode(file_get_contents("https://store.steampowered.com/api/appdetails/?appids=" . $appId), true);
-                                if (!empty($steam[$appId]["success"])) {
-                                    $gameFileName = strtolower(str_replace(" ", "", $steam[$appId]["data"]["name"]));
-                                    $gameFileName = preg_replace('/[^A-Za-z0-9\-]/', '', $gameFileName);
+                                if (!\model\Game::existsWithSteamId($this->database, $appId)) {
+                                    $steam = json_decode(file_get_contents("https://store.steampowered.com/api/appdetails/?appids=" . $appId), true);
+                                    if (!empty($steam[$appId]["success"])) {
+                                        $gameFileName = strtolower(str_replace(" ", "", $steam[$appId]["data"]["name"]));
+                                        $gameFileName = preg_replace('/[^A-Za-z0-9\-]/', '', $gameFileName);
 
-                                    $tags = Array();
-                                    foreach ($steam[$appId]["data"]["genres"] as $genre) {
-                                        array_push($tags, $genre["description"]);
-                                    }
-                                    $tags = implode(",", $tags);
-
-                                    $covers = Array();
-                                    for ($i = 0; $i < count($steam[$appId]["data"]["screenshots"]); $i++) {
-                                        if ($i < 5) {
-                                            array_push($covers, $steam[$appId]["data"]["screenshots"][$i]["path_full"]);
+                                        $tags = Array();
+                                        foreach ($steam[$appId]["data"]["genres"] as $genre) {
+                                            array_push($tags, $genre["description"]);
                                         }
+                                        $tags = implode(",", $tags);
+
+                                        $covers = Array();
+                                        for ($i = 0; $i < count($steam[$appId]["data"]["screenshots"]); $i++) {
+                                            if ($i < 5) {
+                                                array_push($covers, $steam[$appId]["data"]["screenshots"][$i]["path_full"]);
+                                            }
+                                        }
+                                        $covers = implode(",", $covers);
+
+                                        \model\Game::new(
+                                            $this->database,
+                                            $steam[$appId]["data"]["name"],
+                                            $steam[$appId]["data"]["short_description"],
+                                            $steam[$appId]["data"]["developers"][0],
+                                            $tags,
+                                            $steam[$appId]["data"]["header_image"],
+                                            $covers,
+                                            $appId
+                                        );
+
+                                        $gameId = \model\Game::getGameIdWithSteamId($this->database, $appId);
+
+                                        array_push($this->formErrors, "The game is now added. View it <a href='" . \URL . "game/view/" . $gameId . "/'>here</a>");
+                                    } else {
+                                        array_push($this->formErrors, "There was a probelm when trying to find that game");
                                     }
-                                    $covers = implode(",", $covers);
-
-                                    \model\Game::new(
-                                        $this->database,
-                                        $steam[$appId]["data"]["name"],
-                                        $steam[$appId]["data"]["short_description"],
-                                        $steam[$appId]["data"]["developers"][0],
-                                        $tags,
-                                        $steam[$appId]["data"]["header_image"],
-                                        $covers,
-                                        $appId
-                                    );
-
-                                    $gameId = \model\Game::getGameIdWithSteamId($this->database, $appId);
-
-                                    array_push($this->formErrors, "The game is now added. View it <a href='" . \URL . "game/view/" . $gameId . "/'>here</a>");
                                 } else {
-                                    array_push($this->formErrors, "There was a probelm when trying to find that game");
+                                    array_push($this->formErrors, "That game is already in our database");
                                 }
                             } else {
-                                array_push($this->formErrors, "That game is already in our database");
+                                array_push($this->formErrors, "The link you have provided is not a steam link");
                             }
                         } else {
-                            array_push($this->formErrors, "The link you have provided is not a steam link");
+                            array_push($this->formErrors, "Please supply a valid link");
                         }
                     } else {
-                        array_push($this->formErrors, "Please supply a valid link");
+                        array_push($this->formErrors, "The captcha needs to be completed correctly");
                     }
                 } else {
                     array_push($this->formErrors, "Please supply all the fields");

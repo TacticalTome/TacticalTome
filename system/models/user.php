@@ -231,7 +231,11 @@
         static public function isEmailValid(string $email): bool {
             if (strlen($email) <= self::$emailMaxLength) {
                 if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    return true;
+                    $invalidEmails = file(\LIBRARY_DIRECTORY . "invalidemaildomains.txt", FILE_IGNORE_NEW_LINES);
+
+                    if (!in_array(substr($email, strpos($email, "@") + 1), $invalidEmails)) {
+                        return true;
+                    }
                 }
             }
 

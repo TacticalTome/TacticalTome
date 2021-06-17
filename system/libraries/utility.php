@@ -27,4 +27,13 @@
         echo '<meta name="og:image" property="og:image" content="' . \URL . 'images/icon.png">';
     }
 
+    function getReCaptchaFormHTML(): string {
+        return '<div class="g-recaptcha" data-sitekey="' . \RECAPTCHA_SITE_KEY . '"></div>';
+    }
+
+    function isReCaptchaValid(string $value): bool {
+        $responseFromGoogle = json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . urlencode(\RECAPTCHA_SECRET_KEY) . "&response=" . urlencode($value)), true);
+        return $responseFromGoogle["success"];
+    }
+
 ?>

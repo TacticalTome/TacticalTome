@@ -31,24 +31,28 @@
             $this->loadModel("confirmation");
 
             if (!empty($_POST['register'])) {
-                if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['confirmpassword'])) {
+                if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['confirmpassword']) && !empty($_POST['g-recaptcha-response'])) {
                     if ($_POST['password'] == $_POST['confirmpassword']) {
-                        try {
-                            \model\User::register($this->database, $_POST['email'], $_POST['username'], $_POST['password']);
+                        if (\utility\isReCaptchaValid($_POST['g-recaptcha-response'])) {
+                            try {
+                                \model\User::register($this->database, $_POST['email'], $_POST['username'], $_POST['password']);
 
-                            $email = $this->database->protect($_POST['email']);
-                            $password = \model\Confirmation::generatePassword();
-                            $emailTitle = "Confirm Account";
-                            $emailContent = "Please confirm your account by clicking the link below.\n" . \URL . "user/confirm/activateaccount/" . $password . "/". $email . "/";
+                                $email = $this->database->protect($_POST['email']);
+                                $password = \model\Confirmation::generatePassword();
+                                $emailTitle = "Confirm Account";
+                                $emailContent = "Please confirm your account by clicking the link below.\n" . \URL . "user/confirm/activateaccount/" . $password . "/". $email . "/";
 
-                            $userGet = $this->database->query("SELECT * FROM user WHERE email='$email'");
-                            $user = $userGet->fetch_assoc();
+                                $userGet = $this->database->query("SELECT * FROM user WHERE email='$email'");
+                                $user = $userGet->fetch_assoc();
 
-                            \model\Confirmation::new($this->database, $user['id'], "activateaccount", $password, $email, $email, $emailTitle, $emailContent);
+                                \model\Confirmation::new($this->database, $user['id'], "activateaccount", $password, $email, $email, $emailTitle, $emailContent);
 
-                            header("location: " . URL . "user/login/");
-                        } catch (\Exception $exception) {
-                            array_push($this->formErrors, $exception->getMessage());
+                                header("location: " . URL . "user/login/");
+                            } catch (\Exception $exception) {
+                                array_push($this->formErrors, $exception->getMessage());
+                            }
+                        } else {
+                            array_push($this->formErrors, "The captcha needs to be completed correctly");
                         }
                     } else {
                         array_push($this->formErrors, "The passwords you have provided do not match.");
@@ -207,7 +211,7 @@
 
                     $this->loadViewWithHeaderFooter("user", "confirm");
                 } else {
-                    $this->unknownpage();
+                    $this->unknownPage();
                 }
             } else {
                 $this->unknownPage();

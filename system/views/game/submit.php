@@ -15,6 +15,7 @@
         
         <form action="<?php echo URL; ?>game/submit/" method="POST" autocomplete="off" onsubmit="return validateSubmitGame();">
             <input type="text" name="steamLink" placeholder="Steam Link" id="steamLink"><br><br>
+            <center><?php echo \utility\getReCaptchaFormHTML(); ?></center><br>
             <input type="submit" data-color="blue" name="submitGame" value="Submit" id="submitGame">
         </form>
     </div>

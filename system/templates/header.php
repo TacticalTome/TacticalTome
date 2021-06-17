@@ -32,6 +32,13 @@
         <script src="<?php echo \URL; ?>javascript/jquery-ui/jquery-ui.js"></script>
         <link rel="stylesheet" href="<?php echo \URL; ?>stylesheets/jquery-ui/jquery-ui.css" />
 
+        <?php if (($this->pageIdentifier == "Register" || $this->pageIdentifier == "Submit Steam Game") && \ENABLE_RECAPTCHA) { ?>
+            <!--
+                reCAPTCHA
+            -->
+            <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+        <?Php } ?>
+
         <!--
             Other
         -->

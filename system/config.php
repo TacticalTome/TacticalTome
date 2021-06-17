@@ -24,6 +24,15 @@
 	define("ALLOW_REGISTRATION", true);
 
 	/*
+		reCAPTCHA 
+		All reCAPTCHA using this key will pass and will show a warning message (These should not be used in production)
+		Can be grabbed from: https://www.google.com/recaptcha/admin/create
+	*/
+	define("ENABLE_RECAPTCHA", true);
+	define("RECAPTCHA_SITE_KEY", "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI");
+	define("RECAPTCHA_SECRET_KEY", "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe");
+
+	/*
 		Directories
 	*/
 	define("ROOT_DIRECTORY", $_SERVER['DOCUMENT_ROOT'] . "/gamershandbook/");
