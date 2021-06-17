@@ -91,20 +91,21 @@
         var title = $("#title").html();
         
         if (confirm("Are you sure you want to post this? Make sure that everything is how you want it before posting.\n\n*MAKE SURE IT ADHERES TO OUR RULES.")) {
-            $.ajax({ url: "<?php echo \URL; ?>ajax/updatestrategyguide/",
+            $.ajax({ 
+                    url: "<?php echo \URL; ?>ajax/updatestrategyguide/",
                     data: {title: title, content: content, gameID: <?php echo $this->game->getId(); ?>, strategyGuideID: <?php echo $this->strategyGuide->getId(); ?>},
                     type: "POST",
                     success: function(data) {
                         alert(data);
-                        if (data == "Successfully posted") window.location.href = "<?php echo $this->game->getURL(); ?>";
+                        if (data == "Successfully posted") window.location.href = "<?php echo $this->strategyGuide->getURL(); ?>";
                     }
             });
         }
     }
 
-    function backToGamePage() {
+    function backToStrategyGuidePage() {
         if (confirm("Are you sure you want to leave?\n\nAll progress will be lost!")) {
-            window.location.href = "<?php echo $this->game->getURL(); ?>";
+            window.location.href = "<?php echo $this->strategyGuide->getURL(); ?>";
         }
     }
 </script>
