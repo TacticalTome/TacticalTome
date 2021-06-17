@@ -159,13 +159,17 @@
 
 <?php if ($this->game->getSteamAppId() != 0) { ?>
     <script>
+        function number_format(number) {
+            return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+        }
+
         $.get({
             url: "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=<?php echo $this->game->getSteamAppId(); ?>",
             dataType: "json",
             success: function(data) {
                 if (typeof data.response !== undefined) {
                     if (data.response.result) {
-                        $("#currentSteamPlayerCount").text(data.response.player_count);
+                        $("#currentSteamPlayerCount").text(number_format(data.response.player_count));
                     }
                 }
             }
