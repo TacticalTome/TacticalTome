@@ -3,3 +3,4 @@ javascript/jquery-ui/* linguist-vendored
 javascript/jquery.js linguist-vendored
 styles/font-awesome/* linguist-vendored
 styles/jquery-ui/* linguist-vendored
+*.php linguist-language=PHP
