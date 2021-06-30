@@ -3,7 +3,107 @@
     namespace controller;
 
     class API extends \library\Controller {
-        
+        public function index(): void {
+            $this->pageIdentifier = "Api";
+            $this->pageTitle = "API Documentation - " . \WEBSITE_NAME;
+
+            $this->loadViewWithHeaderFooter("api", "index");
+        }
+
+        public function game(string $action = null, int|string $value = null): void {
+            header("Content-Type: application/json");
+
+            $this->loadModel("game");
+            $this->loadModel("apiresult");
+
+            $result =  new \model\ApiResult();
+
+            if (is_null($action)) $result->addError("Action is not set");
+            if (is_null($value)) $result->addError("Value is not set");
+
+            if (!is_null($action)) {
+                switch ($action) {
+                    case "get":
+                        $game = new \model\Game($this->database, $value);
+                        
+                        $result->addData("id", $game->getId());
+                        $result->addData("name", $game->getName());
+                        $result->addData("description", $game->getDescription());
+                        $result->addData("developer", $game->getDeveloper());
+                        $result->addData("developer", $game->getTags());
+                        $result->addData("banner", $game->getBannerURL());
+                        $result->addData("cover", $game->getCovers());
+                        $result->addData("steamappid", $game->getSteamAppId());
+                        $result->addData("followers", $game->getFollowers());
+                        $result->addData("url", $game->getURL());
+                        $result->addData("newstrategyguideurl", $game->getNewStrategyGuideURL());
+                        $result->setSuccess(true);
+                        break;
+                }
+            }
+
+            echo $result->getDataAsJSON();
+        }
+
+        public function strategyGuide(string $action = null, int|string $value = null) {
+            header("Content-Type: application/json");
+
+            $this->loadModel("strategyguide");
+            $this->loadModel("apiresult");
+
+            $result =  new \model\ApiResult();
+
+            if (is_null($action)) $result->addError("Action is not set");
+            if (is_null($value)) $result->addError("Value is not set");
+
+            if (!is_null($action)) {
+                switch ($action) {
+                    case "get":
+                        $strategyGuide = new \model\StrategyGuide($this->database, $value);
+
+                        $result->addData("id", $strategyGuide->getId());
+                        $result->addData("authorid", $strategyGuide->getUserId());
+                        $result->addData("gameid", $strategyGuide->getGameId());
+                        $result->addData("title", $strategyGuide->getTitle());
+                        $result->addData("content", $strategyGuide->getContent());
+                        $result->addData("timeposted", $strategyGuide->getTimeCreated());
+                        $result->addData("favorites", $strategyGuide->getFavorites());
+                        $result->setSuccess(true);
+                        break;
+                }
+            }
+
+            echo $result->getDataAsJSON();
+        }
+
+        public function user(string $action = null, int|string $value = null) {
+            header("Content-Type: application/json");
+
+            $this->loadModel("user");
+            $this->loadModel("apiresult");
+
+            $result =  new \model\ApiResult();
+
+            if (is_null($action)) $result->addError("Action is not set");
+            if (is_null($value)) $result->addError("Value is not set");
+
+            if (!is_null($action)) {
+                switch ($action) {
+                    case "get":
+                        $user = new \model\User($this->database, $value);
+
+                        $result->addData("id", $user->getId());
+                        $result->addData("username", $user->getUsername());
+                        $result->addData("timeregistered", $user->getTimeCreated());
+                        $result->addData("followedgameids", $user->getFollowedGames());
+                        $result->addData("favoritestrategyguideids", $user->getFavoriteStrategyGuides());
+                        $result->setSuccess(true);
+                        break;
+                }
+            }
+
+            echo $result->getDataAsJSON();
+        }
     }
 
 ?>

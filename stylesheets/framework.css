@@ -161,6 +161,25 @@ textarea {
     overflow-y: scroll;
 }
 
+code {
+    font-family: monospace;
+    background: #f4f4f4;
+    color: #666;
+}
+
+pre {
+    background: #f4f4f4;
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    display: block;
+    word-wrap: break-word;
+}
+
 hr[data-align="left"] { margin-left: 0; }
 hr[data-align="right"] { margin-right: 0; }
 

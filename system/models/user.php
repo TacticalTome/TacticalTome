@@ -48,6 +48,9 @@
                     $this->favoriteStrategyGuides[$i] = intval($this->favoriteStrategyGuides[$i]);
                 }
 
+                if (count($this->favoriteStrategyGuides) == 1 && $this->favoriteStrategyGuides[0] == 0) $this->favoriteStrategyGuides = Array();
+                if (count($this->followedGames) == 1 && $this->followedGames[0] == 0) $this->followedGames = Array();
+
                 $this->moderator = $this->mysqli['moderator'];
                 $this->banned = $this->mysqli['banned'];
             }

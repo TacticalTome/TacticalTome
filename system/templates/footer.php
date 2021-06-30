@@ -22,6 +22,10 @@
                     <a class="fontVerdana" href="<?php echo \URL; ?>about/faq/">Frequently Asked Questions</a>
                     <a class="fontVerdana" href="<?php echo \URL; ?>about/contact/">Contact Us</a>
                 </div>
+                <div class="section">
+                    <h4 class="fontTrebuchet">For Developers</h4>
+                    <a class="fontVerdana" href="<?php echo \URL; ?>api/">API Documentation</a>
+                </div>
             </div>
             <div class="banner" data-size="large">
                 &copy; 2021 - <?php echo date("Y"); ?> <a href="<?php echo \URL; ?>"><?php echo \WEBSITE_NAME; ?></a>. All Rights Reserved.

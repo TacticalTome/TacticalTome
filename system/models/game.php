@@ -78,6 +78,10 @@
             return $this->coverURL;
         }
 
+        public function getCovers(): array {
+            return $this->cover;
+        }
+
         public function getSteamAppId(): int {
             return $this->steamAppId;
         }
