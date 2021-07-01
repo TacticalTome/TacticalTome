@@ -6,8 +6,6 @@
 	require_once(\LIBRARY_DIRECTORY . "controller.php");
 	require_once(\LIBRARY_DIRECTORY . "utility.php");
 	require_once(\MODEL_DIRECTORY . "database.php");
-	require_once(\MODEL_DIRECTORY . "user.php");
-	require_once(\MODEL_DIRECTORY . "game.php");
 	
 	class Application {
 		private URL $URL;

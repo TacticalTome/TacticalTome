@@ -13,6 +13,7 @@
 		
 		public function __construct(\model\Database $database) {
 			$this->database = $database;
+			$this->loadModel("user", "game");
 
 			if (isset($_SESSION['uid']) && !empty($_SESSION['uid'])) {
 				$this->userIsLoggedIn = true;
@@ -25,13 +26,15 @@
 			}
 		}
 		
-		protected function loadModel($modelName) {
-			$modelFile = MODEL_DIRECTORY . $modelName . ".php";
-			
-			if (file_exists($modelFile)) {
-				require_once($modelFile);
-			} else {
-				throw new \Exception("Unkown model: " . $modelName);
+		protected function loadModel(... $models) {	
+			foreach ($models as $modelName) {
+				$modelFile = MODEL_DIRECTORY . $modelName . ".php";
+
+				if (file_exists($modelFile)) {
+					require_once($modelFile);
+				} else {
+					throw new \Exception("Unkown model: " . $modelName);
+				}
 			}
 		}
 
