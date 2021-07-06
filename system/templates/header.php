@@ -15,9 +15,15 @@
         <!--
             Framework
         -->
-        <link rel="stylesheet" href="<?php echo \URL; ?>stylesheets/framework.css">
-        <script src="<?php echo \URL; ?>javascript/framework.js"></script>
-        <script src="<?php echo \URL; ?>javascript/carousel.js"></script>
+        <link rel="stylesheet" href="<?php echo \URL; ?>stylesheets/framework.css?v=1.0">
+        <script src="<?php echo \URL; ?>javascript/framework.js?v=1.0"></script>
+        <script src="<?php echo \URL; ?>javascript/carousel.js?v=1.0"></script>
+
+        <!--
+            CSS and Form Validation
+        -->
+        <link rel="stylesheet" href="<?php echo \URL; ?>stylesheets/main.css?v=1.0" />
+        <script src="<?php echo \URL; ?>javascript/formvalidation.js?v=1.0"></script>
 
         <!--
             FontAwesome
@@ -38,12 +44,6 @@
             -->
             <script src='https://www.google.com/recaptcha/api.js' async defer></script>
         <?Php } ?>
-
-        <!--
-            Other
-        -->
-        <link rel="stylesheet" href="<?php echo \URL; ?>stylesheets/main.css" />
-        <script src="<?php echo \URL; ?>javascript/formvalidation.js"></script>
 
         <!--
             Metadata
