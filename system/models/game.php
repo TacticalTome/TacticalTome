@@ -102,7 +102,7 @@
             $recentStrategyGuides = Array();
             $query = $this->database->query("SELECT * FROM strategyguides WHERE gid='".$this->id."' ORDER BY timecreated DESC LIMIT ".$amount);
             while ($get = $query->fetch_assoc()) {
-                array_push($recentStrategyGuides, new \model\StrategyGuide($this->database, $get['id']));
+                array_push($recentStrategyGuides, new StrategyGuide($this->database, $get['id']));
             }
 
             return $recentStrategyGuides;
@@ -112,7 +112,7 @@
             $popularStrategyGuides = Array();
             $query = $this->database->query("SELECT * FROM strategyguides WHERE gid='".$this->id."' ORDER BY favorites DESC LIMIT ".$amount);
             while ($get = $query->fetch_assoc()) {
-                array_push($popularStrategyGuides, new \model\StrategyGuide($this->database, $get['id']));
+                array_push($popularStrategyGuides, new StrategyGuide($this->database, $get['id']));
             }
 
             return $popularStrategyGuides;
@@ -143,6 +143,16 @@
             $query = $database->query("SELECT * FROM games WHERE steamappid='$steamId'");
             $result = $query->fetch_assoc();
             return $result['id'];
+        }
+
+        static public function getMostPopular(Database $database, int $amount): array {
+            $mostPopularGames = Array();
+            $query = $database->query("SELECT * FROM games ORDER BY followers DESC LIMIT ".$amount);
+            while ($get = $query->fetch_assoc()) {
+                array_push($mostPopularGames, new Game($database, $get['id']));
+            }
+
+            return $mostPopularGames;
         }
 
         static public function new(Database $database, string $name, string $description, string $developer, string $tags, string $banner, string $cover, int $steamAppId): void {

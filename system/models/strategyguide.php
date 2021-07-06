@@ -83,23 +83,33 @@
             $this->database->query("UPDATE strategyguides SET favorites='".$this->favorites."' WHERE id='".$this->id."'");
         }
 
-        public function getURL() {
+        public function getURL(): string {
             return \URL . "strategyguide/view/" . $this->id . "/";
         }
 
-        public function getEditURL() {
+        public function getEditURL(): string {
             return \URL . "strategyguide/edit/" . $this->id . "/";
         }
 
-        public function getFavoriteURL() {
+        public function getFavoriteURL(): string {
             return \URL . "strategyguide/favorite/" . $this->id . "/";
         }
 
-        public function getUnfavoriteURL() {
+        public function getUnfavoriteURL(): string {
             return \URL . "strategyguide/unfavorite/" . $this->id . "/";
         }
 
-        static public function new(Database $database, int $uid, int $gid, string $title, string $content) {
+        static public function getTodaysMostPopular(Database $database, int $amount): array {
+            $todaysMostPopularStrategyGuides = Array();
+            $query = $database->query("SELECT * FROM strategyguides WHERE timecreated>'".(time()-86400)."' ORDER BY favorites DESC LIMIT ".$amount);
+            while ($get = $query->fetch_assoc()) {
+                array_push($todaysMostPopularStrategyGuides, new StrategyGuide($database, $get['id']));
+            }
+
+            return $todaysMostPopularStrategyGuides;
+        }
+
+        static public function new(Database $database, int $uid, int $gid, string $title, string $content): void {
             $uid = $database->protect($uid);
             $gid = $database->protect($gid);
             $title = $database->protect($title);
@@ -108,7 +118,7 @@
             $insert = $database->query("INSERT INTO strategyguides (uid, gid, title, content, timecreated) VALUES ('$uid', '$gid', '$title', '$content', '".time()."')");
         }
 
-        static public function update(Database $database, int $id, string $title, string $content) {
+        static public function update(Database $database, int $id, string $title, string $content): void {
             $id = $database->protect($id);
             $title = $database->protect($title);
             $content = $database->protect($content);
@@ -116,7 +126,7 @@
             $update = $database->query("UPDATE strategyguides SET title='$title', content='$content' WHERE id='$id'");
         }
 
-        static public function delete(Database $database, int $id) {
+        static public function delete(Database $database, int $id): void {
             $id = $database->protect($id);
 
             $delete = $database->query("DELETE FROM strategyguides WHERE id='$id'");
