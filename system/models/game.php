@@ -98,6 +98,26 @@
             return $this->exists;
         }
 
+        public function getRecentStrategyGuides(int $amount): array {
+            $recentStrategyGuides = Array();
+            $query = $this->database->query("SELECT * FROM strategyguides WHERE gid='".$this->id."' ORDER BY timecreated DESC LIMIT ".$amount);
+            while ($get = $query->fetch_assoc()) {
+                array_push($recentStrategyGuides, new \model\StrategyGuide($this->database, $get['id']));
+            }
+
+            return $recentStrategyGuides;
+        }
+
+        public function getPopularStrategyGuides(int $amount): array {
+            $popularStrategyGuides = Array();
+            $query = $this->database->query("SELECT * FROM strategyguides WHERE gid='".$this->id."' ORDER BY favorites DESC LIMIT ".$amount);
+            while ($get = $query->fetch_assoc()) {
+                array_push($popularStrategyGuides, new \model\StrategyGuide($this->database, $get['id']));
+            }
+
+            return $popularStrategyGuides;
+        }
+
         public function setFollowers(int $followers): void {
             $this->followers = $followers;
             $this->database->query("UPDATE games SET followers='".$this->followers."' WHERE id='".$this->id."'");

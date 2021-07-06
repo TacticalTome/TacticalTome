@@ -5,22 +5,12 @@
     class Game extends \library\Controller {
         public function view(int $gameID = null) {
             if (!is_null($gameID)) {
-                $this->loadModel("game");
-                $this->loadModel("strategyguide");
+                $this->loadModel("game", "strategyguide");
 
                 $this->game = new \model\Game($this->database, $gameID);
                 if ($this->game->exists()) {
-                    $this->recentStrategyGuides = Array();
-                    $recentStrategyGuidesGet = $this->database->query("SELECT * FROM strategyguides WHERE gid='".$this->game->getId()."' ORDER BY timecreated DESC LIMIT 10");
-                    while ($strategyGuide = $recentStrategyGuidesGet->fetch_assoc()) {
-                        array_push($this->recentStrategyGuides, new \model\StrategyGuide($this->database, $strategyGuide['id']));
-                    }
-
-                    $this->popularStrategyGuides = Array();
-                    $popularStrategyGuidesGet = $this->database->query("SELECT * FROM strategyguides WHERE gid='".$this->game->getId()."' ORDER BY favorites DESC LIMIT 10");
-                    while ($strategyGuide = $popularStrategyGuidesGet->fetch_assoc()) {
-                        array_push($this->popularStrategyGuides, new \model\StrategyGuide($this->database, $strategyGuide['id']));
-                    }
+                    $this->recentStrategyGuides = $this->game->getRecentStrategyGuides(10);
+                    $this->popularStrategyGuides = $this->game->getPopularStrategyGuides(10);
 
                     $this->pageTitle = $this->game->getName() . " - " . \WEBSITE_NAME;
                     $this->pageIdentifier = "View Game";
