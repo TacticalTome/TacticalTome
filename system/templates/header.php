@@ -1,6 +1,6 @@
 <!--
-    <?php echo \WEBSITE_NAME; ?>
-    (c) 2021 - <?php echo date("Y"); ?> Silas Carlson. All Rights Reserved.
+    <?php echo \WEBSITE_NAME ?>
+    (c) 2021 - <?php echo date("Y") . " " . \WEBSITE_NAME; ?>. All Rights Reserved.
 -->
 
 <!DOCTYPE HTML>
