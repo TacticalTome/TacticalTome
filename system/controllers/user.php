@@ -183,26 +183,22 @@
         }
 
         public function confirm(string $action = null, string $password = null, string $value = null) {
+            $this->loadModel("confirmation");
+
             if (!is_null($action) && !is_null($password) && !is_null($value)) {
-                $action = $this->database->protect($action);
-                $password = $this->database->protect($password);
-                $value = $this->database->protect($value);
-
-                $query = $this->database->query("SELECT * FROM confirmations WHERE action='$action' AND password='$password' AND value='$value'");
-                if ($query->num_rows > 0) {
-                    $confirmation = $query->fetch_assoc();
-                    $this->database->query("DELETE FROM confirmations WHERE id='".$confirmation['id']."'");
-
+                $confirmation = new \model\Confirmation($this->database, $action, $password, $value);
+                if ($confirmation->exists()) {
+                    \model\Confirmation::delete($this->database, $confirmation->getId());
                     $this->actionText = "Confirmed";
 
                     switch ($action) {
                         case "activateaccount":
-                            $this->database->query("UPDATE user SET activated='1' WHERE id='".$confirmation['uid']."'");
+                            $this->database->query("UPDATE user SET activated='1' WHERE id='".$confirmation->getUserId()."'");
                             $this->actionText = "Activated account";
                             break;
 
                         case "newemail":
-                            if ($this->userIsLoggedIn && $this->user->getId() == $confirmation['uid']) {
+                            if ($this->userIsLoggedIn && $this->user->getId() == $confirmation->getUserId()) {
                                 $this->user->setEmail($value);
                                 $this->actionText = "Changed email";
                             }

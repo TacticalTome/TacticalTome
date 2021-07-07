@@ -14,11 +14,13 @@
         private Database $database;
         private Array $mysqli;
 
-        public function __construct(Database $database, int $id) {
+        public function __construct(Database $database, string $action, string $password, string $value) {
             $this->database = $database;
-            $id = $this->database->protect($id);
+            $action = $this->database->protect($action);
+            $password = $this->database->protect($password);
+            $value = $this->database->protect($value);
 
-            $query = $this->database->query("SELECT * FROM confirmations WHERE id='$id'");
+            $query = $this->database->query("SELECT * FROM confirmations WHERE action='$action' AND password='$password' AND value='$value'");
             if ($query->num_rows == 1) {
                 $this->exists = true;
                 $this->mysqli = $query->fetch_assoc();
@@ -67,6 +69,10 @@
 
             $database->query("INSERT INTO confirmations (uid, action, password, value, time) VALUES ('$uid', '$action', '$password', '$value', '".time()."')");
             mail($email, $emailTitle, $emailContent);
+        }
+
+        public static function delete(Database $database, int $id): void {
+            $database->query("DELETE FROM confirmations WHERE id='$id'");
         }
 
         public static function generatePassword() {
