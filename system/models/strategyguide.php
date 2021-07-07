@@ -127,8 +127,6 @@
         }
 
         static public function delete(Database $database, int $id): void {
-            $id = $database->protect($id);
-
             $delete = $database->query("DELETE FROM strategyguides WHERE id='$id'");
         }
     }
