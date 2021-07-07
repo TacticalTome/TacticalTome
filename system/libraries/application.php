@@ -20,7 +20,7 @@
 				$className = "\\controller\\" . $controller;
 				
 				require_once(\CONTROLLER_DIRECTORY . $controller . ".php");
-				if (class_exists($className) && method_exists($className, $method)) {
+				if (method_exists($className, $method)) {
 					$database = new \model\Database($db_host, $db_username, $db_password, $db_name);
 					
 					$controllerClass = new $className($database);
@@ -37,5 +37,3 @@
 			require_once(VIEW_DIRECTORY . "error/unknownpage.php");
 		}
 	}
-
-?>

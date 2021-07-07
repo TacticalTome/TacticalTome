@@ -167,5 +167,3 @@
             $insert = $database->query("INSERT INTO games (name, description, developer, tags, banner, cover, steamappid, news) VALUES ('$name', '$description', '$developer', '$tags', '$banner', '$cover', '$steamAppId', '1')");
         }
     }
-
-?>

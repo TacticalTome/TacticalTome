@@ -132,5 +132,3 @@
             $delete = $database->query("DELETE FROM strategyguides WHERE id='$id'");
         }
     }
-
-?>

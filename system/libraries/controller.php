@@ -62,5 +62,3 @@
 			Application::unknownPage();
 		}
 	}
-	
-?>

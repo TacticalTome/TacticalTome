@@ -15,5 +15,3 @@
             $this->loadViewWithHeaderFooter("index", "index");
         }
     }
-
-?>

@@ -35,5 +35,3 @@
         $responseFromGoogle = json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . urlencode(\RECAPTCHA_SECRET_KEY) . "&response=" . urlencode($value)), true);
         return $responseFromGoogle["success"];
     }
-
-?>

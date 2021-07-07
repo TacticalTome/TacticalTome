@@ -138,5 +138,3 @@
             $this->loadViewWithHeaderFooter("game", "submit");
         }
     }
-
-?>

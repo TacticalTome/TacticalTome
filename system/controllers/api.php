@@ -117,5 +117,3 @@
             echo $result->getDataAsJSON();
         }
     }
-
-?>

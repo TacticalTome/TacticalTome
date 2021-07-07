@@ -255,5 +255,3 @@
             return false;
         }
     }
-
-?>

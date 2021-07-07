@@ -73,5 +73,3 @@
             return md5(rand(time()/2, time()*2));
         }
     }
-
-?>

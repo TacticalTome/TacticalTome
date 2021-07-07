@@ -24,5 +24,3 @@
             $this->loadViewWithHeaderFooter("about", "contact");
         }
     }
-
-?>
