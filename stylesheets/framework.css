@@ -71,33 +71,16 @@ p {
     padding-bottom: 1em;
 }
 
-*[data-fontsize="fineprint"] {
-    font-size: 8px;
-}
+*[data-fontsize="fineprint"] { font-size: 8px; }
+*[data-fontsize="small"] { font-size: 12px; }
+*[data-fontsize="medium"] { font-size: 24px; }
+*[data-fontsize="large"] { font-size: 36px; }
 
-*[data-fontsize="small"] {
-    font-size: 12px;
-}
+h1[data-size="large"] { font-size: 3.5em; }
 
-*[data-fontsize="medium"] {
-    font-size: 24px;
-}
-
-*[data-fontsize="large"] {
-    font-size: 36px;
-}
-
-h1[data-size="large"] {
-    font-size: 3.5em;
-}
-
-*[data-fontcolor="lightgray"] {
-    color: lightgray;
-}
-
-*[data-fontcolor="darkgray"] {
-    color: #575757;
-}
+*[data-fontcolor="lightgray"] { color: lightgray; }
+*[data-fontcolor="gray"] { color: gray; }
+*[data-fontcolor="darkgray"] { color: #575757; }
 
 hr {
     width: 100%;
@@ -173,11 +156,10 @@ pre {
     font-family: monospace;
     font-size: 15px;
     line-height: 1.6;
-    margin-bottom: 1.6em;
-    max-width: 100%;
+    padding-left: 1em;
     overflow: auto;
-    display: block;
     word-wrap: break-word;
+    display: block;
 }
 
 hr[data-align="left"] { margin-left: 0; }
@@ -191,6 +173,13 @@ hr[data-color="orange"] { border-color: orange; }
 hr[data-length="short"] { width: 30%; }
 hr[data-length="medium"] { width: 50%; }
 hr[data-length="long"] { width: 70%; }
+
+hr[data-thin="true"] {
+    height: 1px;
+    border: none;
+    color: #585858;
+    background-color: #585858;
+}
 
 i { font-style: italic; }
 b { font-weight: bold; }
@@ -1440,7 +1429,9 @@ table {
     border-collapse: collapse;
 }
 
-table > thead > tr > td {
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th {
     font-weight: bold;
     font-size: 1.75em;
 }
