@@ -1,6 +1,6 @@
 <!--
-    <?php echo \WEBSITE_NAME ?>
-    (c) 2021 - <?php echo date("Y") . " " . \WEBSITE_NAME; ?>. All Rights Reserved.
+    <?= \WEBSITE_NAME ?>
+    (c) 2021 - <?= date("Y") . " " . \WEBSITE_NAME; ?>. All Rights Reserved.
 -->
 
 <!DOCTYPE HTML>
@@ -9,34 +9,34 @@
         <!--
             Site Data
         -->
-        <title><?php echo $this->pageTitle; ?></title>
-        <link rel="icon" href="<?php echo \URL; ?>images/icon.png" type="image/png">
+        <title><?= $this->pageTitle; ?></title>
+        <link rel="icon" href="<?= \URL; ?>images/icon.png" type="image/png">
 
         <!--
             Framework
         -->
-        <link rel="stylesheet" href="<?php echo \URL; ?>stylesheets/framework.css?v=1.0">
-        <script src="<?php echo \URL; ?>javascript/framework.js?v=1.0"></script>
-        <script src="<?php echo \URL; ?>javascript/carousel.js?v=1.0"></script>
+        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/framework.css?v=1.0">
+        <script src="<?= \URL; ?>javascript/framework.js?v=1.0"></script>
+        <script src="<?= \URL; ?>javascript/carousel.js?v=1.0"></script>
 
         <!--
             CSS and Form Validation
         -->
-        <link rel="stylesheet" href="<?php echo \URL; ?>stylesheets/main.css?v=1.0" />
-        <script src="<?php echo \URL; ?>javascript/formvalidation.js?v=1.0"></script>
+        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/main.css?v=1.0" />
+        <script src="<?= \URL; ?>javascript/formvalidation.js?v=1.0"></script>
 
         <!--
             FontAwesome
         -->
-        <link rel="stylesheet" href="<?php echo \URL; ?>stylesheets/font-awesome/all.css" />
-		<script src="<?php echo \URL; ?>javascript/font-awesome/all.js"></script>
+        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/font-awesome/all.css" />
+		<script src="<?= \URL; ?>javascript/font-awesome/all.js"></script>
 
         <!--
             JQuery
         -->
-        <script src="<?php echo \URL; ?>javascript/jquery.js"></script>
-        <script src="<?php echo \URL; ?>javascript/jquery-ui/jquery-ui.js"></script>
-        <link rel="stylesheet" href="<?php echo \URL; ?>stylesheets/jquery-ui/jquery-ui.css" />
+        <script src="<?= \URL; ?>javascript/jquery.js"></script>
+        <script src="<?= \URL; ?>javascript/jquery-ui/jquery-ui.js"></script>
+        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/jquery-ui/jquery-ui.css" />
 
         <?php if (($this->pageIdentifier == "Register" || $this->pageIdentifier == "Submit Steam Game") && \ENABLE_RECAPTCHA) { ?>
             <!--
@@ -50,13 +50,13 @@
         -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
-        <meta name="description" content="<?php echo $this->pageDescription; ?>">
+        <meta name="description" content="<?= $this->pageDescription; ?>">
         <meta name="keywords" content="strategy guides, collection, guides, gaming, games, encyclopedia, tutorials, news">
         <meta name="language" content="English">
-        <meta name="og:url" property="og:url" content="<?php echo \utility\getCurrentURL(); ?>">
+        <meta name="og:url" property="og:url" content="<?= \utility\getCurrentURL(); ?>">
         <meta name="og:type" property="og:type" content="website">
-        <meta name="og:title" property="og:title" content="<?php echo $this->pageTitle; ?>">
-        <meta name="og:description" property="og:description" content="<?php echo $this->pageDescription; ?>">
+        <meta name="og:title" property="og:title" content="<?= $this->pageTitle; ?>">
+        <meta name="og:description" property="og:description" content="<?= $this->pageDescription; ?>">
 
         <?php
             switch( $this->pageIdentifier) {
@@ -102,11 +102,11 @@
             SCROLLTO > medium
         -->
         <div class="topNavigation fixed unselectable" data-theme="dark" data-size="extralarge" data-basesize="extralarge" data-scrollto="medium">
-            <div class="brand hideOnMobile fontTrebuchet colorOrange"><?php echo \WEBSITE_NAME; ?></div>
+            <div class="brand hideOnMobile fontTrebuchet colorOrange"><?= \WEBSITE_NAME; ?></div>
             <div class="linkContainerRight">
                 <div class="linkSection">
-                    <div class="link fontVerdana" id="<?php if ($this->pageIdentifier == "Home") echo "active"; ?>"><a href="<?php echo \URL; ?>"><i class="fas fa-home"></i> Home</a></div>
-                    <div class="link fontVerdana" id="<?php if ($this->pageIdentifier == "Explore") echo "active"; ?>"><a href="<?php echo \URL; ?>user/explore/"><i class="fab fa-wpexplorer"></i> Explore</a></div>
+                    <div class="link fontVerdana" id="<?php if ($this->pageIdentifier == "Home") echo "active"; ?>"><a href="<?= \URL; ?>"><i class="fas fa-home"></i> Home</a></div>
+                    <div class="link fontVerdana" id="<?php if ($this->pageIdentifier == "Explore") echo "active"; ?>"><a href="<?= \URL; ?>user/explore/"><i class="fab fa-wpexplorer"></i> Explore</a></div>
                     <?php if ($this->userIsLoggedIn) { ?>
                         <div class="dropdown hideOnMobile">
                             <span class="title fontVerdana"><i class="fas fa-shoe-prints"></i> Followed Games <i class="fas fa-chevron-down"></i></span>
@@ -125,10 +125,10 @@
                                 ?>
                                 <br>
                                 <hr data-align="left" data-length="short" data-color="white" style="margin-left: 10px;">
-                                <div class="link fontVerdana" id="<?php if ($this->pageIdentifier == "Submit Steam Game") echo "active"; ?>"><a href="<?php echo \URL; ?>game/submit/">Submit a Game</a></div>
+                                <div class="link fontVerdana" id="<?php if ($this->pageIdentifier == "Submit Steam Game") echo "active"; ?>"><a href="<?= \URL; ?>game/submit/">Submit a Game</a></div>
                             </div>
                         </div>
-                        <div class="link fontVerdana hideOnDesktop" id="<?php if ($this->pageIdentifier == "View Followed Games") echo "active"; ?>"><a href="<?php echo \URL; ?>user/followedgames/"><i class="fas fa-shoe-prints"></i> Followed Games</a></div>
+                        <div class="link fontVerdana hideOnDesktop" id="<?php if ($this->pageIdentifier == "View Followed Games") echo "active"; ?>"><a href="<?= \URL; ?>user/followedgames/"><i class="fas fa-shoe-prints"></i> Followed Games</a></div>
                     <?php } ?>
                 </div>
                 <div class="linkSection">
@@ -139,10 +139,10 @@
                 </div>
                 <div class="linkSection">
                     <?php if (!$this->userIsLoggedIn) { ?>
-                        <div class="link" id="smallMargin"><button class="simple fontVerdana" data-theme="dark" data-color="transparent" data-border="blue" onclick="gotoLink('<?php echo \URL; ?>user/login/');"><i class="fas fa-sign-in-alt"></i> Login</button></div>
-                        <div class="link" id="smallMargin"><button class="simple fontVerdana" data-theme="dark" data-color="transparent" data-border="blue" onclick="gotoLink('<?php echo \URL; ?>user/register/');"><i class="fas fa-user-plus"></i> Sign Up</button></div>
+                        <div class="link" id="smallMargin"><button class="simple fontVerdana" data-theme="dark" data-color="transparent" data-border="blue" onclick="gotoLink('<?= \URL; ?>user/login/');"><i class="fas fa-sign-in-alt"></i> Login</button></div>
+                        <div class="link" id="smallMargin"><button class="simple fontVerdana" data-theme="dark" data-color="transparent" data-border="blue" onclick="gotoLink('<?= \URL; ?>user/register/');"><i class="fas fa-user-plus"></i> Sign Up</button></div>
                     <?php } else { ?>
-                        <div class="link" id="smallMargin"><button class="simple fontVerdana" data-theme="dark" data-color="transparent" data-border="blue" onclick="gotoLink('<?php echo \URL; ?>user/account/');"><i class="fas fa-user"></i> Account</button></div>
+                        <div class="link" id="smallMargin"><button class="simple fontVerdana" data-theme="dark" data-color="transparent" data-border="blue" onclick="gotoLink('<?= \URL; ?>user/account/');"><i class="fas fa-user"></i> Account</button></div>
                     <?php } ?>
                 </div>  
             </div>

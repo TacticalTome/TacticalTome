@@ -1,6 +1,6 @@
 <!--
-<?php echo \WEBSITE_NAME; ?>
-    (c) 2021 - <?php echo date("Y") . " " . \WEBSITE_NAME; ?>. All Rights Reserved.
+<?= \WEBSITE_NAME; ?>
+    (c) 2021 - <?= date("Y") . " " . \WEBSITE_NAME; ?>. All Rights Reserved.
 -->
 
 <!DOCTYPE HTML>
@@ -15,28 +15,28 @@
         <!--
             Framework
         -->
-        <link rel="stylesheet" href="<?php echo \URL; ?>stylesheets/framework.css">
-        <script src="<?php echo \URL; ?>javascript/framework.js"></script>
-        <script src="<?php echo \URL; ?>javascript/carousel.js"></script>
+        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/framework.css">
+        <script src="<?= \URL; ?>javascript/framework.js"></script>
+        <script src="<?= \URL; ?>javascript/carousel.js"></script>
 
         <!--
             FontAwesome
         -->
-        <link rel="stylesheet" href="<?php echo \URL; ?>stylesheets/font-awesome/all.css" />
-		<script src="<?php echo \URL; ?>javascript/font-awesome/all.js"></script>
+        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/font-awesome/all.css" />
+		<script src="<?= \URL; ?>javascript/font-awesome/all.js"></script>
 
         <!--
             JQuery
         -->
-        <script src="<?php echo \URL; ?>javascript/jquery.js"></script>
-        <script src="<?php echo \URL; ?>javascript/jquery-ui/jquery-ui.js"></script>
-        <link rel="stylesheet" href="<?php echo \URL; ?>stylesheets/jquery-ui/jquery-ui.css" />
+        <script src="<?= \URL; ?>javascript/jquery.js"></script>
+        <script src="<?= \URL; ?>javascript/jquery-ui/jquery-ui.js"></script>
+        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/jquery-ui/jquery-ui.css" />
 
         <!--
             Other
         -->
-        <link rel="stylesheet" href="<?php echo \URL; ?>stylesheets/main.css" />
-        <script src="<?php echo \URL; ?>javascript/formvalidation.js"></script>
+        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/main.css" />
+        <script src="<?= \URL; ?>javascript/formvalidation.js"></script>
     </head>
 
     <!--
@@ -50,7 +50,7 @@
         <div class="landingContainer fullscreen positionRelative">
             <div class="content centerHorizontalVertical">
                 <h1 class="fontAlfaSlabOne colorOrange" data-size="large">Page not found</h1>
-                <p class="fontVerdana">Return to <a href="<?php echo \URL; ?>" data-color="yellow">home</a></p>
+                <p class="fontVerdana">Return to <a href="<?= \URL; ?>" data-color="yellow">home</a></p>
             </div>
         </div>
     </body>

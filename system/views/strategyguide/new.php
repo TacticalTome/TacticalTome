@@ -1,12 +1,12 @@
 <!--
     Landing Container
 -->
-<script src="<?php echo \URL; ?>javascript/editor.js"></script>
-<div class="gameLandingContainer fullscreen positionRelative" style="background-image: url('<?php echo $this->game->getCoverURL(); ?>');">
+<script src="<?= \URL; ?>javascript/editor.js"></script>
+<div class="gameLandingContainer fullscreen positionRelative" style="background-image: url('<?= $this->game->getCoverURL(); ?>');">
     <div class="content hideOnMobile centerHorizontalVertical" style="width: 75%;">
         <div class="editor-container" style="background: #454545; padding: 10px; border-radius: 10px;">
-            <h1 class="fontAlfaSlabOne colorOrange"><?php echo $this->game->getName(); ?></h1>
-            <p class="fontVerdana"><b>Please view our <a href="<?php echo \URL; ?>legal/postingguidelines/" target="_blank" data-color="yellow">Posting Guidelines</a> before continuing</b></p>
+            <h1 class="fontAlfaSlabOne colorOrange"><?= $this->game->getName(); ?></h1>
+            <p class="fontVerdana"><b>Please view our <a href="<?= \URL; ?>legal/postingguidelines/" target="_blank" data-color="yellow">Posting Guidelines</a> before continuing</b></p>
             <table>
                 <tbody>
                     <tr>
@@ -91,12 +91,12 @@
         var title = $("#title").html();
         
         if (confirm("Are you sure you want to post this? Make sure that everything is how you want it before posting.\n\n*MAKE SURE IT ADHERES TO OUR RULES.")) {
-            $.ajax({ url: "<?php echo \URL; ?>ajax/newstrategyguide/",
-                    data: {title: title, content: content, gameID: <?php echo $this->game->getId(); ?>},
+            $.ajax({ url: "<?= \URL; ?>ajax/newstrategyguide/",
+                    data: {title: title, content: content, gameID: <?= $this->game->getId(); ?>},
                     type: "POST",
                     success: function(data) {
                         alert(data);
-                        if (data == "Successfully posted") window.location.href = "<?php echo $this->game->getURL(); ?>";
+                        if (data == "Successfully posted") window.location.href = "<?= $this->game->getURL(); ?>";
                     }
             });
         }
@@ -104,7 +104,7 @@
 
     function backToGamePage() {
         if (confirm("Are you sure you want to leave?\n\nAll progress will be lost!")) {
-            window.location.href = "<?php echo $this->game->getURL(); ?>";
+            window.location.href = "<?= $this->game->getURL(); ?>";
         }
     }
 </script>

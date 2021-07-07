@@ -35,17 +35,17 @@
                         <div class="row" data-colcount="2">
                             <div class="column hideOnMobile">
                                 <center>    
-                                    <div class="positionRelative hoverOverlayContainer cursorPointer" style="width: 350px; height: 200px;" onclick="gotoLink('<?php echo $game->getURL(); ?>');" title="<?php echo $game->getName(); ?>">
-                                        <img alt="<?php echo $game->getName(); ?> Banner" src="<?php echo $game->getBannerUrl(); ?>" style="width: 100%; height: 100%;"></a>
+                                    <div class="positionRelative hoverOverlayContainer cursorPointer" style="width: 350px; height: 200px;" onclick="gotoLink('<?= $game->getURL(); ?>');" title="<?= $game->getName(); ?>">
+                                        <img alt="<?= $game->getName(); ?> Banner" src="<?= $game->getBannerUrl(); ?>" style="width: 100%; height: 100%;"></a>
                                         <div class="hoverOverlay" style="width: 100%; height: 100%;"></div>
                                     </div>
                                 </center>
                             </div>
                             <div class="column">
-                                <h1 class="fontTrebuchet"><a href="<?php echo $this->featuredStrategyGuides[$i]->getURL(); ?>"><?php echo $this->featuredStrategyGuides[$i]->getTitle(); ?></a></h1>
-                                <p class="fontTrebuchet" data-fontsize="small">Posted by <a href="<?php echo $author->getProfileURL(); ?>"><?php echo $author->getUsername(); ?></a> on <?php echo date("D. F d, Y @ g:i A", $this->featuredStrategyGuides[$i]->getTimeCreated()) ?></p>
-                                <p class="fontTrebuchet hideOnDesktop"><a href="<?php echo $game->getURL(); ?>"><?php echo $game->getName(); ?></a></p>
-                                <p class="fontVerdana" data-fontsize="medium" style="overflow-wrap: break-word;"><?php echo $this->featuredStrategyGuides[$i]->getDescriptionSnippet(250); ?></p>
+                                <h1 class="fontTrebuchet"><a href="<?= $this->featuredStrategyGuides[$i]->getURL(); ?>"><?= $this->featuredStrategyGuides[$i]->getTitle(); ?></a></h1>
+                                <p class="fontTrebuchet" data-fontsize="small">Posted by <a href="<?= $author->getProfileURL(); ?>"><?= $author->getUsername(); ?></a> on <?= date("D. F d, Y @ g:i A", $this->featuredStrategyGuides[$i]->getTimeCreated()) ?></p>
+                                <p class="fontTrebuchet hideOnDesktop"><a href="<?= $game->getURL(); ?>"><?= $game->getName(); ?></a></p>
+                                <p class="fontVerdana" data-fontsize="medium" style="overflow-wrap: break-word;"><?= $this->featuredStrategyGuides[$i]->getDescriptionSnippet(250); ?></p>
                             </div>    
                         </div>
                     <?php
@@ -60,14 +60,14 @@
                                 <h1 class="fontTrebuchet colorOrange centerHorizontalVertical">Featured Game</h1>
                             </div>
                             <div class="column">
-                                <div class="positionRelative hoverOverlayContainer cursorPointer" onclick="gotoLink('<?php echo $this->featuredGames[$i]->getURL(); ?>');" title="<?php echo $this->featuredGames[$i]->getName(); ?>">
-                                    <img alt="<?php echo $this->featuredGames[$i]->getName(); ?> Banner" src="<?php echo $this->featuredGames[$i]->getBannerUrl(); ?>" style="width: 16em; height: 8em;"></a>
+                                <div class="positionRelative hoverOverlayContainer cursorPointer" onclick="gotoLink('<?= $this->featuredGames[$i]->getURL(); ?>');" title="<?= $this->featuredGames[$i]->getName(); ?>">
+                                    <img alt="<?= $this->featuredGames[$i]->getName(); ?> Banner" src="<?= $this->featuredGames[$i]->getBannerUrl(); ?>" style="width: 16em; height: 8em;"></a>
                                     <div class="hoverOverlay" style="width: 16em; height: 8em;"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="hideOnDesktop">
-                            <h1>Featured Game: <a href="<?php echo $this->featuredGames[$i]->getURL(); ?>"><?php echo $this->featuredGames[$i]->getName(); ?></a></h1>
+                            <h1>Featured Game: <a href="<?= $this->featuredGames[$i]->getURL(); ?>"><?= $this->featuredGames[$i]->getName(); ?></a></h1>
                         </div>
                     <?php
                 }
@@ -87,7 +87,7 @@
         ?>
 
         <center>
-        <p class="fontTrebuchet">Not seeing a game? Add it <a href="<?php echo \URL; ?>game/submit/">here</a> or <a href="<?php echo \URL; ?>about/contact/">contact us</a>.</p>
+        <p class="fontTrebuchet">Not seeing a game? Add it <a href="<?= \URL; ?>game/submit/">here</a> or <a href="<?= \URL; ?>about/contact/">contact us</a>.</p>
             <?php if ($this->page > 0) { ?>
                 <button data-color="red" onclick="previousPage();">Previous</button> &nbsp;&nbsp;
             <?php } ?>
@@ -102,18 +102,18 @@
     <?php if ($this->page > 0) { ?>
         function previousPage() {
             <?php if ($this->action == "recommended") { ?> 
-                window.location.href = "<?php echo \URL . "user/explore/recommended/" . ($this->page - 1) . "/"; ?>";
+                window.location.href = "<?= \URL . "user/explore/recommended/" . ($this->page - 1) . "/"; ?>";
             <?php } else { ?>
-                window.location.href = "<?php echo \URL . "user/explore/top/" . ($this->page - 1) . "/"; ?>";
+                window.location.href = "<?= \URL . "user/explore/top/" . ($this->page - 1) . "/"; ?>";
             <?php } ?>
         }
     <?php } ?>
 
     function nextPage() {
         <?php if ($this->action == "recommended") { ?> 
-            window.location.href = "<?php echo \URL . "user/explore/recommended/" . ($this->page + 1) . "/"; ?>";
+            window.location.href = "<?= \URL . "user/explore/recommended/" . ($this->page + 1) . "/"; ?>";
         <?php } else { ?>
-            window.location.href = "<?php echo \URL . "user/explore/top/" . ($this->page + 1) . "/"; ?>";
+            window.location.href = "<?= \URL . "user/explore/top/" . ($this->page + 1) . "/"; ?>";
         <?php } ?>
     }
 </script>

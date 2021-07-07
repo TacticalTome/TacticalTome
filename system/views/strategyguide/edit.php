@@ -1,12 +1,12 @@
 <!--
     Landing Container
 -->
-<script src="<?php echo \URL; ?>javascript/editor.js"></script>
-<div class="gameLandingContainer fullscreen positionRelative" style="background-image: url('<?php echo $this->game->getCoverURL(); ?>');">
+<script src="<?= \URL; ?>javascript/editor.js"></script>
+<div class="gameLandingContainer fullscreen positionRelative" style="background-image: url('<?= $this->game->getCoverURL(); ?>');">
     <div class="content hideOnMobile centerHorizontalVertical" style="width: 75%;">
         <div class="editor-container" style="background: #454545; padding: 10px; border-radius: 10px;">
-            <h1 class="fontAlfaSlabOne colorOrange"><?php echo $this->game->getName(); ?></h1>
-            <p class="fontVerdana"><b>Please view our <a href="<?php echo \URL; ?>legal/postingguidelines/" target="_blank" data-color="yellow">Posting Guidelines</a> before continuing</b></p>
+            <h1 class="fontAlfaSlabOne colorOrange"><?= $this->game->getName(); ?></h1>
+            <p class="fontVerdana"><b>Please view our <a href="<?= \URL; ?>legal/postingguidelines/" target="_blank" data-color="yellow">Posting Guidelines</a> before continuing</b></p>
             <table>
                 <tbody>
                     <tr>
@@ -73,10 +73,10 @@
             </table>
             <br>
 
-            <div class="editor" id="title" style="background: #f9f9f9; min-height: 20px; color: black; outline: none;" contenteditable><?php echo $this->strategyGuide->getTitle(); ?></div>
+            <div class="editor" id="title" style="background: #f9f9f9; min-height: 20px; color: black; outline: none;" contenteditable><?= $this->strategyGuide->getTitle(); ?></div>
             <br>
 
-            <div class="editor" id="editor" style="background: #f9f9f9; min-height: 200px; max-height: 200px; color: black; outline: none; overflow-y: auto;" contenteditable><?php echo $this->strategyGuide->getContent(); ?></div>
+            <div class="editor" id="editor" style="background: #f9f9f9; min-height: 200px; max-height: 200px; color: black; outline: none; overflow-y: auto;" contenteditable><?= $this->strategyGuide->getContent(); ?></div>
 
             <br>
             <button data-color="green" onclick="updateStrategyGuide()">Update</button>
@@ -92,12 +92,12 @@
         
         if (confirm("Are you sure you want to post this? Make sure that everything is how you want it before posting.\n\n*MAKE SURE IT ADHERES TO OUR RULES.")) {
             $.ajax({ 
-                    url: "<?php echo \URL; ?>ajax/updatestrategyguide/",
-                    data: {title: title, content: content, gameID: <?php echo $this->game->getId(); ?>, strategyGuideID: <?php echo $this->strategyGuide->getId(); ?>},
+                    url: "<?= \URL; ?>ajax/updatestrategyguide/",
+                    data: {title: title, content: content, gameID: <?= $this->game->getId(); ?>, strategyGuideID: <?= $this->strategyGuide->getId(); ?>},
                     type: "POST",
                     success: function(data) {
                         alert(data);
-                        if (data == "Successfully posted") window.location.href = "<?php echo $this->strategyGuide->getURL(); ?>";
+                        if (data == "Successfully posted") window.location.href = "<?= $this->strategyGuide->getURL(); ?>";
                     }
             });
         }
@@ -105,7 +105,7 @@
 
     function backToStrategyGuidePage() {
         if (confirm("Are you sure you want to leave?\n\nAll progress will be lost!")) {
-            window.location.href = "<?php echo $this->strategyGuide->getURL(); ?>";
+            window.location.href = "<?= $this->strategyGuide->getURL(); ?>";
         }
     }
 </script>

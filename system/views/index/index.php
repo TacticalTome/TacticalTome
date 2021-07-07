@@ -4,7 +4,7 @@
 -->
 <div class="landingContainer fullscreen positionRelative">
     <div class="content centerHorizontalVertical">
-        <h1 class="fontAlfaSlabOne colorOrange" data-size="large"><?php echo \WEBSITE_NAME; ?></h1>
+        <h1 class="fontAlfaSlabOne colorOrange" data-size="large"><?= \WEBSITE_NAME; ?></h1>
         <p class="fontVerdana">An encyclopedia for game strategies, guides, tutorials, news, and more!</p>
     </div>
 </div>
@@ -16,11 +16,11 @@
 -->
 <div class="carousel unselectable hideOnMobile" id="carousel1" data-theme="dark" data-cycle="true">
     <div class="imageContainer" data-size="cover">
-        <img alt="Gameplay of Stronghold Crusader HD" src="<?php echo URL; ?>/images/screenshot1.jpg" id="slide1" data-caption="caption1" alt="Screenshot #1">
-        <img alt="Gameplay of Disciples II: Gallean's Return" src="<?php echo URL; ?>/images/screenshot2.jpg" id="slide2" data-caption="caption2" alt="Screenshot #2">
-        <img alt="Gameplay of American Conquest: Fight Back" src="<?php echo URL; ?>/images/screenshot3.jpg" id="slide3" data-caption="caption3" alt="Screenshot #3">
-        <img alt="Gameplay of Railroad Tycoon II" src="<?php echo URL; ?>/images/screenshot4.jpg" id="slide4" data-caption="caption4" alt="Screenshot #4">
-        <img alt="Gameplay of Stronghold HD" src="<?php echo URL; ?>/images/screenshot5.jpg" id="slide5" data-caption="caption5" alt="Screenshot #5">
+        <img alt="Gameplay of Stronghold Crusader HD" src="<?= URL; ?>/images/screenshot1.jpg" id="slide1" data-caption="caption1" alt="Screenshot #1">
+        <img alt="Gameplay of Disciples II: Gallean's Return" src="<?= URL; ?>/images/screenshot2.jpg" id="slide2" data-caption="caption2" alt="Screenshot #2">
+        <img alt="Gameplay of American Conquest: Fight Back" src="<?= URL; ?>/images/screenshot3.jpg" id="slide3" data-caption="caption3" alt="Screenshot #3">
+        <img alt="Gameplay of Railroad Tycoon II" src="<?= URL; ?>/images/screenshot4.jpg" id="slide4" data-caption="caption4" alt="Screenshot #4">
+        <img alt="Gameplay of Stronghold HD" src="<?= URL; ?>/images/screenshot5.jpg" id="slide5" data-caption="caption5" alt="Screenshot #5">
     </div>
     <div class="caption centered" id="caption1" data-center="true">
         <div class="content">
@@ -82,7 +82,7 @@
         <div class="row" data-colcount="2">
             <div class="column">
                 <h1 class="fontTrebuchet colorOrange hideOnDesktop">Colleciton of Guides & Tutorials</h1>
-                <p class="fontVerdana">In <?php echo \WEBSITE_NAME; ?> you are able to view any guide or tutorial for any game. Users are able to create and view any guide for any game.</p>
+                <p class="fontVerdana">In <?= \WEBSITE_NAME; ?> you are able to view any guide or tutorial for any game. Users are able to create and view any guide for any game.</p>
             </div>
             <div class="column">
                 <h1 class="fontTrebuchet colorOrange centerHorizontalVertical hideOnMobile">Colleciton of Guides & Tutorials</h1>
@@ -99,7 +99,7 @@
             </div>
             <div class="column">
                 <h1 class="fontTrebuchet colorOrange hideOnDesktop">News Station for Games</h1>
-                <p class="fontVerdana"><?php echo \WEBSITE_NAME; ?> contains news for every game on our website. All newer games will have a news section allowing you to easy access to upcoming or past information regarding the game you play.</p>
+                <p class="fontVerdana"><?= \WEBSITE_NAME; ?> contains news for every game on our website. All newer games will have a news section allowing you to easy access to upcoming or past information regarding the game you play.</p>
             </div>
         </div>
 
@@ -111,8 +111,8 @@
             <?php
                 foreach($this->topGames as $game) {
                     ?>
-                        <div class="column positionRelative hoverOverlayContainer cursorPointer" onclick="gotoLink('<?php echo $game->getURL(); ?>')" title="<?php echo $game->getName(); ?>" style="width: 16em; height: 8em;">
-                            <img src="<?php echo $game->getBannerURL(); ?>" style="width: 100%; height: 100%;"></a>
+                        <div class="column positionRelative hoverOverlayContainer cursorPointer" onclick="gotoLink('<?= $game->getURL(); ?>')" title="<?= $game->getName(); ?>" style="width: 16em; height: 8em;">
+                            <img src="<?= $game->getBannerURL(); ?>" style="width: 100%; height: 100%;"></a>
                             <div class="hoverOverlay" style="width: 100%; height: 100%;"></div>
                         </div>
                     <?php
@@ -124,7 +124,7 @@
             <?php
                 foreach($this->topGames as $game) {
                     ?>
-                        <li class="fontVerdana"><a href="<?php echo $game->getURL(); ?>"><?php echo $game->getName(); ?></a></li>
+                        <li class="fontVerdana"><a href="<?= $game->getURL(); ?>"><?= $game->getName(); ?></a></li>
                     <?php
                 }
             ?>
@@ -141,16 +141,16 @@
                     <div class="row" data-colcount="2">
                         <div class="column hideOnMobile">
                             <center>    
-                                <div class="positionRelative hoverOverlayContainer cursorPointer" style="width: 350px; height: 200px;" onclick="gotoLink('<?php echo $game->getURL(); ?>');" title="<?php echo $game->getName(); ?>">
-                                    <img src="<?php echo $game->getBannerUrl(); ?>" style="width: 100%; height: 100%;"></a>
+                                <div class="positionRelative hoverOverlayContainer cursorPointer" style="width: 350px; height: 200px;" onclick="gotoLink('<?= $game->getURL(); ?>');" title="<?= $game->getName(); ?>">
+                                    <img src="<?= $game->getBannerUrl(); ?>" style="width: 100%; height: 100%;"></a>
                                     <div class="hoverOverlay" style="width: 100%; height: 100%;"></div>
                                 </div>
                             </center>
                         </div>
                         <div class="column">
-                            <h1 class="fontTrebuchet"><a href="<?php echo $strategyGuide->getURL(); ?>"><?php echo $strategyGuide->getTitle(); ?></a></h1>
-                            <p class="fontTrebuchet hideOnDesktop"><a href="<?php echo $game->getURL(); ?>"><?php echo $game->getName(); ?></a></p>
-                            <p class="fontVerdana" data-fontsize="medium" style="overflow-wrap: break-word;"><?php echo $strategyGuide->getDescriptionSnippet(250); ?></p>
+                            <h1 class="fontTrebuchet"><a href="<?= $strategyGuide->getURL(); ?>"><?= $strategyGuide->getTitle(); ?></a></h1>
+                            <p class="fontTrebuchet hideOnDesktop"><a href="<?= $game->getURL(); ?>"><?= $game->getName(); ?></a></p>
+                            <p class="fontVerdana" data-fontsize="medium" style="overflow-wrap: break-word;"><?= $strategyGuide->getDescriptionSnippet(250); ?></p>
                         </div>    
                     </div>
                     <div class="spacer" data-size="mdeium"></div>

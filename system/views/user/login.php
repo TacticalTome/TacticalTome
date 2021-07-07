@@ -12,7 +12,7 @@
         </div>
         <br>
 
-        <form action="<?php echo URL; ?>user/login/" method="POST" autocomplete="off" onsubmit="return validateLogin();">
+        <form action="<?= URL; ?>user/login/" method="POST" autocomplete="off" onsubmit="return validateLogin();">
             <input type="text" name="usernameOrEmail" placeholder="Username or Email" id="username"><br><br>
             <input type="password" name="password" placeholder="Password" id="password"><br><br>
             <input type="submit" name="login" value="Login" data-color="blue" id="submitLogin">

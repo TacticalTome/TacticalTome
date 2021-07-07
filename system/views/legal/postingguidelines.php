@@ -19,14 +19,14 @@
 
         <h1 class="fontTrebuchet">Read before posting a strategy guide</h1>
         <hr>
-        <p class="fontVerdana">By posting a strategy guide and by using <?php echo \WEBSITE_NAME; ?> you acknowledge that you have read and understand the below requirements. Failure to follow the code of conduct and other various rulings will result in your account being terminated.</p>
+        <p class="fontVerdana">By posting a strategy guide and by using <?= \WEBSITE_NAME; ?> you acknowledge that you have read and understand the below requirements. Failure to follow the code of conduct and other various rulings will result in your account being terminated.</p>
 
         <div class="spacer" data-size="medium"></div>
 
         <h3 class="fontTrebuchet">Code of Conduct for Strategy Guides</h3>
         <p class="fontTrebuchet" data-fontsize="small"><i>These are in no particular order.</i></p>
         <ol class="fontVerdana">
-            <li>Do not, under any circumstance, harass any other user based on their characteristics or beliefs. This also includes respecting other users on <?php echo \WEBSITE_NAME; ?></li>
+            <li>Do not, under any circumstance, harass any other user based on their characteristics or beliefs. This also includes respecting other users on <?= \WEBSITE_NAME; ?></li>
             <li>Do not use or type racial slurs or any other severe vulgar language.</li>
             <li>Attempt to refrain from profanity or any other vulgar language; excessive swearing is not tolerated.</li>
             <li>All strategy guides shall be kept at a rating of PG-13, anything deemed excessive of that category is not allowed.</li>
@@ -43,7 +43,7 @@
             <li>Do not impersonate any person or other user.</li>
         </ol>
         <br>
-        <p class="fontVerdana"><b>Please be aware that <?php echo \WEBSITE_NAME; ?> has the full right to delete any post for any reason if it is deemed unwanted and breaks the above code of conduct.</b></p>
+        <p class="fontVerdana"><b>Please be aware that <?= \WEBSITE_NAME; ?> has the full right to delete any post for any reason if it is deemed unwanted and breaks the above code of conduct.</b></p>
     
         <div class="spacer" data-size="medium"></div>
         <p class="fontVerdana"><i>Please continue . . .</i></p>
@@ -52,7 +52,7 @@
         <h3 class="fontTrebuchet">Helpful Information for Strategy Guides</h3>
         <p class="fontTrebuchet" data-fontsize="small"><i>These are in no particular order.</i></p>
         <ol class="fontVerdana">
-            <li>For a good example of a strategy guide see <a href="<?php echo \URL; ?>strategyguide/view/1/" target="_blank">here</a>.</li>
+            <li>For a good example of a strategy guide see <a href="<?= \URL; ?>strategyguide/view/1/" target="_blank">here</a>.</li>
             <li>Refrain from using images. If you would like to include an image in your strategy guide include a link to an external site. Copying and pasting an image will cause your strategy guide to hit the character limit very fast.</li>
             <li>Do not post one singular "tips and tricks" onto a strategy guide. However you may group a bunch of "tips and tricks" together and post them under one guide.</li>
             <li>Put effort into your strategy guide and attempt to be as descriptive as possible. The more descriptive your strategy guide is, the more people will be able to find it.</li>
