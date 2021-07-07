@@ -18,7 +18,7 @@
         <h1 class="fontTrebuchet" data-size="large">Getting Started</h1>
         <p class="fontVerdana">Our API allows you build custom applications integrated with the <?= \WEBSITE_NAME; ?> database.  If you have a specific need and programming talent, you can build the solution you're looking for using the data we provide.</p>
         <p class="fontVerdana">You can use any programming language you'd like, and we recommend choosing a programming langauge that can access webpages and grab it's contents.</p>
-        <p class="fontVerdana">If you would like to add a feature to the Gamer's Handbook yourself, please navigate to your <a href="https://github.com/Paughton/GamersHandbook" target="_blank">Github page</a>.</p>
+        <p class="fontVerdana">If you would like to add a feature to the <?= \WEBSITE_NAME; ?> yourself, please navigate to your <a href="https://github.com/Paughton/GamersHandbook" target="_blank">Github page</a>.</p>
         <p class="fontVerdana" data-fontsize="small"><b>When using our API you agree to our <a href="<?= \URL; ?>legal/termsofservice/" target="_blank">Terms of Service</a>.</b></p>
 
         <div class="spacer" data-size="medium"></div>
