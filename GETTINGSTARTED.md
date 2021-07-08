@@ -6,6 +6,8 @@ Make sure you have read our [Contributing Guide](https://github.com/Paughton/Gam
 #### Disclaimer:
 This file does not override the issues section of this repository nor is it updated automatically to reflect it. Please be aware that some of the suggestions in this document might already be started, implemented, or otherwise abandoned. **Check the issues section before beginning**.
 
+Issues that have the label **Good First Issue** are there if you desire something simple to start on.
+
 If you are still not sure what to do after reading this document, look at the issues section for more ideas. If that does not help please contact [@Paughton](https://github.com/Paughton/) with any questions at: [tanktotgames@gmail.com](mailto:tanktotgames@gmail.com).
 
 ## Ideas to work on
