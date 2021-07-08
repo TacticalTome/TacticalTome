@@ -1,8 +1,8 @@
 # Contributing
-Gamer's Handbook is open up to contributions and it is advised to create an issue before beginning, so we know what you are working on and don't overwrite each other and to pre-approve features.
+Tactical Tome is open up to contributions and it is advised to create an issue before beginning, so we know what you are working on and don't overwrite each other and to pre-approve features.
 
 #### Dependencies
-All of the following software are required in order to run the Gamer's Handbook
+All of the following software are required in order to run the Tactical Tome
 - Web Server
 - PHP 8
 - MySQL
@@ -13,22 +13,22 @@ All these dependencies can be filled by either XAMPP or WampServer (we recommend
 After opening up an issue you may continue working on developing the proposed changes (Please make sure that noone else is working on the same thing). However, if you have proposed a new feature, please wait until a confirmation, from [@Paughton](https://github.com/Paughton/). There might be some already opened issues that have not yet been claimed or started, working upon those are greatly appreciated.
 
 ## Pull Requests
-Please submit all file changes and contributions through pull requests (For more information on how to submit a pull reqest: [Github Docs](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)). When committing please submit an empty `gamershandbook.sql` database file, meaning: no fields. The database file must only have table creation scripts, and no fields or `INSERT` queries. For an example of what we're looking for plesae look at the 	`gamershandbook.sql` in the repository.
+Please submit all file changes and contributions through pull requests (For more information on how to submit a pull reqest: [Github Docs](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)). When committing please submit an empty `tacticaltome.sql` database file, meaning: no fields. The database file must only have table creation scripts, and no fields or `INSERT` queries. For an example of what we're looking for plesae look at the `tacticaltome.sql` in the repository.
 
 ## Installation
-To install: open up git and type: `git clone https://github.com/Paughton/GamersHandbook.git` into a folder inside of a web server (I use XAMPP). Once the installation is complete, import the `gamershandbook.sql` into any MySQL management software/database (I use phpMyAdmin).
+To install: open up git and type: `git clone https://github.com/Paughton/TacticalTome/.git` into a folder inside of a web server (I use XAMPP). Once the installation is complete, import the `tacticaltome.sql` into any MySQL management software/database (I use phpMyAdmin).
 
 After installing the repository you must edit the `system/config.php` file to fit your system's credentials and also the `index.php` file to fit your database's credentials. Specifically you must edit the following PHP constants:
 ```PHP
-define("URL", "http://" . $_SERVER['HTTP_HOST'] . "/gamershandbook/");
-define("ROOT_DIRECTORY", $_SERVER['DOCUMENT_ROOT'] . "/gamershandbook/");
+define("URL", "http://" . $_SERVER['HTTP_HOST'] . "/tacticaltome/");
+define("ROOT_DIRECTORY", $_SERVER['DOCUMENT_ROOT'] . "/tacticaltome/");
 define("WEBSITE_EMAIL", "tanktotgames@gmail.com");
 date_default_timezone_set("America/Chicago");
 ```
 In the main `index.php` file you need to change the following line:
 ```PHP
 // library\Aplication($host, $username, $password, $dbName)
-$application = new library\Application("localhost", "root", "", "gamershandbook");
+$application = new library\Application("localhost", "root", "", "tacticaltome");
 ```
 
 #### Recommended steps for configuartion:
@@ -40,7 +40,7 @@ $application = new library\Application("localhost", "root", "", "gamershandbook"
 
 ## MVC Format
 
-The project is using a PHP MVC (model-view-controller) format. The URL structure of the Gamer's Handbook is as follows: `website.com/controllerName/viewName/param1/param2/.../`
+The project is using a PHP MVC (model-view-controller) format. The URL structure of the Tactical Tome is as follows: `website.com/controllerName/viewName/param1/param2/.../`
 
 All back-end (or server) functions are to be executed in the `controllers`. Each controller has the basic file format of:
 ```PHP
@@ -65,7 +65,7 @@ class ControllerName extends library\Controller {
 }
 ```
 
-See [libraries/controller.php](https://github.com/Paughton/GamersHandbook/blob/main/system/libraries/controller.php) for a list of all controller inherited values. For the method declarations with parameters in the URL it is necessary that you default the parameters to `null` which can be later used to see if the variable is set.
+See [libraries/controller.php](https://github.com/Paughton/TacticalTome/blob/main/system/libraries/controller.php) for a list of all controller inherited values. For the method declarations with parameters in the URL it is necessary that you default the parameters to `null` which can be later used to see if the variable is set.
 
 **Make sure to sanitize ALL inputs from the user using the Database model's function:** `protect`.
 
@@ -91,9 +91,9 @@ To add a model to be loaded by default navigate to `libraries/appplication.php`
 - Game
 
 #### Example files
-- [`controllers/user.php`](https://github.com/Paughton/GamersHandbook/blob/main/system/controllers/user.php)
-- [`models/user.php`](https://github.com/Paughton/GamersHandbook/blob/main/system/models/user.php)
-- [`views/game/view.php`](https://github.com/Paughton/GamersHandbook/blob/main/system/views/game/view.php)
+- [`controllers/user.php`](https://github.com/Paughton/TacticalTome/blob/main/system/controllers/user.php)
+- [`models/user.php`](https://github.com/Paughton/TacticalTome/blob/main/system/models/user.php)
+- [`views/game/view.php`](https://github.com/Paughton/TacticalTome/blob/main/system/views/game/view.php)
 
 ## Coding Formats
 We will be using camel case for all PHP variables (`camelCaseVariable`). However SQL columns will have all their letters lowercased (`notcamelcasecolumn`).
@@ -108,7 +108,7 @@ if ($x == $y) {
 ```
 
 ## Database
-If you have created a new table or column please make sure when exporting that no field creation queries are inside of the `gamershandbook.sql` file. I.e. `INSERT` queries. However table creation/modifications are allowed. This is to help prevent developer data when pulling, cloning, and exporting.
+If you have created a new table or column please make sure when exporting that no field creation queries are inside of the `tacticaltome.sql` file. I.e. `INSERT` queries. However table creation/modifications are allowed. This is to help prevent developer data when pulling, cloning, and exporting.
 
 ## Stylesheets
 Our CSS rules are split up into two different categories: `main` and `framework`. Each category has it's own purpose.
@@ -130,6 +130,6 @@ The data tags can later be used for varying results:
 The `main.css` file is used for everything else and all CSS rules that are specific to the project (can't be used anywhere else).
 
 ## Closing
-Make sure to read our [Getting Started Guide](https://github.com/Paughton/GamersHandbook/blob/main/GETTINGSTARTED.md) if you have any questions or troubles on what to do. If you have any further questions please contact [@Paughton](https://github.com/Paughton/) or email him at [tanktotgames@gmail.com](mailto:tanktotgames@gmail.com)
+Make sure to read our [Getting Started Guide](https://github.com/Paughton/TacticalTome/blob/main/GETTINGSTARTED.md) if you have any questions or troubles on what to do. If you have any further questions please contact [@Paughton](https://github.com/Paughton/) or email him at [tanktotgames@gmail.com](mailto:tanktotgames@gmail.com)
 
 #### This document will be updated regulary to clarify changes.
