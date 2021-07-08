@@ -1,4 +1,4 @@
-# <a href="">Tactical Tome</a>
+# <a href="https://www.tacticaltome.com/" target="_blank">Tactical Tome</a>
 An encyclopedia for game strategies, guides, tutorials, news, and more!
 
 <img alt="Tactical Tome Screenshot 1" src="https://github.com/Paughton/TacticalTome/blob/main/images/webscreenshot1.png"><br>
