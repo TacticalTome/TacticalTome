@@ -15,6 +15,7 @@
 		URL
 	*/
 	define("URL", "http://" . $_SERVER['HTTP_HOST'] . "/tacticaltome/");
+	define("GITHUB_URL", "https://github.com/TacticalTome/TacticalTome");
 
 	/*
 		Website Properties
