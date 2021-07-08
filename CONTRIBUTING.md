@@ -16,7 +16,7 @@ After opening up an issue you may continue working on developing the proposed ch
 Please submit all file changes and contributions through pull requests (For more information on how to submit a pull reqest: [Github Docs](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)). When committing please submit an empty `tacticaltome.sql` database file, meaning: no fields. The database file must only have table creation scripts, and no fields or `INSERT` queries. For an example of what we're looking for plesae look at the `tacticaltome.sql` in the repository.
 
 ## Installation
-To install: open up git and type: `git clone https://github.com/Paughton/TacticalTome/.git` into a folder inside of a web server (I use XAMPP). Once the installation is complete, import the `tacticaltome.sql` into any MySQL management software/database (I use phpMyAdmin).
+To install: open up git and type: `git clone https://github.com/TacticalTome/TacticalTome/.git` into a folder inside of a web server (I use XAMPP). Once the installation is complete, import the `tacticaltome.sql` into any MySQL management software/database (I use phpMyAdmin).
 
 After installing the repository you must edit the `system/config.php` file to fit your system's credentials and also the `index.php` file to fit your database's credentials. Specifically you must edit the following PHP constants:
 ```PHP
@@ -65,7 +65,7 @@ class ControllerName extends library\Controller {
 }
 ```
 
-See [libraries/controller.php](https://github.com/Paughton/TacticalTome/blob/main/system/libraries/controller.php) for a list of all controller inherited values. For the method declarations with parameters in the URL it is necessary that you default the parameters to `null` which can be later used to see if the variable is set.
+See [libraries/controller.php](https://github.com/TacticalTome/TacticalTome/blob/main/system/libraries/controller.php) for a list of all controller inherited values. For the method declarations with parameters in the URL it is necessary that you default the parameters to `null` which can be later used to see if the variable is set.
 
 **Make sure to sanitize ALL inputs from the user using the Database model's function:** `protect`.
 
@@ -91,9 +91,9 @@ To add a model to be loaded by default navigate to `libraries/appplication.php`
 - Game
 
 #### Example files
-- [`controllers/user.php`](https://github.com/Paughton/TacticalTome/blob/main/system/controllers/user.php)
-- [`models/user.php`](https://github.com/Paughton/TacticalTome/blob/main/system/models/user.php)
-- [`views/game/view.php`](https://github.com/Paughton/TacticalTome/blob/main/system/views/game/view.php)
+- [`controllers/user.php`](https://github.com/TacticalTome/TacticalTome/blob/main/system/controllers/user.php)
+- [`models/user.php`](https://github.com/TacticalTome/TacticalTome/blob/main/system/models/user.php)
+- [`views/game/view.php`](https://github.com/TacticalTome/TacticalTome/blob/main/system/views/game/view.php)
 
 ## Coding Formats
 We will be using camel case for all PHP variables (`camelCaseVariable`). However SQL columns will have all their letters lowercased (`notcamelcasecolumn`).
@@ -130,6 +130,6 @@ The data tags can later be used for varying results:
 The `main.css` file is used for everything else and all CSS rules that are specific to the project (can't be used anywhere else).
 
 ## Closing
-Make sure to read our [Getting Started Guide](https://github.com/Paughton/TacticalTome/blob/main/GETTINGSTARTED.md) if you have any questions or troubles on what to do. If you have any further questions please contact [@Paughton](https://github.com/Paughton/) or email him at [tanktotgames@gmail.com](mailto:tanktotgames@gmail.com)
+Make sure to read our [Getting Started Guide](https://github.com/TacticalTome/TacticalTome/blob/main/GETTINGSTARTED.md) if you have any questions or troubles on what to do. If you have any further questions please contact [@Paughton](https://github.com/Paughton/) or email him at [tanktotgames@gmail.com](mailto:tanktotgames@gmail.com)
 
 #### This document will be updated regulary to clarify changes.
