@@ -18,7 +18,7 @@
         <h1 class="fontTrebuchet">FAQ</h1>
         <p class="fontVerdana">
             <b>Q:</b> How can I contribute to <?= \WEBSITE_NAME; ?>?<br>
-            <b>A:</b> You can contribute by visiting our <a href="https://github.com/Paughton/GamersHandbook" target="_blank">GitHub page</a>
+            <b>A:</b> You can contribute by visiting our <a href="https://github.com/Paughton/TacticalTome" target="_blank">GitHub page</a>
         </p>
 
         <div class="spacer" data-size="medium"></div>
