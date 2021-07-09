@@ -42,7 +42,7 @@
         </p>
         <?php if ($this->game->getSteamAppId() != 0) { ?>
             <p class="fontVerdana"><b>Steam link</b>: <a href="https://store.steampowered.com/app/<?= $this->game->getSteamAppId(); ?>/" target="_blank"><?= $this->game->getName(); ?></a></p>
-            <p class="fontVerdana"><b>Who's Playing</b>: <span id="currentSteamPlayerCount">Loading</span> players</p>
+            <p class="fontVerdana"><b>Who's Playing</b>: <span id="currentSteamPlayerCount"><?= $this->game->getCurrentSteamPlayers(); ?></span> players</p>
         <?php } ?>
         <hr>
 
@@ -51,7 +51,21 @@
         <h3 class="fontVerdana">News</h3>
         <?php if ($this->game->hasNews()) { ?>
             <ol id="gameNewsContainer">
-                <p class="fontVerdana">Loading News...</p>
+                <?php
+                    $index = 0;
+                    $steamNewsArticles = $this->game->getSteamNews();
+                    foreach ($steamNewsArticles as $news) {
+                        if ($index > 4) break;
+                        ?>
+                            <li class="fontVerdana"><a href="<?= $news["url"]; ?>"><?= $news["title"]; ?></a></li>
+                            <ul class='fontVerdana'>
+                                <li>Posted by <?= $news["author"] ?> on <?= date("D. F d, Y @ g:i A", $news["date"]); ?></li>
+                                <li><?= $news["feedlabel"]; ?></li>
+                            </ul><br>
+                        <?php
+                        $index++;
+                    }
+                ?>
             </ol>
         <?php } else { ?>
             <p class="fontVerdana">This game is not found on steam and therefore does not support a news section or the provided news section is not used for this specific game. However if you have any news you would like posted here, please contact us.</p>
@@ -110,73 +124,3 @@
         <div class="spacer" data-size="large"></div>
     </div>
 </div>
-
-<?php if ($this->game->hasNews()) { ?>
-    <script>
-        function formatMonth(index) {
-            let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            return months[index];
-        }
-
-        function formatDate(date) {
-            if (date <= 9) {
-                return "0" + date;
-            }
-            return date;
-        }
-
-        function formatTime(hours, minutes) {
-            if (minutes <= 9) minutes = "0" + minutes;
-            if (hours < 12) { // AM
-                if (hours == 0) return "12:" + minutes + " AM";
-                return hours + ":" + minutes + " AM";
-            } else { // PM
-                if (hours == 12) return "12:" + minutes + " PM";
-                return (hours - 12) + ":" + minutes + " PM";
-            }
-        }
-
-        $.get({
-            url: "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=<?= $this->game->getSteamAppId(); ?>",
-            dataType: "json",
-            success: function(data) {
-                $("#gameNewsContainer").empty();
-                let maxNews = 5;
-                if (data.appnews.newsitems.length > 0) {
-                    for (let i = 0; i < maxNews; i++) {
-                        if (typeof data.appnews.newsitems[i] !== "undefined") {
-                            if (i > 0 && data.appnews.newsitems[i].date == data.appnews.newsitems[i-1].date) maxNews++;
-                            else {
-                                let datePosted = new Date(data.appnews.newsitems[i].date * 1000);
-                                let datePostedAsString = formatMonth(datePosted.getMonth()) + " " + formatDate(datePosted.getDate()) + ", " + datePosted.getFullYear() + " @ " + formatTime(datePosted.getHours(), datePosted.getMinutes()); 
-                                $("#gameNewsContainer").append("<li class='fontVerdana'><a href='" + data.appnews.newsitems[i].url + "' target='_blank'>" + data.appnews.newsitems[i].title + "</a></li><ul class='fontVerdana'><li>Posted by " + data.appnews.newsitems[i].author + " on " + datePostedAsString + "</li><li>" + data.appnews.newsitems[i].feedlabel + "</li></ul><br>");
-                            }
-                        }
-                    }
-                } else {
-                    $("#gameNewsContainer").append("<p class='fontVerdana'>There seems to be no news that we could find.</p>");
-                }
-            }
-        });
-    </script>
-<?php } ?>
-
-<?php if ($this->game->getSteamAppId() != 0) { ?>
-    <script>
-        function number_format(number) {
-            return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-        }
-
-        $.get({
-            url: "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=<?= $this->game->getSteamAppId(); ?>",
-            dataType: "json",
-            success: function(data) {
-                if (typeof data.response !== undefined) {
-                    if (data.response.result) {
-                        $("#currentSteamPlayerCount").text(number_format(data.response.player_count));
-                    }
-                }
-            }
-        });
-    </script>
-<?php } ?>
