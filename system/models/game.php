@@ -123,12 +123,25 @@
             $this->database->query("UPDATE games SET followers='".$this->followers."' WHERE id='".$this->id."'");
         }
 
-        public function getURL() {
+        public function getURL(): string {
             return \URL . "game/view/" . $this->id . "/";
         }
 
-        public function getNewStrategyGuideURL() {
+        public function getNewStrategyGuideURL(): string {
             return \URL . "strategyguide/new/" . $this->id . "/";
+        }
+
+        public function getCurrentSteamPlayers(): int {
+            $apiResult = json_decode(file_get_contents("https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key=" . \STEAMAPI_KEY . "&appid=" . $this->getSteamAppId()), true);
+            if ($apiResult["response"]["result"]) {
+                return $apiResult["response"]["player_count"];
+            }
+            return -1;
+        }
+
+        public function getSteamNews(): Array {
+            $apiResult = json_decode(file_get_contents("https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?key=" . \STEAMAPI_KEY . "&appid=" . $this->getSteamAppId()), true);
+            return $apiResult["appnews"]["newsitems"];
         }
 
         static public function existsWithSteamId(Database $database, int $steamId): bool {

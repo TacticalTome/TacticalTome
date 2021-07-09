@@ -9,7 +9,6 @@
 		PHP Settings
 	*/
 	error_reporting(E_ALL);
-	ini_set("allow_url_fopen", true);
 
 	/*
 		URL
@@ -48,6 +47,13 @@
 	define("TEMPLATE_DIRECTORY", SYSTEM_DIRECTORY . "templates/");
 	define("BANNER_DIRECTORY", IMAGE_DIRECTORY . "banners/");
 	define("COVER_DIRECTORY", IMAGE_DIRECTORY . "covers/");
+
+	/*
+		API Keys
+
+		(You must get this from the steam API)
+	*/
+	define("STEAMAPI_KEY", "keyforsite");
 
 	/*
 		Misc.
