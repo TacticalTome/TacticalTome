@@ -71,12 +71,12 @@
             switch ($action) {
                 case "activateaccount":
                     $emailTitle = "Activate Account";
-                    $emailContent = "Please confirm your account by clicking the link below.\n" . \URL . "user/confirm/activateaccount/" . $password . "/". $email . "/";
+                    $emailContent = "Please confirm your account by clicking the link below.\n" . \URL . "user/confirm/activateaccount/" . $password . "/". $value . "/";
                     break;
 
                 case "newemail":
                     $emailTitle = "Change Email";
-                    $emailContent = "You have been requested to change your email to: " . $email . "\nClick the link below to confirm this action (If this was not you change your password and ignore this email).\n" . \URL . "user/confirm/newemail/" . $password . "/". $email . "/";
+                    $emailContent = "You have been requested to change your email to: " . $value . "\nClick the link below to confirm this action (If this was not you change your password and ignore this email).\n" . \URL . "user/confirm/newemail/" . $password . "/". $value . "/";
                     break;
 
                 default:
