@@ -62,13 +62,31 @@
             return $this->exists;
         }
 
-        public static function new(Database $database, int $uid, string $action, string $password, string $value, string $email, string $emailTitle, string $emailContent): void {
+        public static function new(Database $database, int $uid, string $action, string $password, string $value, string $email): void {
             $uid = $database->protect($uid);
             $action = $database->protect($action);
+            $password = $database->protect($password);
             $value = $database->protect($value);
+            
+            switch ($action) {
+                case "activateaccount":
+                    $emailTitle = "Activate Account";
+                    $emailContent = "Please confirm your account by clicking the link below.\n" . \URL . "user/confirm/activateaccount/" . $password . "/". $email . "/";
+                    break;
+
+                case "newemail":
+                    $emailTitle = "Change Email";
+                    $emailContent = "You have been requested to change your email to: " . $email . "\nClick the link below to confirm this action (If this was not you change your password and ignore this email).\n" . \URL . "user/confirm/newemail/" . $password . "/". $email . "/";
+                    break;
+
+                default:
+                    $emailTitle = "Unknown action: $action";
+                    $emailContent = "Please contact us at: " . \WEBSITE_EMAIL;
+                    break;
+            }
 
             $database->query("INSERT INTO confirmations (uid, action, password, value, time) VALUES ('$uid', '$action', '$password', '$value', '".time()."')");
-            mail($email, $emailTitle, $emailContent);
+            \utility\mailTo($email, $emailTitle, $emailContent);
         }
 
         public static function delete(Database $database, int $id): void {

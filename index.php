@@ -1,8 +1,6 @@
 <?php
 
 	require_once("./system/config.php");
-	require_once(LIBRARY_DIRECTORY . "application.php");
+	require_once(CORE_DIRECTORY . "application.php");
 	
-	$application = new library\Application("localhost", "root", "", "tacticaltome");
-
-?>
+	$application = new core\Application();

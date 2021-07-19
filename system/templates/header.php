@@ -1,6 +1,7 @@
 <!--
     <?= \WEBSITE_NAME ?>
     (c) 2021 - <?= date("Y") . " " . \WEBSITE_NAME; ?>. All Rights Reserved.
+    v<?= \WEBSITE_VERSION; ?>
 -->
 
 <!DOCTYPE HTML>
@@ -15,15 +16,15 @@
         <!--
             Framework
         -->
-        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/framework.css?v=1.0">
-        <script src="<?= \URL; ?>javascript/framework.js?v=1.0"></script>
-        <script src="<?= \URL; ?>javascript/carousel.js?v=1.0"></script>
+        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/framework.css?v=<?= \STYLESHEET_JAVASCRIPT_VERSIONS["framework.css"]; ?>">
+        <script src="<?= \URL; ?>javascript/framework.js?v=<?= \STYLESHEET_JAVASCRIPT_VERSIONS["framework.js"]; ?>"></script>
+        <script src="<?= \URL; ?>javascript/carousel.js?v=<?= \STYLESHEET_JAVASCRIPT_VERSIONS["carousel.js"]; ?>"></script>
 
         <!--
             CSS and Form Validation
         -->
-        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/main.css?v=1.0" />
-        <script src="<?= \URL; ?>javascript/formvalidation.js?v=1.0"></script>
+        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/main.css?v=<?= \STYLESHEET_JAVASCRIPT_VERSIONS["main.css"]; ?>" />
+        <script src="<?= \URL; ?>javascript/formvalidation.js?v=<?= \STYLESHEET_JAVASCRIPT_VERSIONS["formvalidation.js"]; ?>"></script>
 
         <!--
             FontAwesome

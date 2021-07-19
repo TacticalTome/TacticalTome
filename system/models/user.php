@@ -22,14 +22,22 @@
         private Database $database;
         private array $mysqli; 
 
-        public function __construct(Database $database, int $id) {
+        public function __construct(Database $database, int $id, Array $mysqli = array()) {
             $this->database = $database;
             $id = $this->database->protect($id);
-            $get = $this->database->query("SELECT * FROM user WHERE id='$id'");
-            if ($get->num_rows > 0) {
-                $this->mysqli = $get->fetch_assoc();
-                $this->isValid = true;
 
+            if (empty($mysqli)) {
+                $get = $this->database->query("SELECT * FROM user WHERE id='$id'");
+                if ($get->num_rows > 0) {
+                    $this->mysqli = $get->fetch_assoc();
+                    $this->isValid = true;
+                }
+            } else {
+                $this->mysqli = $mysqli;
+                $this->isValid = true;
+            }
+
+            if ($this->isValid) {
                 $this->id = $this->mysqli['id'];
                 $this->email = $this->mysqli['email'];
                 $this->username = $this->mysqli['username'];
@@ -253,5 +261,17 @@
             }
 
             return false;
+        }
+
+        static public function getWithEmail(Database $database, string $email) {
+            $email = $database->protect($email);
+
+            $get = $database->query("SELECT * FROM user WHERE email='$email'");
+            if ($get->num_rows > 0) {
+                $mysqli = $get->fetch_assoc();
+                return new User($database, $mysqli['id'], $mysqli);
+            } else {
+                throw new \Exception("There is no user with that email");
+            }
         }
     }

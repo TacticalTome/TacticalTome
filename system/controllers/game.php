@@ -2,7 +2,7 @@
 
     namespace controller;
 
-    class Game extends \library\Controller {
+    class Game extends \core\Controller {
         public function view(int $gameID = null) {
             if (!is_null($gameID)) {
                 $this->loadModel("game", "strategyguide");

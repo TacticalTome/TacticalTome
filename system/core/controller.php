@@ -1,6 +1,6 @@
 <?php
 
-	namespace library;
+	namespace core;
 	
 	class Controller {
 		protected \model\Database $database;
@@ -11,7 +11,7 @@
 		protected string $pageDescription = \WEBSITE_NAME . " is an encyclopedia for game strategies, guides, tutorials, news, and more!";
 		protected bool $userIsLoggedIn = false;
 		
-		public function __construct(\model\Database $database) {
+		public function __construct(\model\Database &$database) {
 			$this->database = $database;
 			$this->loadModel("user", "game");
 
@@ -26,7 +26,7 @@
 			}
 		}
 		
-		protected function loadModel(... $models) {	
+		protected function loadModel(... $models): void {	
 			foreach ($models as $modelName) {
 				$modelFile = MODEL_DIRECTORY . $modelName . ".php";
 
@@ -38,13 +38,13 @@
 			}
 		}
 
-		protected function loadViewWithHeaderFooter($viewFolder, $viewName) {
+		protected function loadViewWithHeaderFooter(string $viewFolder, string $viewName): void {
 			require_once(TEMPLATE_DIRECTORY . "header.php");
 			$this->loadView($viewFolder, $viewName);
 			require_once(TEMPLATE_DIRECTORY . "footer.php");
 		}
 
-		protected function loadView($viewFolder, $viewName) {
+		protected function loadView(string $viewFolder, string $viewName): void {
 			$viewFile = VIEW_DIRECTORY . $viewFolder . "/" . $viewName . ".php";
 
 			if (file_exists($viewFile)) {
@@ -54,11 +54,11 @@
 			}
 		}
 		
-		protected function output($string) {
+		protected function outputAlert($string): void {
 			echo "<div class='output'>" . $string . "</div>";
 		}
 
-		protected function unknownPage() {
+		protected function unknownPage(): void {
 			Application::unknownPage();
 		}
 	}

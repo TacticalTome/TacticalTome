@@ -1,6 +1,6 @@
 <?php
 
-	namespace library;
+	namespace model;
 	
 	class URL {
 		private string $content;
@@ -9,8 +9,7 @@
 		private Array $parameters = array();
 		
 		public function __construct(string $URL) {
-			$this->content = $URL;
-			$this->content = str_replace(\URL, "", $this->content);
+			$this->content = str_replace(\URL, "", $URL);
 
 			$this->parseContent();
 		}

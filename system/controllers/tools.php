@@ -2,7 +2,7 @@
 
     namespace controller;
 
-    class Tools extends \library\Controller {
+    class Tools extends \core\Controller {
         public function search(string $search = null) {
             if (!is_null($search)) {
                 $search = $this->database->protect(urldecode($search));

@@ -2,12 +2,10 @@
 
     namespace controller;
 
-    class StrategyGuide extends \library\Controller {
+    class StrategyGuide extends \core\Controller {
         public function view(int $strategyGuideID = null) {
             if (!is_null($strategyGuideID)) {
-                $this->loadModel("user");
-                $this->loadModel("game");
-                $this->loadModel("strategyguide");
+                $this->loadModel("strategyguide", "reply");
 
                 $this->strategyGuide = new \model\StrategyGuide($this->database, $strategyGuideID);
                 if ($this->strategyGuide->exists()) {
@@ -17,6 +15,8 @@
                     $this->pageTitle = $this->strategyGuide->getTitle() . " - " . $this->game->getName() . " - " . \WEBSITE_NAME;
                     $this->pageIdentifier = "View Strategy Guide";
                     $this->pageDescription = $this->strategyGuide->getPreview();
+
+                    $this->allReplies = \model\Reply::getAllStrategyGuideReplies($this->database, $this->strategyGuide->getId());
 
                     $this->loadViewWithHeaderFooter("strategyguide", "view");
                 } else {

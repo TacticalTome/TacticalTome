@@ -19,6 +19,10 @@
             $this->data["data"][$key] = $value;
         }
 
+        public function addArray(Array $array) {
+            array_push($this->data["data"], $array);
+        }
+
         public function setSuccess(bool $success): void {
             $this->data["success"] = $success;
         }
@@ -28,6 +32,6 @@
         }
 
         public function getDataAsJSON(): string {
-            return json_encode($this->data);
+            return json_encode($this->data, JSON_PRETTY_PRINT);
         }
     }

@@ -21,22 +21,17 @@ To install: open up git and type: `git clone https://github.com/TacticalTome/Tac
 After installing the repository you must edit the `system/config.php` file to fit your system's credentials and also the `index.php` file to fit your database's credentials. Specifically you must edit the following PHP constants:
 ```PHP
 define("URL", "http://" . $_SERVER['HTTP_HOST'] . "/tacticaltome/");
-define("ROOT_DIRECTORY", $_SERVER['DOCUMENT_ROOT'] . "/tacticaltome/");
-define("WEBSITE_EMAIL", "tanktotgames@gmail.com");
-date_default_timezone_set("America/Chicago");
-```
-In the main `index.php` file you need to change the following line:
-```PHP
-// library\Aplication($host, $username, $password, $dbName)
-$application = new library\Application("localhost", "root", "", "tacticaltome");
+define("DATABASE_HOST", "localhost");
+define("DATABASE_USERNAME", "root");
+define("DATABASE_PASSWORD", "");
+define("DATABASE_NAME", "tacticaltome");
 ```
 
 #### Recommended steps for configuartion:
 1. Change the `URL` constant to the URL of your local files (typically `localhost`)
-2. Change the `ROOT_DIRECTORY` to wherever your files are located (base file)
-3. Change the `MAIN_EMAIL` to your email if you have mail setup with PHP (*Optional*)
-4. Change the timezone to whatever you timezone you are in (*Optional*)
-5. Change the database credentials in the `index.php` file
+2. Change the `WEBSITE_EMAIL` and `WEBSITE_EMAIL_PASSWORD` (if using gmail) to your email if you have mail setup with PHP (*Optional*)
+3. Change the timezone to whatever you timezone you are in (*Optional*)
+4. Change the database credentials
 
 ## MVC Format
 

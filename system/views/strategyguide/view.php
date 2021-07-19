@@ -54,11 +54,117 @@
             <?php } ?>
             <div class="spacer" data-size="medium"></div>
         <?php } ?>
+
+        <h2 class="fontTrebuchet" id="comments">Comments</h2>
+        <hr>
+        <ul>
+        <?php
+            if (!empty($this->allReplies)) {
+                foreach ($this->allReplies as $reply) {
+                    $author = new \model\User($this->database, $reply->getUserId());
+                    ?>
+                        <li>
+                            <h5 class="fontTrebuchet"><a href="<?= $author->getProfileURL(); ?>"><?= $author->getUsername(); ?></a></h5>
+                            <p class="fontTrebuchet" data-fontsize="small"><?= date("D. F d, Y @ g:i A", $reply->getTimeCreated()); ?></p>
+                            <p class="fontVerdana"><?= $reply->getContent(); ?></p>
+                            <?php if ($this->userIsLoggedIn) { ?>
+                                <div class="linkButton fontTrebuchet" data-fontsize="small" data-float="left" onclick="openReplyContainer('<?= $reply->getId(); ?>');">Reply</div>
+                                <?php if ($this->user->getId() == $author->getId()) { ?>
+                                    <div class="linkButton fontTrebuchet" style="margin-left: 10px;" data-fontsize="small" data-float="left" onclick="deleteReply('<?= $reply->getId(); ?>');">Delete</div>
+                                <?php } ?>
+                                <?php if ($this->user->isModerator()) { ?>
+                                <div class="linkButton fontTrebuchet" style="margin-left: 10px;" data-fontsize="small" data-float="left" onclick="forceDeleteReply('<?= $reply->getId(); ?>');">Force Delete</div>
+                                <?php } ?>
+                                <div style="clear: both;"></div>
+                            <?php } ?>
+                        </li>
+                    <?php
+                }
+            } else {
+                echo "<p class='fontVerdana'>There currently are no comments</p>";
+            }
+        ?>
+        </ul>
+        <div class="spacer" data-size="medium"></div>
+        <?php if ($this->userIsLoggedIn) { ?>
+            <button class="simple" data-color="green" id="showReplyContainer">Reply</button> 
+        <?php } else { ?>
+            <p class="fontVerdana">You must be <a href="<?= \URL; ?>user/login/" target="_blank">logged in</a> to reply.</p>
+        <?php } ?>
+        <div class="spacer" data-size="medium"></div>
+    </div>
+</div>
+
+<!--
+    Reply Container
+-->
+<div class="blurEntireBackground" id="replyContainer" data-theme="dark" style="display: none;">
+    <div class="centerHorizontalVertical backgroundWhite roundedCorners centerText" style="padding: 2%;">
+        <h1 class="fontTrebuchet">Reply</h1>
+        <input name="replyContent" id="replyContent" type="text" value="" placeholder="Reply Here..." data-theme="dark" style="min-width: 25vw;"><br><br>
+        <input name="replyId" id="replyId" type="hidden" value="">
+        <button class="simple" data-color="green" style="min-width: 25vw;" id="replySubmit">Reply</button>
+        <button class="simple" data-size="small" data-color="red" id="closeReplyContainer">Close</button>
     </div>
 </div>
 
 <?php
     if ($this->userIsLoggedIn) {
+        ?>
+            <script>
+                $("#showReplyContainer").on("click", function() {
+                    $("#replyId").val("");
+                    $("#replyContainer").fadeIn();
+                });
+
+                $("#closeReplyContainer").on("click", function() {
+                    $("#replyId").val("");
+                    $("#replyContainer").fadeOut();
+                });
+
+                function openReplyContainer(replyId) {
+                    $("#replyId").val(replyId);
+                    $("#replyContainer").fadeIn();
+                }
+
+                function deleteReply(replyId) {
+                    $.ajax({
+                        url: "<?= \URL; ?>ajax/deletereply/",
+                        data: {
+                            replyId: replyId
+                        },
+                        type: "POST",
+                        success: function(data) {
+                            alert(data);
+                            if (data == "Successfully deleted") window.location.href = "<?= \Utility\getCurrentURL(); ?>";
+                        }
+                    });
+                }
+
+                $("#replySubmit").on("click", function() {
+                    const replyContent = $("#replyContent").val();
+                    const replyId = $("#replyId").val();
+                    if (replyContent && /\S/.test(replyContent)) {
+                        $.ajax({
+                            url: "<?= \URL; ?>ajax/reply/",
+                            data: {
+                                strategyGuideId: <?= $this->strategyGuide->getId(); ?>,
+                                replyContent: replyContent,
+                                replyId: replyId
+                            },
+                            type: "POST",
+                            success: function(data) {
+                                alert(data);
+                                if (data == "Successfully posted") window.location.href = "<?= \Utility\getCurrentURL(); ?>";
+                            }
+                        });
+                    } else {
+                        alert("Your reply is empty");
+                    }
+                });
+            </script>
+        <?php
+
         if ($this->user->getId() == $this->strategyGuide->getUserId()) {
             ?>
                 <script>
@@ -82,7 +188,7 @@
             ?>
                 <script>
                     function forceDeleteStrategyGuide() {
-                        if (confirm("Are you sure you want delete this strategy guide?\n\nThis is not reversible!")) {
+                        if (confirm("Are you sure you want to delete this strategy guide?\n\nThis is not reversible!")) {
                             const reason = prompt("What is the reason?");
                             if (reason === "" || !reason) return;
                             $.ajax({
@@ -92,6 +198,26 @@
                                 success: function(data) {
                                     alert(data);
                                     if (data == "Successfully deleted") window.location.href = "<?= $this->game->getURL(); ?>";
+                                }
+                            });
+                        }
+                    }
+
+                    function forceDeleteReply(replyId) {
+                        if (confirm("Are you sure you want to delete this reply?\n\nThis is not reversible!")) {
+                            const reason = prompt("What is the reason?");
+                            if (reason === "" || !reason) return;
+
+                            $.ajax({
+                                url: "<?= \URL; ?>ajax/forcedeletereply/",
+                                data: {
+                                    replyId: replyId,
+                                    reason: reason
+                                },
+                                type: "POST",
+                                success: function(data) {
+                                    alert(data);
+                                    if (data == "Successfully deleted") window.location.href = "<?= \Utility\getCurrentURL(); ?>";
                                 }
                             });
                         }

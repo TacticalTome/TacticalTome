@@ -29,6 +29,8 @@
             Game 
         -->
         <h1 class="fontTrebuchet" data-size="large">Games</h1>
+
+        <!-- Show Game Information -->
         <hr data-thin="true">
         <h2 class="fontTrebuchet">Show Game Information</h2>
         <p class="fontTrebuchet" data-fontcolor="gray"><?= \URL; ?>api/game/get/[GAME_ID]/<p>
@@ -86,6 +88,8 @@ print_r($data); // Prints out the data
             Strategy Guides 
         -->
         <h1 class="fontTrebuchet" data-size="large">Strategy Guides</h1>
+
+        <!-- Show Strategy Guide Information -->
         <hr data-thin="true">
         <h2 class="fontTrebuchet">Show Strategy Guide Information</h2>
         <p class="fontTrebuchet" data-fontcolor="gray"><?= \URL; ?>api/strategyguide/get/[STRATEGY_GUIDE_ID]/<p>
@@ -123,6 +127,58 @@ print_r($data); // Prints out the data
         <h5 class="fontTrebuchet"><b>Description</b></h5>
         <p class="fontVerdana">Shows all the data for a specific strategy guide by it's ID.</p>
 
+        <!-- Show Strategy Guide Replies -->
+        <hr data-thin="true">
+        <h2 class="fontTrebuchet">Show Strategy Guide Replies</h2>
+        <p class="fontTrebuchet" data-fontcolor="gray"><?= \URL; ?>api/strategyguide/getreplies/[STRATEGY_GUIDE_ID]/<p>
+
+        <div class="row" data-colcount="2" style="width: 100%;">
+            <div class="column" style="width: 50%;">
+                <p class="fontVerdana"><b>Example Request (Using PHP)</b></p>
+                <p class="fontVerdana" data-fontcolor="gray" data-fontsize="small"><?= \URL; ?>api/strategyguide/getreplies/1/</p>
+                <pre style="width: 90%;"><code>
+$apiResult = file_get_contents("<?= \URL; ?>api/strategyguide/getreplies/1/");
+$data = json_decode($apiResult);
+print_r($data); // Prints out the data
+                </code></pre>
+            </div>
+
+            <div class="column" style="width: 50%;">
+                <p class="fontVerdana"><b>Example Response (JSON)</b></p>
+                <pre style="width: 90%; max-height: 25em;"><code>
+{
+    "success": true,
+    "errors": [],
+    "data": [
+        {
+            "id": 1,
+            "authorid": 1,
+            "strategyguideid": 1,
+            "content": "This is an example reply to an example strategy guide",
+            "timeposted": 1626194118
+        },
+        {
+            "id": 2,
+            "authorid": 1,
+            "strategyguideid": 1,
+            "content": "This is an example reply to an example reply to an example strategy guide",
+            "timeposted": 1626194118
+        },
+        {
+            "id": 3,
+            "authorid": 1,
+            "strategyguideid": 1,
+            "content": "This is an example reply to an example reply to an example reply to an example strategy guide",
+            "timeposted": 1626194118
+        }
+    ]
+}
+                </code></pre>
+            </div>
+        </div>
+        <h5 class="fontTrebuchet"><b>Description</b></h5>
+        <p class="fontVerdana">Shows all the replies for a specific strategy guide by it's ID.</p>
+
         <div class="spacer" data-size="medium"></div>
         <hr data-thin="true">
         <div class="spacer" data-size="medium"></div>
@@ -131,6 +187,8 @@ print_r($data); // Prints out the data
             Users 
         -->
         <h1 class="fontTrebuchet" data-size="large">Users</h1>
+
+        <!-- Show User Information -->
         <hr data-thin="true">
         <h2 class="fontTrebuchet">Show User Information</h2>
         <p class="fontTrebuchet" data-fontcolor="gray"><?= \URL; ?>api/user/get/[USER_ID]/<p>
