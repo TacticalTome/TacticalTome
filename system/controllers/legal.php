@@ -2,7 +2,7 @@
 
     namespace controller;
 
-    class Legal extends \library\Controller {
+    class Legal extends \core\Controller {
         public function privacyPolicy() {
             $this->pageIdentifier = "Privacy Policy";
             $this->pageTitle = "Privacy Policy - " . \WEBSITE_NAME;

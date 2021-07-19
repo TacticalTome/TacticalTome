@@ -2,7 +2,7 @@
 
     namespace controller;
 
-    class About extends \library\Controller {
+    class About extends \core\Controller {
         public function index() {
             $this->pageIdentifier = "About";
             $this->pageTitle = "About - " . \WEBSITE_NAME;

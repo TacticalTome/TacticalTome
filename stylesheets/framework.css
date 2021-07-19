@@ -101,13 +101,13 @@ body[data-theme="dark"] a:hover {
 
 body[data-theme="light"] a {
     text-decoration: none;
-    color: #555555;
-    transition: color 0.2s ease-in-out;
+    color: #0f07f0;
+    transition: color .2s ease-in-out;
 }
 
 body[data-theme="light"] a:hover {
-    color: #424242;
-    transition: color 0.2s ease-in-out;
+    color: #1109e3;
+    transition: color .2s ease-in-out;
 }
 
 a[data-color="yellow"] {
@@ -183,16 +183,6 @@ hr[data-thin="true"] {
 
 i { font-style: italic; }
 b { font-weight: bold; }
-
-body[data-theme="light"] a {
-    color: #0f07f0;
-    transition: color .2s ease-in-out;
-}
-
-body[data-theme="light"] a:hover {
-    color: #1109e3;
-    transition: color .2s ease-in-out;
-}
 
 
 
@@ -303,6 +293,14 @@ body[data-theme="light"] .lineWithWords:after {
     padding-top: 10em;
 }
 
+*[data-float="right"] {
+    float: right;
+}
+
+*[data-float="left"] {
+    float: left;
+}
+
 .bottomLeftScreen {
     position: fixed;
     right: 2%;
@@ -359,6 +357,23 @@ body[data-theme="dark"] .blurEntireBackground { background-color: rgba(255, 255,
         display: none !important;
     }
 }
+
+
+
+/***********************************
+    BACKGROUNDS & BORDERS
+***********************************/
+/***
+    Universal Rules
+***/
+.backgroundWhite { background-color: white; }
+.backgroundBlack { background-color: black; }
+.backgroundYellow { background-color: yellow; }
+.backgroundGreen { background-color: green; }
+.backgroundRed { background-color: red; }
+.backgroundOrange { background-color: orange; }
+
+.roundedCorners { border-radius: 10px; }
 
 
 
@@ -748,6 +763,10 @@ button.grow:hover {
     transform: scale(1.10);
 }
 
+button:active {
+    transform: scale(0.95);
+}
+
 body[data-theme="dark"] button { box-shadow: 0 4px 8px 0 rgba(171, 171, 171, 0.2), 0 6px 20px 0 rgba(171, 171, 171, 0.19); }
 body[data-theme="light"] button { box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
 
@@ -803,6 +822,7 @@ button[data-color="green"] {
     color: white;
 }
 button[data-color="green"]:hover { background-color: #0a7a12; }
+button[data-color="green"]:active { background-color: #096b10; }
 
 /*
     Red Color
@@ -1342,7 +1362,12 @@ button[data-border="blue"] {
 /***
     Universal Rules
 ***/
-input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"], select {
+input[type="text"], 
+input[type="password"], 
+input[type="email"], 
+input[type="date"], 
+input[type="file"], 
+select {
     width: 35%;
     padding: 10px;
     border-radius: 10px;
@@ -1352,9 +1377,18 @@ input[type="text"], input[type="password"], input[type="email"], input[type="dat
     
 }
 
-input[type="text"]::placeholder, input[type="password"]::placeholder, input[type="email"]::placeholder, input[type="date"]::placeholder,
-input[type="text"]:-ms-input-placeholder, input[type="password"]:-ms-input-placeholder, input[type="email"]:-ms-input-placeholder, input[type="date"]:-ms-input-placeholder, 
-input[type="text"]::-ms-input-placeholder, input[type="password"]::-ms-input-placeholder, input[type="email"]::-ms-input-placeholder, input[type="date"]::-ms-input-placeholder {
+input[type="text"]::placeholder, 
+input[type="password"]::placeholder, 
+input[type="email"]::placeholder, 
+input[type="date"]::placeholder,
+input[type="text"]:-ms-input-placeholder, 
+input[type="password"]:-ms-input-placeholder, 
+input[type="email"]:-ms-input-placeholder, 
+input[type="date"]:-ms-input-placeholder, 
+input[type="text"]::-ms-input-placeholder, 
+input[type="password"]::-ms-input-placeholder, 
+input[type="email"]::-ms-input-placeholder, 
+input[type="date"]::-ms-input-placeholder {
     color: rgb(73, 73, 73);
 }
 
@@ -1367,7 +1401,9 @@ input[type="submit"] {
     font-family: Verdana;
 }
 
-input[type="text"][data-border="true"], input[type="password"][data-border="true"], input[type="email"][data-border="true"] {
+input[type="text"][data-border="true"], 
+input[type="password"][data-border="true"], 
+input[type="email"][data-border="true"] {
     border: 1px solid rgb(37, 37, 37);
 }
 
@@ -1378,6 +1414,16 @@ textarea {
     border: none;
     font-family: Verdana;
     font-size: 18px;
+}
+
+/*
+    Dark Theme
+*/
+input[type="text"][data-theme="dark"], 
+input[type="password"][data-theme="dark"], 
+input[type="email"][data-theme="dark"] {
+    background-color: #222222;
+    color: #ffffff;
 }
 
 /*
@@ -1574,4 +1620,51 @@ table[data-theme="dark"] td[data-border="true"] {
     70% { transform: scale(1.05); }
     80% { transform: scale(1); }
     100% { transform: scale(1); }
+}
+
+
+
+/***********************************
+    LINKS WITHOUT HREF
+***********************************/
+/***
+    Universal Rules
+***/
+.linkButton {
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+/* 
+    Light Theme
+*/
+body[data-theme="light"] .linkButton {
+    color: #0f07f0;
+}
+
+body[data-theme="light"] .linkButton:hover {
+    color: #1109e3;
+}
+
+/* 
+    Dark Theme
+*/
+body[data-theme="dark"] .linkButton {
+    color: aqua;
+}
+
+body[data-theme="dark"] .linkButton:hover {
+    color: #01e6e6;
+}
+
+/*
+    Yellow color
+*/
+.linkButton[data-color="yellow"] {
+    color: #ffff00 !important;
+}
+
+.linkButton[data-color="yellow"]:hover {
+    color: #e9e900 !important;
 }

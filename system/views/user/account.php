@@ -14,7 +14,7 @@
 <div id="outputContainer">
         <?php
             for ($i = 0; $i < count($this->formErrors); $i++) {
-                $this->output($this->formErrors[$i]);
+                $this->outputAlert($this->formErrors[$i]);
             }
         ?>  
 </div>

@@ -1,6 +1,7 @@
 <!--
-<?= \WEBSITE_NAME; ?>
+    <?= \WEBSITE_NAME; ?>
     (c) 2021 - <?= date("Y") . " " . \WEBSITE_NAME; ?>. All Rights Reserved.
+    v<?= \WEBSITE_VERSION; ?>
 -->
 
 <!DOCTYPE HTML>
@@ -9,34 +10,14 @@
         <!--
             Site Data
         -->
-        <title>404 Error: Page not found</title>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <title>404 Error: PAge not found</title>
+        <link rel="icon" href="<?= \URL; ?>images/icon.png" type="image/png">
 
         <!--
-            Framework
+            CSS
         -->
-        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/framework.css">
-        <script src="<?= \URL; ?>javascript/framework.js"></script>
-        <script src="<?= \URL; ?>javascript/carousel.js"></script>
-
-        <!--
-            FontAwesome
-        -->
-        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/font-awesome/all.css" />
-		<script src="<?= \URL; ?>javascript/font-awesome/all.js"></script>
-
-        <!--
-            JQuery
-        -->
-        <script src="<?= \URL; ?>javascript/jquery.js"></script>
-        <script src="<?= \URL; ?>javascript/jquery-ui/jquery-ui.js"></script>
-        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/jquery-ui/jquery-ui.css" />
-
-        <!--
-            Other
-        -->
-        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/main.css" />
-        <script src="<?= \URL; ?>javascript/formvalidation.js"></script>
+        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/framework.css?v=<?= \STYLESHEET_JAVASCRIPT_VERSIONS["framework.css"]; ?>">
+        <link rel="stylesheet" href="<?= \URL; ?>stylesheets/main.css?v=<?= \STYLESHEET_JAVASCRIPT_VERSIONS["main.css"]; ?>" />
     </head>
 
     <!--

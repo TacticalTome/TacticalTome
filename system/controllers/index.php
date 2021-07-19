@@ -2,7 +2,7 @@
 
     namespace controller;
 
-    class Index extends \library\Controller {
+    class Index extends \core\Controller {
         public function index() {
             $this->pageTitle = \WEBSITE_NAME;
             $this->pageIdentifier = "Home";

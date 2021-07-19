@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 		Sessions
 	*/
@@ -21,7 +21,17 @@
 	*/
 	define("WEBSITE_NAME", "Tactical Tome");
 	define("WEBSITE_EMAIL", "tanktotgames@gmail.com");
+	define("WEBSITE_EMAIL_PASSWORD", "notmypassword");
 	define("ALLOW_REGISTRATION", true);
+	define("ALLOW_SENDING_EMAILS", false); // By setting this to true make sure you have set the password in libraries\utility
+
+	/*
+		Database Properties
+	*/
+	define("DATABASE_HOST", "localhost");
+	define("DATABASE_USERNAME", "root");
+	define("DATABASE_PASSWORD", "");
+	define("DATABASE_NAME", "tacticaltome");
 
 	/*
 		reCAPTCHA 
@@ -37,16 +47,12 @@
 	/*
 		Directories
 	*/
-	define("ROOT_DIRECTORY", $_SERVER['DOCUMENT_ROOT'] . "/tacticaltome/");
-	define("SYSTEM_DIRECTORY", ROOT_DIRECTORY . "system/");
-	define("IMAGE_DIRECTORY", ROOT_DIRECTORY . "images/");
-	define("LIBRARY_DIRECTORY", SYSTEM_DIRECTORY . "libraries/");
-	define("CONTROLLER_DIRECTORY", SYSTEM_DIRECTORY . "controllers/");
-	define("MODEL_DIRECTORY", SYSTEM_DIRECTORY . "models/");
-	define("VIEW_DIRECTORY", SYSTEM_DIRECTORY . "views/");
-	define("TEMPLATE_DIRECTORY", SYSTEM_DIRECTORY . "templates/");
-	define("BANNER_DIRECTORY", IMAGE_DIRECTORY . "banners/");
-	define("COVER_DIRECTORY", IMAGE_DIRECTORY . "covers/");
+	define("CORE_DIRECTORY", __DIR__ . "/core/");
+	define("LIBRARY_DIRECTORY", __DIR__ . "/libraries/");
+	define("CONTROLLER_DIRECTORY", __DIR__ . "/controllers/");
+	define("MODEL_DIRECTORY", __DIR__ . "/models/");
+	define("VIEW_DIRECTORY", __DIR__ . "/views/");
+	define("TEMPLATE_DIRECTORY", __DIR__ . "/templates/");
 
 	/*
 		API Keys
@@ -58,6 +64,13 @@
 	/*
 		Misc.
 	*/
+	define("WEBSITE_VERSION", "1.0.1");
+	define("STYLESHEET_JAVASCRIPT_VERSIONS", Array(
+		"framework.css" => "1.0",
+		"main.css" => "1.0",
+		"carousel.js" => "1.0",
+		"editor.js" => "1.0",
+		"formvalidation.js" => "1.0",
+		"framework.js" => "1.0"
+	));
 	date_default_timezone_set("America/Chicago");
-	
-?>

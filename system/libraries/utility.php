@@ -35,3 +35,24 @@
         $responseFromGoogle = json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . urlencode(\RECAPTCHA_SECRET_KEY) . "&response=" . urlencode($value)), true);
         return $responseFromGoogle["success"];
     }
+
+    function mailTo(string $email, string $subject, string $content): void {
+        if (!\ALLOW_SENDING_EMAILS) return;
+
+        require_once("Mail.php");
+
+        $headers = Array(
+            "From" => "<" . \WEBSITE_EMAIL . ">",
+            "To" => "<" . $email . ">",
+            "Subject" => $subject
+        );
+        $smtp = \Mail::factory("smtp", Array(
+            "host" => "ssl://smtp.gmail.com",
+            "port" => "465",
+            "auth" => true,
+            "username" => \WEBSITE_EMAIL,
+            "password" => \WEBSITE_EMAIL_PASSWORD
+        ));
+
+        $mail = $smtp->send($headers["To"], $headers, $content);
+    }

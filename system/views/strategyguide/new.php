@@ -1,7 +1,7 @@
 <!--
     Landing Container
 -->
-<script src="<?= \URL; ?>javascript/editor.js"></script>
+<script src="<?= \URL; ?>javascript/editor.js?v=<?= \STYLESHEET_JAVASCRIPT_VERSIONS["editor.js"]; ?>"></script>
 <div class="gameLandingContainer fullscreen positionRelative" style="background-image: url('<?= $this->game->getCoverURL(); ?>');">
     <div class="content hideOnMobile centerHorizontalVertical" style="width: 75%;">
         <div class="editor-container" style="background: #454545; padding: 10px; border-radius: 10px;">

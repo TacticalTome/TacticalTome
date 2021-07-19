@@ -2,7 +2,7 @@
 
     namespace controller;
 
-    class API extends \library\Controller {
+    class API extends \core\Controller {
         public function index(): void {
             $this->pageIdentifier = "Api";
             $this->pageTitle = "API Documentation - " . \WEBSITE_NAME;
@@ -54,10 +54,9 @@
         public function strategyGuide(string $action = null, int|string $value = null) {
             header("Content-Type: application/json");
 
-            $this->loadModel("strategyguide");
-            $this->loadModel("apiresult");
+            $this->loadModel("strategyguide", "reply", "apiresult");
 
-            $result =  new \model\ApiResult();
+            $result = new \model\ApiResult();
 
             if (is_null($action)) $result->addError("Action is not set");
             if (is_null($value)) $result->addError("Value is not set");
@@ -80,6 +79,27 @@
                             } else {
                                 $result->addError("No strategy guide with that ID exists");
                             }
+                        }
+                        break;
+
+                    case "getreplies":
+                        if (!is_null($value)) {
+                            $strategyGuideReplies = \model\Reply::getAllStrategyGuideReplies($this->database, $value);
+
+                            $index = 0;
+                            foreach ($strategyGuideReplies as $reply) {
+                                $result->addArray(Array(
+                                    "id" => $reply->getId(),
+                                    "authorid" => $reply->getUserId(),
+                                    "strategyguideid" => $reply->getStrategyGuideId(),
+                                    "content" => $reply->getContent(),
+                                    "timeposted" => $reply->getTimeCreated()
+                                ));
+                                $index++;
+                            }
+                            $result->setSuccess(true);
+                        } else {
+                            $result->addError("No strategy guide with that ID exists");
                         }
                         break;
                 }

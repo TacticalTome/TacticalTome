@@ -2,68 +2,49 @@
 
     namespace controller;
 
-    class User extends \library\Controller {
+    class User extends \core\Controller {
         public function login() {
-            $this->loadModel("user");
-
-            if (!empty($_POST['login'])) {
-                if (!empty($_POST['usernameOrEmail']) && !empty($_POST['password'])) {
-                    try {
-                        \model\User::login($this->database, $_POST['usernameOrEmail'], $_POST['password']);
-                        header("location: " . URL);
-                    } catch (\Exception $exception) {
-                        array_push($this->formErrors, $exception->getMessage());
-                    }
-                } else {
-                    array_push($this->formErrors, "Please supply all the fields");
-                }
-            }
+            if ($this->userIsLoggedIn) header("location: " . \URL);
 
             $this->pageIdentifier = "Login";
             $this->pageTitle = "Login - " . \WEBSITE_NAME;
+
+            if (!empty($_POST['login'])) {
+                try {
+                    if (empty($_POST['usernameOrEmail']) || empty($_POST['password'])) throw new \Exception("Please supply all the fields");
+                    \model\User::login($this->database, $_POST['usernameOrEmail'], $_POST['password']);
+                    header("location: " . \URL);
+                } catch (\Exception $exception) {
+                    array_push($this->formErrors, $exception->getMessage());
+                }
+            }
 
             $this->loadViewWithHeaderFooter("user", "login");
         }
 
         public function signup() { $this->register(); }
         public function register() {
-            $this->loadModel("user");
-            $this->loadModel("confirmation");
-
-            if (!empty($_POST['register'])) {
-                if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['confirmpassword']) && !empty($_POST['g-recaptcha-response'])) {
-                    if ($_POST['password'] == $_POST['confirmpassword']) {
-                        if (\utility\isReCaptchaValid($_POST['g-recaptcha-response'])) {
-                            try {
-                                \model\User::register($this->database, $_POST['email'], $_POST['username'], $_POST['password']);
-
-                                $email = $this->database->protect($_POST['email']);
-                                $password = \model\Confirmation::generatePassword();
-                                $emailTitle = "Confirm Account";
-                                $emailContent = "Please confirm your account by clicking the link below.\n" . \URL . "user/confirm/activateaccount/" . $password . "/". $email . "/";
-
-                                $userGet = $this->database->query("SELECT * FROM user WHERE email='$email'");
-                                $user = $userGet->fetch_assoc();
-
-                                \model\Confirmation::new($this->database, $user['id'], "activateaccount", $password, $email, $email, $emailTitle, $emailContent);
-
-                                header("location: " . URL . "user/login/");
-                            } catch (\Exception $exception) {
-                                array_push($this->formErrors, $exception->getMessage());
-                            }
-                        } else {
-                            array_push($this->formErrors, "The captcha needs to be completed correctly");
-                        }
-                    } else {
-                        array_push($this->formErrors, "The passwords you have provided do not match.");
-                    }
-                } else {
-                    array_push($this->formErrors, "Please supply all the fields");
-                }
-            }
+            if ($this->userIsLoggedIn) header("location: " . \URL);
 
             $this->pageIdentifier = "Register";
             $this->pageTitle = "Register - " . \WEBSITE_NAME;
+
+            $this->loadModel("confirmation");
+
+            if (!empty($_POST['register'])) {
+                try {
+                    if (empty($_POST['email']) || empty($_POST['username']) || empty($_POST['confirmpassword']) || empty($_POST['g-recaptcha-response'])) throw new \Exception("Please supply all the fields");
+                    if ($_POST['password'] != $_POST['confirmpassword']) throw new \Exception("Passwords do no match");
+                    if (!\utility\isReCaptchaValid($_POST['g-recaptcha-response'])) throw new \Exception("The captcha needs to be completed correctly");
+
+                    \model\User::register($this->database, $_POST['email'], $_POST['username'], $_POST['password']);
+                    \model\Confirmation::new($this->database, \model\User::getWithEmail($this->database, $_POST['email'])->getId(), "activateaccount", \model\Confirmation::generatePassword(), $_POST['email'], $_POST['email']);
+                    
+                    header("location: " . \URL . "user/login/");
+                } catch (\Exception $exception) {
+                    array_push($this->formErrors, $exception->getMessage());
+                }
+            }
 
             $this->loadViewWithHeaderFooter("user", "register");
         }
@@ -74,8 +55,9 @@
         }
 
         public function explore(string $action = null, int $page = null) {
-            $this->loadModel("user");
-            $this->loadModel("game");
+            $this->pageTitle = "Explore - " . \WEBSITE_NAME; 
+            $this->pageIdentifier = "Explore";
+
             $this->loadModel("strategyguide");
 
             $offset = 0;
@@ -120,108 +102,92 @@
                 array_push($this->featuredGames, $game);
             }
 
-            $this->pageTitle = "Explore - " . \WEBSITE_NAME; 
-            $this->pageIdentifier = "Explore";
-
             $this->loadViewWithHeaderFooter("user", "explore");
         }
 
         public function account() {
-            if ($this->userIsLoggedIn) {
-                $this->loadModel("strategyguide");
-                $this->loadModel("game");
-                $this->loadModel("confirmation");
+            if (!$this->userIsLoggedIn) header("location: " . \URL . "user/login/");
 
-                if (!empty($_POST['changepassword'])) {
-                    if (!empty($_POST['password']) && !empty($_POST['newpassword']) && !empty($_POST['confirmnewpassword'])) {
-                        if (password_verify($_POST['password'], $this->user->getPassword())) {
-                            if ($_POST['newpassword'] == $_POST['confirmnewpassword']) {
-                                $password = password_hash($_POST['newpassword'], PASSWORD_DEFAULT);
-                                $this->user->setPassword($password);
-                                array_push($this->formErrors, "Password updated");
-                            } else {
-                                array_push($this->formErrors, "Passwords do not match");
-                            }
-                        } else {
-                            array_push($this->formErrors, "Incorrect Password");
-                        }
-                    } else {
-                        array_push($this->formErrors, "Please supply all the fields");
-                    }
-                } else if (!empty($_POST['changeemail'])) {
-                    if (!empty($_POST['newemail'])) {
-                        if (\model\User::isEmailValid($_POST['newemail']) && !\model\User::isEmailTaken($this->database, $_POST['newemail'])) {
-                            $email = $this->database->protect($_POST['newemail']);
-                            $password = \model\Confirmation::generatePassword();
-                            $emailTitle = "Change Email";
-                            $emailContent = "You have been requested to change your email to: " . $email . "\nClick the link below to confirm this action.\n" . \URL . "user/confirm/newemail/" . $password . "/". $email . "/";
+            $this->pageIdentifier = "Account";
+            $this->pageTitle = "Your Account - " . \WEBSITE_NAME;
 
-                            \model\Confirmation::new($this->database, $this->user->getId(), "newemail", $password, $email, $email, $emailTitle, $emailContent);
-                            array_push($this->formErrors, "You have been sent an email to confirm your request");
-                        } else {
-                            array_push($this->formErrors, "The email you have provided is either invalid or already in use");
-                        }
-                    } else {
-                        array_push($this->formErrors, "Please supply all the fields");
-                    }
+            $this->loadModel("strategyguide", "confirmation");
+
+            if (!empty($_POST['changepassword'])) {
+                try {
+                    if (empty($_POST['password']) || empty($_POST['newpassword']) || empty($_POST['confirmnewpassword'])) throw new \Exception("Please supply all the fields");
+                    if (!password_verify($_POST['password'], $this->user->getPassword())) throw new \Exception("Incorrect Password");
+                    if ($_POST['newpassword'] != $_POST['confirmnewpassword']) throw new \Exception("Passwords do no match");
+
+                    $this->user->setPassword(password_hash($_POST['newpassword'], PASSWORD_DEFAULT));
+                    array_Push($this->formErrors, "Password updated");
+                } catch (\Exception $exception) {
+                    array_push($this->formErrors, $exception->getMessage());
                 }
-
-                $this->userStrategyGuides = Array();
-                $query = $this->database->query("SELECT * FROM strategyguides WHERE uid='".$this->user->getId()."'");
-                while ($get = $query->fetch_assoc()) {
-                    $guide = new \model\StrategyGuide($this->database, $get['id']);
-                    array_push($this->userStrategyGuides, $guide);
-                }
-
-                $this->pageIdentifier = "Account";
-                $this->pageTitle = "Your Account - " . \WEBSITE_NAME;
-
-                $this->loadViewWithHeaderFooter("user", "account");
-            } else {
-                header("location: " . \URL . "user/login/");
             }
+
+            if (!empty($_POST['changeemail'])) {
+                try {
+                    if (empty($_POST['newemail'])) throw new \Exception("Please supply all the fields");
+                    if (!\model\User::isEmailValid($_POST['newemail'])) throw new \Exception("Email is invalid");
+                    if (\model\User::isEmailTaken($this->database, $_POST['newemail'])) throw new \Exception("Email is already in use");
+
+                    \model\Confirmation::new($this->database, $this->user->getId(), "newemail", \model\Confirmation::generatePassword(), $_POST['newemail'], $this->user->getEmail());
+                    array_push($this->formErrors, "You have been sent an email to confirm your request");
+                } catch (\Exception $exception) {
+                    array_push($this->formErrors, $exception->getMessage());
+                }
+            }
+
+            $this->userStrategyGuides = Array();
+            $query = $this->database->query("SELECT * FROM strategyguides WHERE uid='".$this->user->getId()."'");
+            while ($get = $query->fetch_assoc()) {
+                $guide = new \model\StrategyGuide($this->database, $get['id']);
+                array_push($this->userStrategyGuides, $guide);
+            }
+
+            $this->loadViewWithHeaderFooter("user", "account");
         }
 
         public function confirm(string $action = null, string $password = null, string $value = null) {
+            if (is_null($action) || is_null($password) || is_null($value)) return $this->unknownPage();
+
             $this->loadModel("confirmation");
 
-            if (!is_null($action) && !is_null($password) && !is_null($value)) {
-                $confirmation = new \model\Confirmation($this->database, $action, $password, $value);
-                if ($confirmation->exists()) {
-                    \model\Confirmation::delete($this->database, $confirmation->getId());
-                    $this->actionText = "Confirmed";
+            $confirmation = new \model\Confirmation($this->database, $action, $password, $value);
+            if ($confirmation->exists()) {
+                \model\Confirmation::delete($this->database, $confirmation->getId());
+                $this->actionText = "Confirmed";
 
-                    switch ($action) {
-                        case "activateaccount":
-                            $this->database->query("UPDATE user SET activated='1' WHERE id='".$confirmation->getUserId()."'");
-                            $this->actionText = "Activated account";
-                            break;
+                switch ($action) {
+                    case "activateaccount":
+                        $this->database->query("UPDATE user SET activated='1' WHERE id='".$confirmation->getUserId()."'");
+                        $this->actionText = "Activated account";
+                        break;
 
-                        case "newemail":
-                            if ($this->userIsLoggedIn && $this->user->getId() == $confirmation->getUserId()) {
-                                $this->user->setEmail($value);
-                                $this->actionText = "Changed email";
-                            }
-                            break;
-                    }
-
-                    $this->loadViewWithHeaderFooter("user", "confirm");
-                } else {
-                    $this->unknownPage();
+                    case "newemail":
+                        if ($this->userIsLoggedIn && $this->user->getId() == $confirmation->getUserId()) {
+                            $this->user->setEmail($value);
+                            $this->actionText = "Changed email";
+                        }
+                        break;
                 }
+
+                $this->loadViewWithHeaderFooter("user", "confirm");
             } else {
                 $this->unknownPage();
             }
         }
 
         public function view(int $id = null) {
-            if (!is_null($id)) {
-                $this->loadModel("user");
-                $this->loadModel("game");
-                $this->loadModel("strategyguide");
+            if (is_null($id)) return $this->unknownPage();
 
-                $id = $this->database->protect($id);
-                $this->userProfile = new \model\User($this->database, $id);
+            $this->userProfile = new \model\User($this->database, $id);
+            if ($this->userProfile->isValid()) {
+                $this->pageIdentifier = "Profile";
+                $this->pageTitle = $this->userProfile->getUsername() . " - " . \WEBSITE_NAME;
+
+                $this->loadModel("strategyguide");
 
                 $this->userStrategyGuides = Array();
                 $query = $this->database->query("SELECT * FROM strategyguides WHERE uid='".$this->userProfile->getId()."'");
@@ -239,36 +205,25 @@
                     if (!empty($strategyGuide)) array_push($this->userFavoriteStrategyGuides, new \model\StrategyGuide($this->database, $strategyGuide));
                 }
 
-                if ($this->userProfile->isValid()) {
-                    $this->pageIdentifier = "Profile";
-                    $this->pageTitle = $this->userProfile->getUsername() . " - " . \WEBSITE_NAME;
-
-                    $this->loadViewWithHeaderFooter("user", "view");
-                } else {
-                    $this->unknownPage();
-                }
+                $this->loadViewWithHeaderFooter("user", "view");
             } else {
-                $this->unknownPage();
+                return $this->unknownPage();
             }
         }
 
         public function followedGames() {
-            if ($this->userIsLoggedIn) {
-                $this->loadModel("game");
+            if (!$this->userIsLoggedIn) return $this->unknownPage();
 
-                $this->followedGames = Array();
-                foreach ($this->user->getFollowedGames() as $gameId) {
-                    if (!empty($gameId)) {
-                        array_push($this->followedGames, new \model\Game($this->database, $gameId));
-                    }
+            $this->pageIdentifier = "View Followed Games";
+            $this->pageTitle = "Your Followed Games - " . \WEBSITE_NAME;
+
+            $this->followedGames = Array();
+            foreach ($this->user->getFollowedGames() as $gameId) {
+                if (!empty($gameId)) {
+                    array_push($this->followedGames, new \model\Game($this->database, $gameId));
                 }
-
-                $this->pageIdentifier = "View Followed Games";
-                $this->pageTitle = "Your Followed Games - " . \WEBSITE_NAME;
-
-                $this->loadViewWithHeaderFooter("user", "followedgames");
-            } else { 
-                $this->unknownPage();
             }
+
+            $this->loadViewWithHeaderFooter("user", "followedgames");
         }
     }
