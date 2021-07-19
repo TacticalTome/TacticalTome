@@ -23,7 +23,7 @@
 	define("WEBSITE_EMAIL", "tanktotgames@gmail.com");
 	define("WEBSITE_EMAIL_PASSWORD", "notmypassword");
 	define("ALLOW_REGISTRATION", true);
-	define("ALLOW_SENDING_EMAILS", false); // By setting this to true make sure you have set the password in libraries\utility
+	define("ALLOW_SENDING_EMAILS", false);
 
 	/*
 		Database Properties
@@ -64,9 +64,9 @@
 	/*
 		Misc.
 	*/
-	define("WEBSITE_VERSION", "1.0.1");
+	define("WEBSITE_VERSION", "1.1.1");
 	define("STYLESHEET_JAVASCRIPT_VERSIONS", Array(
-		"framework.css" => "1.0",
+		"framework.css" => "1.1",
 		"main.css" => "1.0",
 		"carousel.js" => "1.0",
 		"editor.js" => "1.0",
