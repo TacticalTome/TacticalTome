@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2021 at 03:00 AM
+-- Generation Time: Jul 19, 2021 at 11:50 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `gamershandbook`
+-- Database: `tacticaltome`
 --
 
 -- --------------------------------------------------------
@@ -53,6 +53,20 @@ CREATE TABLE `games` (
   `steamappid` int(11) NOT NULL,
   `news` tinyint(1) NOT NULL,
   `followers` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `replies`
+--
+
+CREATE TABLE `replies` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `sid` int(11) NOT NULL,
+  `content` varchar(1000) NOT NULL,
+  `timecreated` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -108,6 +122,12 @@ ALTER TABLE `games`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `replies`
+--
+ALTER TABLE `replies`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `strategyguides`
 --
 ALTER TABLE `strategyguides`
@@ -133,6 +153,12 @@ ALTER TABLE `confirmations`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `replies`
+--
+ALTER TABLE `replies`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
