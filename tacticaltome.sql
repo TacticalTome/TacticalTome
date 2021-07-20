@@ -102,7 +102,8 @@ CREATE TABLE `user` (
   `followedgames` varchar(100) NOT NULL,
   `favoritestrategyguides` varchar(100) NOT NULL,
   `moderator` tinyint(1) NOT NULL,
-  `banned` tinyint(1) NOT NULL
+  `banned` tinyint(1) NOT NULL,
+  `coins` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
