@@ -71,6 +71,7 @@
 		"carousel.js" => "1.0",
 		"editor.js" => "1.0",
 		"formvalidation.js" => "1.0",
-		"framework.js" => "1.0"
+		"framework.js" => "1.1",
+		"strategyguide.js" => "1.0"
 	));
 	date_default_timezone_set("America/Chicago");
