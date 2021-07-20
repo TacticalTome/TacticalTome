@@ -121,18 +121,18 @@ a[data-color="yellow"]:hover {
     transition: color 0.2s ease-in-out;
 }
 
+ul, ol {
+    display: block;
+    font-size: 18px;
+    padding-left: 40px;
+}
+
 ul {
     list-style-type: disc;
-    font-size: 18px;
 }
 
 ol {
     list-style-type: decimal;
-    font-size: 18px;
-}
-
-ul ul, ul ol, ol ol, ol ul {
-    padding-left: 10px;
 }
 
 li {
@@ -574,6 +574,7 @@ body[data-theme="dark"] .blurEntireBackground { background-color: rgba(255, 255,
 
     .topNavigation[data-size="medium"] > #navigationCollapse { margin-top: 5px; }
     .topNavigation[data-size="large"] > #navigationCollapse { margin-top: 8px; }
+    .topNavigation[data-size="extralarge"] > #navigationCollapse { margin-top: 11px; }
 
     .topNavigation .dropdown.display > .content { display: block; }
 }

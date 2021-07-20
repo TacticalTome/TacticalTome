@@ -17,8 +17,12 @@
             Framework
         -->
         <link rel="stylesheet" href="<?= \URL; ?>stylesheets/framework.css?v=<?= \STYLESHEET_JAVASCRIPT_VERSIONS["framework.css"]; ?>">
-        <script src="<?= \URL; ?>javascript/framework.js?v=<?= \STYLESHEET_JAVASCRIPT_VERSIONS["framework.js"]; ?>"></script>
-        <script src="<?= \URL; ?>javascript/carousel.js?v=<?= \STYLESHEET_JAVASCRIPT_VERSIONS["carousel.js"]; ?>"></script>
+
+        <!--
+            Javascript
+        -->
+        <script src="<?= \URL; ?>javascript/functions.js?v=<?= \STYLESHEET_JAVASCRIPT_VERSIONS["functions.js"]; ?>"></script>
+        <script type="module" src="<?= \URL; ?>javascript/main.js?v=<?= \STYLESHEET_JAVASCRIPT_VERSIONS["main.js"]; ?>"></script>
 
         <!--
             CSS and Form Validation

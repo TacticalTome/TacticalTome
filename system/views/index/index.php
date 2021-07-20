@@ -165,7 +165,8 @@
 <!--
     Script
 -->
-<script>
+<script type="module">
+    import {Carousel} from "<?= \URL; ?>javascript/framework/carousel.js";
     var carousel1 = new Carousel("carousel1");
     $("#navigateLeft").click(function(){
         carousel1.navigateLeft();
