@@ -51,6 +51,7 @@
         -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
+        <meta name="baseurl" content="<?= \URL; ?>">
         <meta name="description" content="<?= $this->pageDescription; ?>">
         <meta name="keywords" content="strategy guides, collection, guides, gaming, games, encyclopedia, tutorials, news">
         <meta name="language" content="English">
@@ -65,6 +66,8 @@
                     echo '<meta name="author" content="' . $this->author->getUsername() . '">';
                     echo '<meta name="copyright" content="' . $this->author->getUsername() . '">';
                     echo '<meta name="og:image" property="og:image" content="' . $this->game->getCoverURL() . '">';
+                    echo '<meta name="gameurl" content="' . $this->game->getURL() . '">';
+                    echo '<meta name="strategyguideid" content="' . $this->strategyGuide->getId() . '">';
                     break;
 
                 case "View Game":

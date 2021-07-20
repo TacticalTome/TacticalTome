@@ -167,13 +167,13 @@
 
         // todo: refactor
         public function reply() {
-            if (!empty($_POST['strategyGuideId']) && !empty($_POST['replyContent'])) {
+            if (!empty($_POST['strategyGuideID']) && !empty($_POST['replyContent'])) {
                 if (substr($_SERVER['HTTP_REFERER'], 0, strlen(\URL)) === \URL) {
                     if ($this->userIsLoggedIn && !$this->user->isBanned()) {
                         if (strlen($_POST['replyContent']) <= 1000) {
                             $this->loadModel("strategyguide", "reply");
 
-                            $strategyGuide = new \model\StrategyGuide($this->database, $_POST['strategyGuideId']);
+                            $strategyGuide = new \model\StrategyGuide($this->database, $_POST['strategyGuideID']);
                             if ($strategyGuide->exists()) {
                                 \model\Reply::new($this->database, $this->user->getId(), $strategyGuide->getId(), $_POST['replyContent']);
                                 echo "Successfully posted";
@@ -196,12 +196,12 @@
 
         public function deletereply() {
             try {
-                if (empty($_POST['replyId'])) throw new \Exception("There was a problem when deleting that reply");
+                if (empty($_POST['replyID'])) throw new \Exception("There was a problem when deleting that reply");
                 if (substr($_SERVER['HTTP_REFERER'], 0, strlen(\URL)) !== \URL) throw new \Exception("Something went wrong");
                 if (!$this->userIsLoggedIn || $this->user->isBanned()) throw new \Exception("You must be logged in");
                 
                 $this->loadModel("reply");
-                $reply = new \model\Reply($this->database, $_POST['replyId']);
+                $reply = new \model\Reply($this->database, $_POST['replyID']);
 
                 if (!$reply->exists()) throw new \Exception("The reply you tried deleting does not exist");
                 if ($reply->getUserId() != $this->user->getId()) throw new \Exception("You must be the owner of that reply");
@@ -215,12 +215,12 @@
 
         public function forcedeletereply() {
             try {
-                if (empty($_POST['replyId']) || empty($_POST['reason'])) throw new \Exception("There was a problem when deleting that reply");
+                if (empty($_POST['replyID']) || empty($_POST['reason'])) throw new \Exception("There was a problem when deleting that reply");
                 if (substr($_SERVER['HTTP_REFERER'], 0, strlen(\URL)) !== \URL) throw new \Exception("Something went wrong");
                 if (!$this->userIsLoggedIn || $this->user->isBanned()) throw new \Exception("You must be logged in");
                 
                 $this->loadModel("reply");
-                $reply = new \model\Reply($this->database, $_POST['replyId']);
+                $reply = new \model\Reply($this->database, $_POST['replyID']);
                 
                 if (!$reply->exists()) throw new \Exception("The reply you tried deleting does not exist");
                 if (!$this->user->isModerator()) throw new \Exception("You must be a moderator to delete that reply!");

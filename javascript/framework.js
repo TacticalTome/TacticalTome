@@ -45,6 +45,18 @@ function gotoLinkInNewTab(link) {
     window.open(link, "_blank");
 }
 
+function getMeta(metaName) {
+    const metas = document.getElementsByTagName('meta');
+  
+    for (let i = 0; i < metas.length; i++) {
+        if (metas[i].getAttribute('name') === metaName) {
+            return metas[i].getAttribute('content');
+        }
+    }
+  
+    return '';
+}
+
 window.onload = function() {
     var isMobile = false; //initiate as false
     // device detection
