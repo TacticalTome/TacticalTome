@@ -1,9 +1,22 @@
 /*
     Get Properties 
 */
-const strategyGuideId = getMeta("strategyguideid"); // ID of the strategy guide (in database)
-const baseURL = getMeta("baseurl"); // The base URL of the website i.e. https://www.tacticaltome.com/
-const gameURL = getMeta("gameurl"); // The URL of the game i.e. https://www.tacticaltome.com/game/view/1/
+const strategyGuideId = getMetaData("strategyguideid"); // ID of the strategy guide (in database)
+const baseURL = getMetaData("baseurl"); // The base URL of the website i.e. https://www.tacticaltome.com/
+const gameURL = getMetaData("gameurl"); // The URL of the game i.e. https://www.tacticaltome.com/game/view/1/
+
+// Get Meta Data
+function getMetaData(metaName) {
+    const metas = document.getElementsByTagName('meta');
+  
+    for (let i = 0; i < metas.length; i++) {
+        if (metas[i].getAttribute('name') === metaName) {
+            return metas[i].getAttribute('content');
+        }
+    }
+  
+    return '';
+}
 
 /*
     User (owner of strategy guide) deletes strategy guide

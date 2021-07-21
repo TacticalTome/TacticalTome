@@ -4,7 +4,7 @@
 <div class="gameLandingContainer fullscreen positionRelative" style="background-image: url('<?= $this->game->getCoverURL(); ?>');">
     <div class="content centerHorizontalVertical">
         <h1 class="fontAlfaSlabOne colorOrange" data-size="large"><?= $this->strategyGuide->getTitle(); ?></h1>
-        <p class="fontTrebuchet"><a data-color="yellow" href="<?php $this->game->getURL(); ?>"><?= $this->game->getName(); ?></a></p>
+        <p class="fontTrebuchet"><a data-color="yellow" href="<?= $this->game->getURL(); ?>"><?= $this->game->getName(); ?></a></p>
         <p class="fontTrebuchet"><b>By: <a href="<?= $this->author->getProfileURL(); ?>" data-color="yellow"><?= $this->author->getUsername(); ?></a> on <?= date("D. F d, Y @ g:i A", $this->strategyGuide->getTimeCreated()); ?></b></p>
         <p class="fontVerdana hideOnMobile"><?= $this->strategyGuide->getPreview(); ?></p>
         <?php

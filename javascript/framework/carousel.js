@@ -1,4 +1,4 @@
-class Carousel {
+export class Carousel {
     #ID = "";
     #images = [];
     #captions = [];
