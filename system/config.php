@@ -64,11 +64,11 @@
 	/*
 		Misc.
 	*/
-	define("WEBSITE_VERSION", "1.1.1");
+	define("WEBSITE_VERSION", "1.1.2");
 	define("STYLESHEET_JAVASCRIPT_VERSIONS", Array(
 		// Stylesheets
 		"framework.css" => "1.2",
-		"main.css" => "1.0",
+		"main.css" => "1.1",
 		
 		// Javascript
 		"editor.js" => "1.1",
