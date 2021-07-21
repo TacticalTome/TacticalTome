@@ -3,7 +3,7 @@
 -->
 <div class="gameLandingContainer fullscreen positionRelative" style="background-image: url('<?= $this->game->getCoverURL(); ?>');">
     <div class="content centerHorizontalVertical">
-        <h1 class="fontAlfaSlabOne colorOrange" data-size="large"><?= $this->game->getName(); ?></h1>
+        <h1 class="fontAlfaSlabOne colorOrange" data-size="medium"><?= $this->game->getName(); ?></h1>
         <p class="fontVerdana">Followers: <?= number_format($this->game->getFollowers()); ?></p>
         <p class="fontVerdana hideOnMobile"><?= $this->game->getShortDescription(); ?></p>
 
