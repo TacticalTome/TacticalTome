@@ -2,11 +2,8 @@
 
 	namespace core;
 	
-	require_once(\CORE_DIRECTORY . "controller.php");
-	require_once(\LIBRARY_DIRECTORY . "utility.php");
-	require_once(\MODEL_DIRECTORY . "url.php");
-	require_once(\MODEL_DIRECTORY . "database.php");
-	
+	require_once(LIBRARY_DIRECTORY . "utility.php");
+
 	class Application {
 		private URL $URL;
 		

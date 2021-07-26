@@ -11,8 +11,6 @@
                         if (strlen($_POST['title']) <= 100 && strlen($_POST['content']) <= 65535) {
                             if (time() - $this->user->getTimeSinceLastPosted() >= 3600) {
                                 if (!str_contains($_POST['content'], "<body") && !str_contains($_POST['content'], "<script") && !str_contains($_POST['content'], "<link")  && !str_contains($_POST['content'], "<meta")) {
-                                    $this->loadModel("game", "strategyguide");
-
                                     $game = new \model\Game($this->database, $_POST['gameID']);
                                     if ($game->exists()) {
                                         $this->user->setTimeSinceLastPosted(time());
@@ -48,8 +46,6 @@
                     if ($this->userIsLoggedIn) {
                         if (strlen($_POST['title']) <= 100 && strlen($_POST['content']) <= 65535) {
                             if (!str_contains($_POST['content'], "<body") && !str_contains($_POST['content'], "<script") && !str_contains($_POST['content'], "<link")  && !str_contains($_POST['content'], "<meta")) {
-                                $this->loadModel("game", "strategyguide");
-
                                 $game = new \model\Game($this->database, $_POST['gameID']);
                                 $strategyGuide = new \model\StrategyGuide($this->database, $_POST['strategyGuideID']);
                                 if ($game->exists() && $strategyGuide->exists()) {
@@ -84,7 +80,6 @@
             if (!empty($_POST['strategyGuideID'])) {
                 if (substr($_SERVER['HTTP_REFERER'], 0, strlen(\URL)) === \URL) {
                     if ($this->userIsLoggedIn) {
-                        $this->loadModel("strategyguide");
                         $strategyGuide = new \model\StrategyGuide($this->database, $_POST['strategyGuideID']);
 
                         if ($strategyGuide->exists()) {
@@ -111,8 +106,6 @@
             if (!empty($_POST['userID']) && !empty($_POST['reason'])) {
                 if ($this->userIsLoggedIn) {
                     if ($this->user->isModerator()) {
-                        $this->loadModel("user");
-
                         $user = new \model\User($this->database, $_POST['userID']);
                         if ($user->isValid()) {
                             if ($user->isBanned()) {
@@ -143,8 +136,6 @@
             if (!empty($_POST['strategyGuideID']) && !empty($_POST['reason'])) {
                 if ($this->userIsLoggedIn) {
                     if ($this->user->isModerator()) {
-                        $this->loadModel("strategyguide");
-
                         $strategyGuide = new \model\StrategyGuide($this->database, $_POST['strategyGuideID']);
                         if ($strategyGuide->exists()) {
                             $user = new \model\User($this->database, $strategyGuide->getUserId());
@@ -171,8 +162,6 @@
                 if (substr($_SERVER['HTTP_REFERER'], 0, strlen(\URL)) === \URL) {
                     if ($this->userIsLoggedIn && !$this->user->isBanned()) {
                         if (strlen($_POST['replyContent']) <= 1000) {
-                            $this->loadModel("strategyguide", "reply");
-
                             $strategyGuide = new \model\StrategyGuide($this->database, $_POST['strategyGuideID']);
                             if ($strategyGuide->exists()) {
                                 \model\Reply::new($this->database, $this->user->getId(), $strategyGuide->getId(), $_POST['replyContent']);
@@ -200,7 +189,6 @@
                 if (substr($_SERVER['HTTP_REFERER'], 0, strlen(\URL)) !== \URL) throw new \Exception("Something went wrong");
                 if (!$this->userIsLoggedIn || $this->user->isBanned()) throw new \Exception("You must be logged in");
                 
-                $this->loadModel("reply");
                 $reply = new \model\Reply($this->database, $_POST['replyID']);
 
                 if (!$reply->exists()) throw new \Exception("The reply you tried deleting does not exist");
@@ -219,7 +207,6 @@
                 if (substr($_SERVER['HTTP_REFERER'], 0, strlen(\URL)) !== \URL) throw new \Exception("Something went wrong");
                 if (!$this->userIsLoggedIn || $this->user->isBanned()) throw new \Exception("You must be logged in");
                 
-                $this->loadModel("reply");
                 $reply = new \model\Reply($this->database, $_POST['replyID']);
                 
                 if (!$reply->exists()) throw new \Exception("The reply you tried deleting does not exist");

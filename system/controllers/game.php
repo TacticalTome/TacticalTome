@@ -5,8 +5,6 @@
     class Game extends \core\Controller {
         public function view(int $gameID = null) {
             if (!is_null($gameID)) {
-                $this->loadModel("game", "strategyguide");
-
                 $this->game = new \model\Game($this->database, $gameID);
                 if ($this->game->exists()) {
                     $this->recentStrategyGuides = $this->game->getRecentStrategyGuides(10);
@@ -27,8 +25,6 @@
 
         public function follow(int $gameID = null) {
             if (!is_null($gameID) && $this->userIsLoggedIn) {
-                $this->loadModel("game");
-
                 $this->game = new \model\Game($this->database, $gameID);
                 if ($this->game->exists()) {
                     if (!$this->user->isFollowingGame($gameID)) {
@@ -47,8 +43,6 @@
 
         public function unfollow(int $gameID = null) {
             if (!is_null($gameID) && $this->userIsLoggedIn) {
-                $this->loadModel("game");
-
                 $this->game = new \model\Game($this->database, $gameID);
                 if ($this->game->exists()) {
                     if ($this->user->isFollowingGame($gameID)) {
@@ -66,8 +60,6 @@
         }
 
         public function submit() {
-            $this->loadModel("game");
-
             if (!empty($_POST['submitGame'])) {
                 if (!empty($_POST['steamLink']) && !empty($_POST['g-recaptcha-response'])) {
                     if (\utility\isReCaptchaValid($_POST['g-recaptcha-response'])) {

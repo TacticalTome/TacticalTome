@@ -13,9 +13,6 @@
         public function game(string $action = null, int|string $value = null): void {
             header("Content-Type: application/json");
 
-            $this->loadModel("game");
-            $this->loadModel("apiresult");
-
             $result =  new \model\ApiResult();
 
             if (is_null($action)) $result->addError("Action is not set");
@@ -53,8 +50,6 @@
 
         public function strategyGuide(string $action = null, int|string $value = null) {
             header("Content-Type: application/json");
-
-            $this->loadModel("strategyguide", "reply", "apiresult");
 
             $result = new \model\ApiResult();
 
@@ -110,9 +105,6 @@
 
         public function user(string $action = null, int|string $value = null) {
             header("Content-Type: application/json");
-
-            $this->loadModel("user");
-            $this->loadModel("apiresult");
 
             $result =  new \model\ApiResult();
 

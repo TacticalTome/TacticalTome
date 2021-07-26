@@ -29,8 +29,6 @@
             $this->pageIdentifier = "Register";
             $this->pageTitle = "Register - " . \WEBSITE_NAME;
 
-            $this->loadModel("confirmation");
-
             if (!empty($_POST['register'])) {
                 try {
                     if (empty($_POST['email']) || empty($_POST['username']) || empty($_POST['confirmpassword']) || empty($_POST['g-recaptcha-response'])) throw new \Exception("Please supply all the fields");
@@ -57,8 +55,6 @@
         public function explore(string $action = null, int $page = null) {
             $this->pageTitle = "Explore - " . \WEBSITE_NAME; 
             $this->pageIdentifier = "Explore";
-
-            $this->loadModel("strategyguide");
 
             $offset = 0;
             if (!is_null($page)) $offset = intval($page) * 20;
@@ -111,8 +107,6 @@
             $this->pageIdentifier = "Account";
             $this->pageTitle = "Your Account - " . \WEBSITE_NAME;
 
-            $this->loadModel("strategyguide", "confirmation");
-
             if (!empty($_POST['changepassword'])) {
                 try {
                     if (empty($_POST['password']) || empty($_POST['newpassword']) || empty($_POST['confirmnewpassword'])) throw new \Exception("Please supply all the fields");
@@ -152,8 +146,6 @@
         public function confirm(string $action = null, string $password = null, string $value = null) {
             if (is_null($action) || is_null($password) || is_null($value)) return $this->unknownPage();
 
-            $this->loadModel("confirmation");
-
             $confirmation = new \model\Confirmation($this->database, $action, $password, $value);
             if ($confirmation->exists()) {
                 \model\Confirmation::delete($this->database, $confirmation->getId());
@@ -186,8 +178,6 @@
             if ($this->userProfile->isValid()) {
                 $this->pageIdentifier = "Profile";
                 $this->pageTitle = $this->userProfile->getUsername() . " - " . \WEBSITE_NAME;
-
-                $this->loadModel("strategyguide");
 
                 $this->userStrategyGuides = Array();
                 $query = $this->database->query("SELECT * FROM strategyguides WHERE uid='".$this->userProfile->getId()."'");

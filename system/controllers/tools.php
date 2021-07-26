@@ -6,9 +6,6 @@
         public function search(string $search = null) {
             if (!is_null($search)) {
                 $search = $this->database->protect(urldecode($search));
-                $this->loadModel("user");
-                $this->loadModel("game");
-                $this->loadModel("strategyguide");
 
                 $search_games = $this->database->query("SELECT * FROM games WHERE name LIKE '%$search%' OR description LIKE '%$search%' ORDER BY followers DESC");
                 $search_strategyguides = $this->database->query("SELECT * FROM strategyguides WHERE title LIKE '%$search%' OR content LIKE '%$search%' ORDER by favorites DESC");

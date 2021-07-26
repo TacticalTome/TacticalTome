@@ -5,8 +5,6 @@
     class StrategyGuide extends \core\Controller {
         public function view(int $strategyGuideID = null) {
             if (!is_null($strategyGuideID)) {
-                $this->loadModel("strategyguide", "reply");
-
                 $this->strategyGuide = new \model\StrategyGuide($this->database, $strategyGuideID);
                 if ($this->strategyGuide->exists()) {
                     $this->game = new \model\Game($this->database, $this->strategyGuide->getGameId());
@@ -29,9 +27,6 @@
 
         public function favorite(int $strategyGuideID = null) {
             if (!is_null($strategyGuideID) && $this->userIsLoggedIn) {
-                $this->loadModel("game");
-                $this->loadModel("strategyguide");
-
                 $this->strategyGuide = new \model\StrategyGuide($this->database, $strategyGuideID);
                 $this->game = new \model\Game($this->database, $this->strategyGuide->getGameId());
                 if ($this->game->exists() && $this->user->getId() != $this->strategyGuide->getUserId()) {
@@ -52,9 +47,6 @@
 
         public function unfavorite(int $strategyGuideID = null) {
             if (!is_null($strategyGuideID) && $this->userIsLoggedIn) {
-                $this->loadModel("game");
-                $this->loadModel("strategyguide");
-
                 $this->strategyGuide = new \model\StrategyGuide($this->database, $strategyGuideID);
                 $this->game = new \model\Game($this->database, $this->strategyGuide->getGameId());
                 if ($this->game->exists() && $this->user->getId() != $this->strategyGuide->getUserId()) {
@@ -75,8 +67,6 @@
 
         public function new(int $gameID = null) {
             if (!is_null($gameID) && $this->userIsLoggedIn) {
-                $this->loadModel("game");
-
                 $this->game = new \model\Game($this->database, $gameID);
                 if ($this->game->exists() && $this->user->isFollowingGame($this->game->getId())) {
                     $this->pageIdentifier = "New Strategy Guide";
@@ -93,10 +83,6 @@
 
         public function edit(int $strategyGuideID = null) {
             if (!is_null($strategyGuideID) && $this->userIsLoggedIn) {
-                $this->loadModel("user");
-                $this->loadModel("game");
-                $this->loadModel("strategyguide");
-
                 $this->strategyGuide = new \model\StrategyGuide($this->database, $strategyGuideID);
                 if ($this->strategyGuide->exists() && $this->user->getId() == $this->strategyGuide->getUserId()) {
                     $this->game = new \model\Game($this->database, $this->strategyGuide->getGameId());

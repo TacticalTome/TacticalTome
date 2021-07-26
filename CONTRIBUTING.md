@@ -42,10 +42,7 @@ All back-end (or server) functions are to be executed in the `controllers`. Each
 namespace controller;
 
 class ControllerName extends library\Controller {
-	public function index() {
-    	// This function loads a model (inherited from Controller)
-    	$this->loadModel("modelname"); // modelname.php
-        
+	public function index() { 
         /* this function loads the header file (template/header.php) and
         footer file (template.php) and loads the file provided in between */
         $this->loadViewWithHeaderFooter("folder", "file"); // folder/file.php
@@ -64,7 +61,7 @@ See [libraries/controller.php](https://github.com/TacticalTome/TacticalTome/blob
 
 **Make sure to sanitize ALL inputs from the user using the Database model's function:** `protect`.
 
-Models are objects that are easily able to be used in other controllers. For an example `User` and `Database` are models. All database queries should be handled by models, unless it is a `while (fetch_assoc())` method or any other method (accessing multiple rows or any other special case). **All models should sanitize (`database->protect`) all incoming input**. Models are initialized the a similar way to controllers (with a different namespace):
+Models are objects that are easily able to be used in other controllers. For an example `User` and `Database` are models. All database queries should be handled by models, unless it is a `while (fetch_assoc())` method or any other method (accessing multiple rows or any other special case). Models are automatically loaded when they are called from the `autloader.php` file. **All models should sanitize (`database->protect`) all incoming input**. Models are initialized the a similar way to controllers (with a different namespace):
 ```PHP
 namespace model;
 
@@ -75,15 +72,6 @@ class ModelName {
 ```
 
 Views are files that contain all the HTML code and are what the user actually sees. All views are located in the following file structure: `views/ControllerName/ViewName.php`.
-
-#### Models loaded by default (always loaded)
-To add a model to be loaded by default navigate to `libraries/appplication.php`
-- Database
-    - Use `$this->database->protect` to sanitize inputs
-- User
-    - `$this->user`
-    - Use `$this->userIsLoggedIn ` to see if the user is logged in
-- Game
 
 #### Example files
 - [`controllers/user.php`](https://github.com/TacticalTome/TacticalTome/blob/main/system/controllers/user.php)
