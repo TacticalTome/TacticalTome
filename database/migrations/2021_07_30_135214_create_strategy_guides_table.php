@@ -19,6 +19,7 @@ class CreateStrategyGuidesTable extends Migration
             $table->unsignedBigInteger('game_id')->comment('The game this strategy guide is under')->index('game_id');
             $table->string('title', 256);
             $table->text('content');
+            $table->softDeletes();
             $table->timestamps();
 
             // Foreign Keys
