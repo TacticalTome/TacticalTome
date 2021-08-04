@@ -18,6 +18,7 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('user_id')->comment('User who posted this comment');
             $table->unsignedBigInteger('strategy_guide_id')->comment('The strategy guide the comment is under');
             $table->string('content', 1000);
+            $table->softDeletes();
             $table->timestamps();
 
             // Foreign Keys
